@@ -1,4 +1,4 @@
-cognitionis-utils-basickit
+cognitionis-nlp-libraries
 ==========================
 
-File access and string utils
+A set of basic libraries useful for NLP projects

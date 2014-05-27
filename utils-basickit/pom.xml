@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        <modelVersion>4.0.0</modelVersion> <!--maven model type (see schema above) -->
+        <groupId>com.cognitionis</groupId>       <!-- base package uri -->
+        <artifactId>utils-basickit</artifactId>     <!-- the project name (id) -->
+	<version>1.0.0-SNAPSHOT</version>  <!-- version. NOTE: must be -SNAPSHOT. Maven automatically removes that when release:prepare/perform -->        
+	<packaging>jar</packaging>
+        <name>Utils BasicKit</name>                 <!-- Full name (not id) -->
+        <description>A set of file access and string utils</description>
+        <url>http://www.cognitionis.com</url>
+        <licenses>
+                <license>
+                        <name>Apache License, Version 2.0</name>
+                        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+                </license>
+        </licenses>
+        <developers>
+                <developer>
+                        <id>hector.llorens</id>
+                        <name>Hector Llorens</name>
+                        <email>hector.llorens.martinez@gmail.com</email>
+                </developer>
+        </developers>
+        <properties>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                <maven.compiler.source>1.7</maven.compiler.source>
+                <maven.compiler.target>1.7</maven.compiler.target>
+        </properties>
+	<distributionManagement>
+	   <repository>
+	       <id>repo</id>
+	       <url>https://github.com/hllorens/cognitionis-mvn-repo/raw/master/releases</url>
+	   </repository>
+	   <snapshotRepository>
+	       <id>snapshot-repo</id>
+	       <url>https://github.com/hllorens/cognitionis-mvn-repo/raw/master/snapshots</url>
+	   </snapshotRepository>
+	</distributionManagement>       
+       
+        <build>
+                <resources>
+			<resource>
+			    <directory>.</directory>
+			    <includes><include>README.TXT</include></includes>
+			    <!--<targetPath>..</targetPath> -->
+			</resource>			
+                </resources>
+                <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.cognitionis.utils_basickit.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> 
+                </plugins>              
+        </build>
+       
+       
+        <dependencies>
+        </dependencies>
+</project>
+
