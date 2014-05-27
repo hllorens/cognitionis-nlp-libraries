@@ -1,4 +1,4 @@
-package com.cognitionis.utils_basickit;
+package com.cognitionis.jtimegraph;
 
 
 /**
