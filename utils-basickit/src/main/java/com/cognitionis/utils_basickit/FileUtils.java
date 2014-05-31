@@ -9,6 +9,7 @@ import java.util.Map.*;
 //import javax.activation.MimetypesFileTypeMap;
 //import java.nio.charset.CharsetDecoder;
 
+
 /**
  * @author Hector Llorens
  * @since 2011
@@ -29,6 +30,10 @@ public class FileUtils {
     }*/
     // MIME Types, not so accurate nor useful by the moment...
     //String mime=new MimetypesFileTypeMap().getContentType(f);
+    // Resource locations
+    public static final int JAR = 0;
+    public static final int LOCAL_FILE_SYSTEM = 1;
+    public static final int WEB = 2;
     // File encodings (charsets)
     public static String UTF8 = "UTF-8";
     public static String ASCII = "ASCII";
@@ -91,7 +96,7 @@ public class FileUtils {
             // Old way: String executionPath=(new File (".")).getCanonicalPath();
             return System.getProperty("user.dir");
         } catch (Exception e) {
-            System.err.println("Errors found (FileUtils):\n\tApplication path not found: " + e.getMessage() + "\n");
+            System.err.println("Errors found (FileUtils):\n\tApplication execution path not found: " + e.getMessage() + "\n");
             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                 e.printStackTrace(System.err);
             }
@@ -109,13 +114,16 @@ public class FileUtils {
                 //innerpath = FileUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
                 //innerpath = FileUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
+                // probably won't work for Windows non ascii folder names
             URL url = FileUtils.class.getProtectionDomain().getCodeSource().getLocation();
             innerpath = (new File(URLDecoder.decode(url.getFile(), "UTF-8"))).getAbsolutePath();
+
 
                 //System.out.println("dfdf "+innerpath);
                 if (innerpath.contains(".jar")) {
                     innerpath = innerpath.substring(0, innerpath.lastIndexOf(File.separator) + 1);
-                    if (innerpath.endsWith(File.separator+"lib"+File.separator)) {
+                    // Go up from app local libraries
+                    if (innerpath.endsWith(File.separator + "lib" + File.separator)) {
                         innerpath = innerpath.substring(0, innerpath.length() - 4);
                     }
                     // When you release the final dist you must use a name different than "dist"
@@ -127,16 +135,19 @@ public class FileUtils {
                     /*if (innerpath.endsWith("/lib/")) {
                     innerpath = innerpath.substring(0, innerpath.length() - 4);
                     }*/
-                    if (innerpath.endsWith("build"+File.separator+"classes"+File.separator)) {
+                    if (innerpath.endsWith("build" + File.separator + "classes" + File.separator)) {
                         innerpath = innerpath.substring(0, innerpath.length() - 14);
                     }
                 }
-                if (innerpath.matches(".*Utils_BasicKit.*")) {
+                if (innerpath.matches(".*Utils_BasicKit.*")) { // DELETE THIS
                 // Hack for debugging (executed from NetBeans... and project added, not compiled)
                 innerpath = "/home/hector/Dropbox/JApplications/TIMEE/";
                 //System.err.println("utils_bk FileUtils.java. This must be solved in some other way.");
                 //System.exit(0);
                 }
+
+                // TODO: we have a problem if this library is just in the classpath I guess, test it.
+
                 FileUtils.ApplicationPath = innerpath;
             }
             return innerpath;
@@ -147,6 +158,117 @@ public class FileUtils {
             }
             return "";
         }
+    }
+
+    public static String ensureURL(String URLName) {
+        // replace windows by linux
+        if (File.separator.equals("\\") && URLName.contains("\\")) {
+            URLName=URLName.replaceAll("\\\\", "/");
+        }
+        // handel ugly windows dirves C:\ not starting by / 
+        if(!URLName.startsWith("/") && URLName.matches("^[A-Za-z]:.*")){
+            URLName="/"+URLName;
+        }
+        
+        // handle spaces?? %20?
+        
+        if (!URLName.matches("^[^:/ |]+:.*") ) {
+            URLName = "file://" + URLName;  // NOTE: // has been recently added
+        }
+
+        
+        return URLName;
+    }
+
+    public static boolean URL_exists(String URLName) {
+        boolean result = false;
+        try {
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.out.println("EXISTS? " + ensureURL(URLName));
+            }
+            URL url = new URL(ensureURL(URLName));
+            URLConnection con = url.openConnection(); // this will return an {Http,Jar}UrlConnection depending
+            if (url.getProtocol().equals("http")) {
+                HttpURLConnection con_http = (HttpURLConnection) con;
+                HttpURLConnection.setFollowRedirects(false);
+                //HttpURLConnection.setInstanceFollowRedirects(false); // this might be needed
+                con_http.setRequestMethod("HEAD");
+                if (con_http.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    result = true;
+                }
+            } else {
+                con.connect(); // still does not work and requires external resources
+                result = true;
+            }
+        } catch (Exception e) {
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.err.println("Errors found (FileUtils): URL ("+URLName+") not found: " + e.getMessage() + "\n");
+                e.printStackTrace(System.err);
+            }
+            return false;
+        }
+        return result;
+    }
+
+    /**
+     * Return an existing resources path given a subdir (trying to find it
+     * inside or outside to classes)
+     *
+     * @param subdir
+     * @return res_path
+     * @throws Exception if resources are not found
+     */
+    public static String getResourcesPath(String subdir) throws Exception {
+        String app_path = FileUtils.getApplicationPath();
+        String res_path = app_path + File.separator + subdir;
+        //System.out.println(res_path);
+
+        if (!URL_exists(res_path)) { // Check for external resoucre (outside classes)
+            // For our beloved Windows
+            String extra = ""; // TODO check if this is really needed, it is but could be avoided if we transform res_path to URI at the beginiing
+            if (File.separator.equals("\\")) {
+                extra = "\\";
+            }
+            res_path=res_path.replaceAll(extra + File.separator + "classes", ""); // see if we need \\ for windows
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.out.println("look outside classes: "+ensureURL(res_path));
+            }            
+        }
+        
+
+
+        if (!URL_exists(res_path)) { // Check for JAR resoucre
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.out.println("look into jar");
+            }
+            // replace \ by / since URL always use that even in windows
+            URL res = FileUtils.class.getClassLoader().getResource(subdir.replaceAll("\\\\", "/"));
+            //InputStream res = FileUtils.class.getClassLoader().getResourceAsStream(subdir);
+            if (res == null) {
+                            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.out.println("java jar res not found " + subdir);
+                            }
+            } else {
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.out.println("java jar res " + res.toString());
+                System.out.println("file: " + new File(res.getPath())); // path part of the URL
+                }
+                Enumeration<URL> resources = FileUtils.class.getClassLoader().getResources(subdir.replaceAll("\\\\", "/")); //
+                            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                                System.out.println("exists = " + resources.hasMoreElements());
+                            }
+                res_path = res.toString();
+            }
+        }
+
+        // ANOTHER OPTION IS SEARCH ON THE WEB 
+        //cognitionis.com/resources/... 
+
+        if (!URL_exists(res_path)) { //Set to null if does not exist
+            throw new Exception("Resources " + subdir + " do not exist neither interal or external to 'classes' in " + app_path + " or inside jar.");
+        }
+
+        return res_path;
     }
 
     public static void copyFileUtil(File in, File out) throws IOException {
@@ -347,6 +469,8 @@ public class FileUtils {
         short b = '\0';
         boolean ascii = true;
 
+        if(bytes==null) return "EMPTY-FILE";
+        
         for (i = 0; i < bytes.length; i++) {
             b = (short) (0xFF & bytes[i]);
 
@@ -372,7 +496,11 @@ public class FileUtils {
 
         return ((ascii) ? ASCII : UTF8);
     }
-
+    
+    public static String getEncoding(InputStream is) {
+        return getEncoding(FileUtils.file2bytes(is));
+    }
+    
     /**
      * Returns if a file is ascii, iso or utf
      * @param f
@@ -409,16 +537,28 @@ public class FileUtils {
 
     public static byte[] file2bytes(File f) {
         try {
-            FileInputStream fi = new FileInputStream(f);
+            //System.err.println("Converting file to input stream"+f.getAbsolutePath()+"\n");
+            return file2bytes(new FileInputStream(f));
+        } catch (Exception e) {
+            System.err.println("Errors found (FileUtils):\n\t" + e.getMessage() + "\n");
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                e.printStackTrace(System.err);
+            }
+        }
+        return null;
+    }
 
-            ArrayList<Byte> bytes = new ArrayList<Byte>();
+    public static byte[] file2bytes(InputStream is) {
+        try {
+            //System.err.println("input stream bytes available "+is.available()+"\n");
+            ArrayList<Byte> bytes = new ArrayList<>();
             byte c;
             int rc;
-            while ((rc = fi.read()) > -1) {
+            while ((rc = is.read()) > -1) {
                 c = (byte) (rc & 255);
                 bytes.add(c);
             }
-            fi.close();
+            is.close();
 
             int bsize = bytes.size();
             byte[] rbytes = new byte[bsize];
@@ -426,6 +566,7 @@ public class FileUtils {
             for (int i = 0; i < bsize; i++) {
                 rbytes[i] = ((Byte) bytes.get(i)).byteValue();
             }
+            //System.err.println("bytes read "+rbytes.length+"\n");
 
             return rbytes;
         } catch (Exception e) {
@@ -438,6 +579,7 @@ public class FileUtils {
         return null;
     }
 
+    
 //    static public String getTempDir() {
 //        String ret = System.getProperty("java.io.tmpdir");
 //
@@ -497,7 +639,7 @@ public class FileUtils {
      */
     public static void writeFileFromString(String str, String fileName) throws java.io.IOException {
         //BufferedWriter of = new BufferedWriter(new FileWriter(fileName));
-        OutputStreamWriter of = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(new File(fileName))),Charset.forName("UTF8"));
+        OutputStreamWriter of = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(new File(fileName))), Charset.forName("UTF8"));
 
         try {
             of.write(str);
@@ -505,5 +647,4 @@ public class FileUtils {
             of.close();
         }
     }
-
 }
