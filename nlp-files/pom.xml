@@ -52,7 +52,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.cognitionis.utils_basickit.Main</mainClass>
+                            <mainClass>com.cognitionis.nlp_files.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
