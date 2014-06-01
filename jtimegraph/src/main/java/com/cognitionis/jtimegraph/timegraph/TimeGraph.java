@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cognitionis.jtimegraph.timegraph;
 
 import java.text.*;
@@ -9,28 +5,27 @@ import java.util.*;
 
 /**
  * TimeGraph implementation
+ *
  * @author hector
  */
 public class TimeGraph {
 
     public static final DateFormat iso = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-    public static final DateFormat granul_days = new SimpleDateFormat("yyyy-MM-dd");
+    public static final String granul_days = "yyyy-MM-dd";
+    public static final DateFormat granul_days2 = new SimpleDateFormat("yyyy-MM-dd");
     public static final String upper_bound = "9999-12-31T23:59:59";
     public static final String lower_bound = "0000-01-01T00:00:00";
-
-
     // metagraph contains a list of pointchains, if some chain becomes empty it can be either reused or deleted.
     private ArrayList<Chain> metagraph;
     // reference TimePoint
     private HashMap<String, TimePoint> entity_tp_map;
     // reference Entities (only used after the creation of the timegraph)
     //DEPRECATED: private HashMap<TimePoint, String> tp_entity_map; (INCLUDED IN TimePoint)
-
     //timex-refdate HashMap to easyly locate them in the map
     // useful for answering before 1999 (and 1999 is not in the graph) so we need to find all refs before 1999
     // ej: e1_s 1999
     private TreeMap<Date, String> date_entitypoint_map;
-           
+
     public TimeGraph() {
         metagraph = new ArrayList<Chain>();
         entity_tp_map = new HashMap<String, TimePoint>();
@@ -38,29 +33,32 @@ public class TimeGraph {
         //tp_entity_map = new HashMap<TimePoint, String>();
     }
 
-
     public boolean addRelation(String lid, String entity1, String greginterval1_s, String greginterval1_e, String entity2, String greginterval2_s, String greginterval2_e, String relation) {
         try {
+            if (entity1 == null || entity2 == null || relation == null) {
+                throw new Exception("ERROR: entity1 entity2 and relation must be not NULL.");
+            }
+
             String x1 = entity1 + "_s";
             String x2 = entity1 + "_e";
             String y1 = entity2 + "_s";
             String y2 = entity2 + "_e";
 
             if (greginterval1_s != null && greginterval1_e != null) {
-                Date d1=(Date) iso.parse(greginterval1_s);
-                Date d2=(Date) iso.parse(greginterval1_e);
-                if(!d1.before(d2)){
-                    throw new Exception("Event "+entity1+" associated begin date is posterior to end date.");
+                Date d1 = (Date) iso.parse(greginterval1_s);
+                Date d2 = (Date) iso.parse(greginterval1_e);
+                if (!d1.before(d2)) {
+                    throw new Exception("Event " + entity1 + " associated begin date is posterior to end date.");
                 }
                 date_entitypoint_map.put((Date) iso.parse(greginterval1_s), x1);
                 date_entitypoint_map.put((Date) iso.parse(greginterval1_e), x2);
             }
 
             if (greginterval2_s != null && greginterval2_e != null) {
-                Date d1=(Date) iso.parse(greginterval2_s);
-                Date d2=(Date) iso.parse(greginterval2_e);
-                if(!d1.before(d2)){
-                    throw new Exception("Event "+entity2+" associated begin date is posterior to end date.");
+                Date d1 = (Date) iso.parse(greginterval2_s);
+                Date d2 = (Date) iso.parse(greginterval2_e);
+                if (!d1.before(d2)) {
+                    throw new Exception("Event " + entity2 + " associated begin date is posterior to end date.");
                 }
                 date_entitypoint_map.put((Date) iso.parse(greginterval2_s), y1);
                 date_entitypoint_map.put((Date) iso.parse(greginterval2_e), y2);
@@ -126,7 +124,7 @@ public class TimeGraph {
 
     /**
      * Calculate positions according to the relation for new chain...
-     * 
+     *
      * @param tpx1
      * @param tpx2
      * @param tpy1
@@ -641,8 +639,9 @@ public class TimeGraph {
     }
 
     /**
-     * Check if the relation is in the graph or is inconsistent and only if it can be added -> add it.
-     * Adding new relations can produce chain collapses that reduce the graph.
+     * Check if the relation is in the graph or is inconsistent and only if it
+     * can be added -> add it. Adding new relations can produce chain collapses
+     * that reduce the graph.
      *
      * @param x1
      * @param x2
@@ -1257,7 +1256,7 @@ public class TimeGraph {
 
     /**
      * Returns the point relation between two points in the graph
-     * 
+     *
      * @param x
      * @param y
      * @return
@@ -1271,7 +1270,8 @@ public class TimeGraph {
     }
 
     /**
-     * Returns =,<,> depending on the tp relation of two elements in the same chain
+     * Returns =,<,> depending on the tp relation of two elements in the same
+     * chain
      *
      * @param a
      * @param b
@@ -1290,7 +1290,8 @@ public class TimeGraph {
     }
 
     /**
-     * Returns =,<,> depending on the tp relation of two elements in different chains
+     * Returns =,<,> depending on the tp relation of two elements in different
+     * chains
      *
      * @param a
      * @param b
@@ -1313,6 +1314,7 @@ public class TimeGraph {
 
     /**
      * Tries to find y after x in the graph (same as x before y)
+     *
      * @param x
      * @param y
      * @param visited_chains
@@ -1365,6 +1367,7 @@ public class TimeGraph {
 
     /**
      * Adds a cross chain relation for two points and check for fusion
+     *
      * @param x
      * @param y
      * @return
@@ -1415,18 +1418,18 @@ public class TimeGraph {
 
 
         /*if (metagraph.get(x.getChain()).isMoreInformative(x.getPosition(), y, ">")) {
-        TimePoint aux = metagraph.get(x.getChain()).getAfterConnections(x.getPosition()).get(y.getChain());
-        metagraph.get(x.getChain()).removeConnection(x.getPosition(), aux, ">");
-        metagraph.get(aux.getChain()).removeConnection(aux.getPosition(), x, "<");
-        } else {
-        if (metagraph.get(y.getChain()).isMoreInformative(y.getPosition(), x, "<")) {
-        TimePoint aux = metagraph.get(y.getChain()).getBeforeConnections(y.getPosition()).get(x.getChain());
-        metagraph.get(y.getChain()).removeConnection(y.getPosition(), aux, "<");
-        metagraph.get(aux.getChain()).removeConnection(aux.getPosition(), y, ">");
-        }
-        }
-        metagraph.get(x.getChain()).addConnection(x.getPosition(), y, ">");
-        metagraph.get(y.getChain()).addConnection(y.getPosition(), x, "<");
+         TimePoint aux = metagraph.get(x.getChain()).getAfterConnections(x.getPosition()).get(y.getChain());
+         metagraph.get(x.getChain()).removeConnection(x.getPosition(), aux, ">");
+         metagraph.get(aux.getChain()).removeConnection(aux.getPosition(), x, "<");
+         } else {
+         if (metagraph.get(y.getChain()).isMoreInformative(y.getPosition(), x, "<")) {
+         TimePoint aux = metagraph.get(y.getChain()).getBeforeConnections(y.getPosition()).get(x.getChain());
+         metagraph.get(y.getChain()).removeConnection(y.getPosition(), aux, "<");
+         metagraph.get(aux.getChain()).removeConnection(aux.getPosition(), y, ">");
+         }
+         }
+         metagraph.get(x.getChain()).addConnection(x.getPosition(), y, ">");
+         metagraph.get(y.getChain()).addConnection(y.getPosition(), x, "<");
          */
 
         checkChainFusion(x, y); // TODO SACAR FUERA DE LA FUNCION Y PROVAR OTRA VEZ
@@ -1460,6 +1463,7 @@ public class TimeGraph {
 
     /**
      * Given a relation name, return the inverse Allen-TimeML relation
+     *
      * @param rel
      * @return
      */
@@ -1901,11 +1905,12 @@ public class TimeGraph {
     }
 
     /**
-     * Given the implementation model it may happen that a chain (max. one chain) ends up empty after
-     * the construction of the graph.
+     * Given the implementation model it may happen that a chain (max. one
+     * chain) ends up empty after the construction of the graph.
      *
-     * This function removes such chain: if it is the last one it is just removed,
-     * if not the last one is moved in its place and then the empty reamains the last one and it is removed
+     * This function removes such chain: if it is the last one it is just
+     * removed, if not the last one is moved in its place and then the empty
+     * reamains the last one and it is removed
      *
      */
     public void removeEmptyChain() {
@@ -2024,7 +2029,9 @@ public class TimeGraph {
         return out;
     }
 
-    /** Return if the TimeGraph contains a relation between two intervals (entities)
+    /**
+     * Return if the TimeGraph contains a relation between two intervals
+     * (entities)
      *
      * @param x
      * @param y
@@ -2051,27 +2058,34 @@ public class TimeGraph {
         TimePoint tpy1 = entity_tp_map.get(y1);
         TimePoint tpy2 = entity_tp_map.get(y2);
         try {
+            // if the question is about an entity that is not in the graph check if it is an iso date
             if (tpx1 == null || tpx2 == null) {
-                Date d=iso.parse(x);
-                String interval=get_interval_value(x);
-                if(date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0])) && date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[1]))){
-                    x1=date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
-                    x2=date_entitypoint_map.get(iso.parse(interval.split("\\|")[1]));
-                    tpx1=entity_tp_map.get(x1);
-                    tpx2=entity_tp_map.get(x2);
-                }else{
+                if (is_clean_ISO8601_date(x)) {
+                    String interval = get_interval_value(x);
+                    if (date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0])) && date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[1]))) {
+                        x1 = date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
+                        x2 = date_entitypoint_map.get(iso.parse(interval.split("\\|")[1]));
+                        tpx1 = entity_tp_map.get(x1);
+                        tpx2 = entity_tp_map.get(x2);
+                    } else {
+                        throw new Exception(x);
+                    }
+                } else {
                     throw new Exception(x);
                 }
             }
             if (tpy1 == null || tpy2 == null) {
-                Date d=iso.parse(y);
-                String interval=get_interval_value(y);
-                if(date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0])) && date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[1]))){
-                    y1=date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
-                    y2=date_entitypoint_map.get(iso.parse(interval.split("\\|")[1]));
-                    tpy1=entity_tp_map.get(y1);
-                    tpy2=entity_tp_map.get(y2);
-                }else{
+                if (is_clean_ISO8601_date(y)) {
+                    String interval = get_interval_value(y);
+                    if (date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0])) && date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[1]))) {
+                        y1 = date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
+                        y2 = date_entitypoint_map.get(iso.parse(interval.split("\\|")[1]));
+                        tpy1 = entity_tp_map.get(y1);
+                        tpy2 = entity_tp_map.get(y2);
+                    } else {
+                        throw new Exception(y);
+                    }
+                } else {
                     throw new Exception(y);
                 }
             }
@@ -2225,8 +2239,9 @@ public class TimeGraph {
         return "unknown";
     }
 
-    /** Return the relation of 2 entities in the TimeGraph
-     * or UNKNOWN if these are not related
+    /**
+     * Return the relation of 2 entities in the TimeGraph or UNKNOWN if these
+     * are not related
      *
      * @param x
      * @param y
@@ -2246,26 +2261,26 @@ public class TimeGraph {
         TimePoint tpy2 = entity_tp_map.get(y2);
         try {
             if (tpx1 == null || tpx2 == null) {
-                Date d=iso.parse(x);
-                String interval=get_interval_value(x);
-                if(date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0])) && date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[1]))){
-                    x1=date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
-                    x2=date_entitypoint_map.get(iso.parse(interval.split("\\|")[1]));
-                    tpx1=entity_tp_map.get(x1);
-                    tpx2=entity_tp_map.get(x2);
-                }else{
+                Date d = iso.parse(x);
+                String interval = get_interval_value(x);
+                if (date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0])) && date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[1]))) {
+                    x1 = date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
+                    x2 = date_entitypoint_map.get(iso.parse(interval.split("\\|")[1]));
+                    tpx1 = entity_tp_map.get(x1);
+                    tpx2 = entity_tp_map.get(x2);
+                } else {
                     throw new Exception(x);
                 }
             }
             if (tpy1 == null || tpy2 == null) {
-                Date d=iso.parse(y);
-                String interval=get_interval_value(y);
-                if(date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0])) && date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[1]))){
-                    y1=date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
-                    y2=date_entitypoint_map.get(iso.parse(interval.split("\\|")[1]));
-                    tpy1=entity_tp_map.get(y1);
-                    tpy2=entity_tp_map.get(y2);
-                }else{
+                Date d = iso.parse(y);
+                String interval = get_interval_value(y);
+                if (date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0])) && date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[1]))) {
+                    y1 = date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
+                    y2 = date_entitypoint_map.get(iso.parse(interval.split("\\|")[1]));
+                    tpy1 = entity_tp_map.get(y1);
+                    tpy2 = entity_tp_map.get(y2);
+                } else {
                     throw new Exception(y);
                 }
             }
@@ -2426,21 +2441,21 @@ public class TimeGraph {
         TimePoint tpx1 = entity_tp_map.get(x1);
         try {
             if (tpx1 == null) {
-                String interval=get_interval_value(x);
-                Date d=iso.parse(interval.split("\\|")[0]);
-                if(date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0]))){
-                    x1=date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
-                    tpx1=entity_tp_map.get(x1);
-                }else{
-                    if(date_entitypoint_map.isEmpty()){
+                String interval = get_interval_value(x);
+                Date d = iso.parse(interval.split("\\|")[0]);
+                if (date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0]))) {
+                    x1 = date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
+                    tpx1 = entity_tp_map.get(x1);
+                } else {
+                    if (date_entitypoint_map.isEmpty()) {
                         return "[] (there are no dates to compare in the graph)";
-                    }else{
+                    } else {
                         date_entitypoint_map.put(d, "--query--");
-                        if(date_entitypoint_map.lowerKey(d)!=null){
-                            x1=date_entitypoint_map.lowerEntry(d).getValue();
-                            tpx1=entity_tp_map.get(x1);
-                        }else{
-                            return "[] (there are no dates before "+x+")";
+                        if (date_entitypoint_map.lowerKey(d) != null) {
+                            x1 = date_entitypoint_map.lowerEntry(d).getValue();
+                            tpx1 = entity_tp_map.get(x1);
+                        } else {
+                            return "[] (there are no dates before " + x + ")";
                         }
                         date_entitypoint_map.remove(d);
                     }
@@ -2493,21 +2508,21 @@ public class TimeGraph {
         TimePoint tpx1 = entity_tp_map.get(x1);
         try {
             if (tpx1 == null) {
-                Date d=iso.parse(x);
-                String interval=get_interval_value(x);
-                if(date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0]))){
-                    x1=date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
-                    tpx1=entity_tp_map.get(x1);
-                }else{
-                    if(date_entitypoint_map.isEmpty()){
+                Date d = iso.parse(x);
+                String interval = get_interval_value(x);
+                if (date_entitypoint_map.containsKey(iso.parse(interval.split("\\|")[0]))) {
+                    x1 = date_entitypoint_map.get(iso.parse(interval.split("\\|")[0]));
+                    tpx1 = entity_tp_map.get(x1);
+                } else {
+                    if (date_entitypoint_map.isEmpty()) {
                         return "[] (there are no dates to compare in the graph)";
-                    }else{
+                    } else {
                         date_entitypoint_map.put(d, "--query--");
-                        if(date_entitypoint_map.higherKey(d)!=null){
-                            x1=date_entitypoint_map.higherEntry(d).getValue();
-                            tpx1=entity_tp_map.get(x1);
-                        }else{
-                            return "[] (there are no dates after "+x+")";
+                        if (date_entitypoint_map.higherKey(d) != null) {
+                            x1 = date_entitypoint_map.higherEntry(d).getValue();
+                            tpx1 = entity_tp_map.get(x1);
+                        } else {
+                            return "[] (there are no dates after " + x + ")";
                         }
                         date_entitypoint_map.remove(d);
                     }
@@ -2957,79 +2972,171 @@ public class TimeGraph {
 
     }
 
+    /**
+     * Get the interval values in the format lower|upper given any timex If it
+     * is not possible lower and upper will be equal to the given timex value
+     *
+     * @param value
+     * @return
+     */
+    public static String get_interval_value(String value) {
+        try {
+            if (value == null) {
+                return null;
+            }
+            String lv = value;
+            String uv = value;
+            // malformed T with - (-T)
+            value = value.replaceAll("-T", "T");
+            // one digit hours
+            if (value.matches(".*T[0-9]:.*")) {
+                value = value.replaceAll("(.*)T(.*)", "$1T0$2");
+            }
+            // add 0 to <4 dates
+            String year = "0000";
+            if (value.matches("^[0-9]+$")) {
+                if (value.length() > 4) {
+                    // error year above 9999
+                    throw new Exception("Year above 9999. Omitted.");
+                }
+            }
 
-    public static String get_interval_value(String value){
-        String lv=value;
-        String uv=value;
+            if (value.matches("^[0-9]{4}")) {
+                year = value.substring(0, 4);
+            }
             if (value.matches("(?i)[0-9]{4}-(WI|SP|SU|AU|FA|[QT](1|2|3|4)|H(1|2))")) {
                 if (value.matches("(?i).*-(WI|Q1|H1|T1)")) {
-                    lv = value.substring(0, 4) + "-01-01";
-                    uv = value.substring(0, 4) + "-03-01";
+                    String february_last_day = "28";
+                    if (isLeapYear(Integer.parseInt(year))) {
+                        february_last_day = "29";
+                    }
+                    return year + "-01-01|" + year + "-02-" + february_last_day;
                 }
                 if (value.matches("(?i).*-(SP|Q2|T2)")) {
-                    lv = value.substring(0, 4) + "-03-01";
-                    uv = value.substring(0, 4) + "-05-31";
+                    return year + "-03-01|" + year + "-05-31";
                 }
                 if (value.matches("(?i).*-(SU|Q3|H2|T3)")) {
-                    lv = value.substring(0, 4) + "-06-01";
-                    uv = value.substring(0, 4) + "-08-31";
+                    return year + "-06-01|" + year + "-08-31";
                 }
                 if (value.matches("(?i).*-(AU|FA|Q4|T4)")) {
-                    lv = value.substring(0, 4) + "-09-01";
-                    uv = value.substring(0, 4) + "-12-31";
+                    return year + "-09-01|" + year + "-12-31";
                 }
             }
 
             if (value.matches("(?i)[0-9]{4}-[0-9]{2}-[0-9]{2}T(MO|AF|EV|NI|MI|NO)")) {
+                String date_string = value.substring(0, 10);
                 // MORNING 5-12
                 if (value.matches("(?i).*TMO")) {
-                    lv = value.substring(0, 10) + "T05:00:00";
-                    uv = value.substring(0, 10) + "T11:59:59";
+                    return date_string + "T05:00:00|" + date_string + "T11:59:59";
                 } // NOON 12
                 if (value.matches("(?i).*TNO")) {
-                    lv = value.substring(0, 10) + "T12:00:00";
-                    uv = value.substring(0, 10) + "T12:00:01";
+                    return date_string + "T12:00:00|" + date_string + "T12:00:01";
                 } // AFTERNOON 13
                 if (value.matches("(?i).*TAF")) {
-                    lv = value.substring(0, 10) + "T12:00:01";
-                    uv = value.substring(0, 10) + "T17:59:59";
+                    return date_string + "T12:00:01|" + date_string + "T17:59:59";
                 } // DEPEND ON WORK BREAKS 17-18
                 if (value.matches("(?i).*TEV")) {
-                    lv = value.substring(0, 10) + "T18:00:00";
-                    uv = value.substring(0, 10) + "T20:59:59";
+                    return date_string + "T18:00:00|" + date_string + "T20:59:59";
                 } // AFTER WORK... GOING BACK HOME...
                 if (value.matches("(?i).*TNI")) {
-                    lv = value.substring(0, 10) + "T21:00:00";
-                    uv = value.substring(0, 10) + "T04:59:59";
+                    return date_string + "T21:00:00|" + date_string + "T23:59:59";
                 } // MIDNIGHT
                 if (value.matches("(?i).*TMI")) {
-                    lv = value.substring(0, 10) + "T00:00:00";
-                    uv = value.substring(0, 10) + "T00:00:01";
+                    return date_string + "T00:00:00|" + date_string + "T00:00:01";
                 }
             }
 
-            if(value.matches("[0-9]([0-9]([0-9]([0-9](-[0-9]{2}(-[0-9]{2}(T[0-2][0-9](:[0-5][0-9](:[0-5][0-9])?)?)?)?)?)?)?)?")){
-                lv=value+lower_bound.substring(value.length());
-                uv=value+upper_bound.substring(value.length());
-                if(value.length()==7){
-                    Date dateaux=null;
-                    try{
-                    dateaux = (Date) iso.parse(lv);
-                    }catch(Exception e){
-                        e.printStackTrace();
-                        System.exit(0);
-                    }
-                    GregorianCalendar cal=new GregorianCalendar();
+            if (value.matches("(?i)[0-9]{4}-W[0-9]{2}(-WE)?")) {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                Date dateaux = df.parse(year + "-01-01");
+                GregorianCalendar cal = new GregorianCalendar();
+                cal.setTime(dateaux);
+                SimpleDateFormat df2 = new SimpleDateFormat(granul_days);
+                cal.add(GregorianCalendar.WEEK_OF_YEAR, Integer.parseInt(value.substring(6, 8)));
+                lv = df2.format(cal.getTime()) + "T00:00:00";
+                cal.add(GregorianCalendar.DAY_OF_MONTH, 6);
+                uv = df2.format(cal.getTime()) + "T23:59:59";
+                if (value.endsWith("WE")) {
+                    cal.add(GregorianCalendar.DAY_OF_MONTH, -1);
+                    lv = df2.format(cal.getTime()) + "T00:00:00";
+                }
+                return lv + "|" + uv;
+            }
+
+            //months and days and normal times (clean)
+            if (is_clean_ISO8601_date_part(value)) {
+                lv = value + lower_bound.substring(value.length());
+                uv = value + upper_bound.substring(value.length());
+                if (value.length() == 7) { // months
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                    Date dateaux = df.parse(lv);
+                    GregorianCalendar cal = new GregorianCalendar();
                     cal.setTime(dateaux);
+                    // calculate last day of the month
                     cal.add(GregorianCalendar.MONTH, 1);
                     cal.add(GregorianCalendar.DAY_OF_MONTH, -1);
-                    uv = granul_days.format(cal.getTime())+upper_bound.substring(value.length()+3);
+                    uv = granul_days2.format(cal.getTime()) + upper_bound.substring(value.length() + 3);
                 }
             }
 
-        return lv+"|"+uv;
+
+            return lv + "|" + uv;
+        } catch (Exception e) {
+            System.err.println("Errors found (Timex):\n\t" + e.toString() + "\n");
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                e.printStackTrace(System.err);
+                System.exit(1);
+            }
+            return null;
+        }
     }
 
+    /**
+     * True if the string is a valid clean ISO8601 (yyyy-MM-dd'T'HH:mm:ss)
+     *
+     * @param value
+     * @return
+     */
+    static boolean is_clean_ISO8601_date(String value) {
+        if (value.matches("[0-9][0-9][0-9][0-9]-[0-9]{2}-[0-9]{2}T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]")) {
+            return true;
+        }
+        return false;
+    }
 
+    /**
+     * True if the string is a valid ISO8601
+     *
+     * @param value
+     * @return
+     */
+    static boolean is_ISO8601_date(String value) {
+        if (value.matches("[0-9]([0-9]([0-9]([0-9](-[0-9]{2}(-[0-9]{2}(  T([0-2][0-9](:[0-5][0-9](:[0-5][0-9])?)? | (MO|AF|EV|NI|MI|NO) )  )?|-W[0-5][0-9](-WE)?)|-(WI|SP|SU|AU|FA|[QT](1|2|3|4)|H(1|2)))?)?)?)?")) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * True if the string is a valid clean ISO8601 (yyyy-MM-dd'T'HH:mm:ss)
+     *
+     * @param value
+     * @return
+     */
+    static boolean is_clean_ISO8601_date_part(String value) {
+        if (value.matches("[0-9]([0-9]([0-9]([0-9](-[0-9]{2}(-[0-9]{2}(T[0-2][0-9](:[0-5][0-9](:[0-5][0-9])?)?)?)?)?)?)?)?")) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * True if a given year is a lap year
+     *
+     * @param year
+     * @return
+     */
+    static boolean isLeapYear(final int year) {
+        return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+    }
 }
-
