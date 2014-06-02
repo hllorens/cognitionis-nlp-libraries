@@ -166,7 +166,7 @@ public final class Timex extends Element implements Cloneable {
                 }
             }
             
-            if (value.matches("^[0-9]{4}")) {
+            if (value.matches("^[0-9]{4}.*")) {
                 year = value.substring(0, 4);
             }
             if (value.matches("(?i)[0-9]{4}-(WI|SP|SU|AU|FA|[QT](1|2|3|4)|H(1|2))")) {
@@ -175,16 +175,16 @@ public final class Timex extends Element implements Cloneable {
                     if (isLeapYear(Integer.parseInt(year))) {
                         february_last_day = "29";
                     }
-                    return  year + "-01-01|" + year + "-02-" + february_last_day;
+                    return  year + "-01-01T00:00:00|" + year + "-02-" + february_last_day + "T23:59:59";
                 }
                 if (value.matches("(?i).*-(SP|Q2|T2)")) {
-                    return  year + "-03-01|" + year + "-05-31";
+                    return  year + "-03-01T00:00:00|" + year + "-05-31T23:59:59";
                 }
                 if (value.matches("(?i).*-(SU|Q3|H2|T3)")) {
-                    return year + "-06-01|" + year + "-08-31";
+                    return year + "-06-01T00:00:00|" + year + "-08-31T23:59:59";
                 }
                 if (value.matches("(?i).*-(AU|FA|Q4|T4)")) {
-                    return year + "-09-01|" + year + "-12-31";
+                    return year + "-09-01T00:00:00|" + year + "-12-31T23:59:59";
                 }
             }
 
