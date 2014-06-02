@@ -37,7 +37,7 @@ public final class TimePoint implements Comparable<TimePoint> {
         position = DEFAULT_position;
         try {
             entities = entities.replaceAll("\\s+", "");
-            if (entities.length() == 0 || entities.matches(".*[,]+.*")) {
+            if (entities.length() == 0 || entities.matches(".*,[,]+.*")) {
                 throw new Exception("Malformed entities string can not be associated to a time point: " + entities);
             }
             associated_entities = entities;
@@ -53,7 +53,7 @@ public final class TimePoint implements Comparable<TimePoint> {
         position = p;
         try {
             entities = entities.replaceAll("\\s+", "");
-            if (entities.length() == 0 || entities.matches("[,]+")) {
+            if (entities.length() == 0 || entities.matches(".*,[,]+.*")) {
                 throw new Exception("Malformed entities string can not be associated to a time point: " + entities);
             }
             associated_entities = entities;
@@ -133,7 +133,7 @@ public final class TimePoint implements Comparable<TimePoint> {
         try {
             // Minimum check
             entities = entities.replaceAll("[\\s+]", "").trim();
-            if (entities.length() == 0 || entities.matches(".*[,]+.*")) {
+            if (entities.length() == 0 || entities.matches(".*,[,]+.*")) {
                 if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                     throw new Exception("Malformed entities string can not be associated to a time point: " + entities);
                 } else {
