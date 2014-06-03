@@ -2,7 +2,7 @@
         <modelVersion>4.0.0</modelVersion> <!--maven model type (see schema above) -->
         <groupId>com.cognitionis</groupId>       <!-- base package uri -->
         <artifactId>utils-basickit</artifactId>     <!-- the project name (id) -->
-	<version>1.0.0</version>  <!-- version. NOTE: update it manually -->        
+	<version>1.0.1</version>  <!-- version. NOTE: update it manually -->        
 	<packaging>jar</packaging>
         <name>Utils BasicKit</name>                 <!-- Full name (not id) -->
         <description>A set of file access and string utils</description>
