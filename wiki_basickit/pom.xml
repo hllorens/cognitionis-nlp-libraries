@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <modelVersion>4.0.0</modelVersion> <!--maven model type (see schema above) -->
         <groupId>com.cognitionis</groupId>       <!-- base package uri -->
-        <artifactId>jtimegraph</artifactId>     <!-- the project name (id) -->
+        <artifactId>wiki-basickit</artifactId>     <!-- the project name (id) -->
 	<version>1.0.0</version>  <!-- version. NOTE: update it manually -->        
 	<packaging>jar</packaging>
-        <name>JTimeGraph</name>                 <!-- Full name (not id) -->
-        <description>Java implementation of the TimeGraph abstraction defined in [Miller-Schubert 1990] and a GregorianGraph consisting of a mono-chain simplification for ordering interval events based on Gregorian Calendar dates ({start,end}date). </description>
+        <name>Wiki BasicKit</name>                 <!-- Full name (not id) -->
+        <description>Java implementation of Wikipedia hanler.</description>
         <url>http://www.cognitionis.com</url>
         <licenses>
                 <license>
@@ -52,7 +52,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.cognitionis.jtimegraph.Main</mainClass>
+                            <mainClass>com.cognitionis.wiki_basickit.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -98,6 +98,12 @@
 	    <artifactId>utils-basickit</artifactId>
 	    <version>1.0.1</version>
 	</dependency>	 
+	<dependency>
+	    <groupId>com.cognitionis</groupId>
+	    <artifactId>nlp-files</artifactId>
+	    <version>1.0.0</version>
+	</dependency>	 
+	
 	</dependencies>
 </project>
 

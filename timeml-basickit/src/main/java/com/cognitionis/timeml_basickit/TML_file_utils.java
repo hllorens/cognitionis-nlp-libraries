@@ -512,7 +512,11 @@ public class TML_file_utils {
     }
 
     /**
-     * Given a TimeML file, adds the implicit tref-tref links (removing some original links if necessary)
+     * Given a TimeML file, adds the implicit tref-tref links.
+     * It searches for explicit dates and add their timex-timex implicit
+     * temporal relations creating a time backbone of the document.
+     * This trust the timex date values over other annotated information.
+     * (removes original links if necessary)
      *
      * @param tmlfile
      * @return
@@ -616,6 +620,7 @@ public class TML_file_utils {
             }
 
             //System.out.println(refs);
+            // this could be more sophisticated is uses lower bound to sort first
             TreeMap<String, Timex> sorted_refs = new TreeMap(new AscStringTimexMapComparator(refs));
             sorted_refs.putAll(refs);
 
@@ -704,7 +709,8 @@ public class TML_file_utils {
             filecontents = filecontents.replaceAll("<[TSAR]LINK[^>]*>[^\\n]*\\n", "");
 
             // create new links string (1.tref_tref + 2.original)
-            tref_tref_links.addAll(original_links);
+            // addAll only adds the links that do not break the timegraph concistency
+            tref_tref_links.addAll(original_links); 
             for (int i = 0; i < tref_tref_links.size(); i++) {
                 Link l = tref_tref_links.get(i);
                 if (l.get_type().startsWith("tlink-event-timex")) {
