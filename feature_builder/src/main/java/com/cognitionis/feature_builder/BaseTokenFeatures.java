@@ -68,6 +68,7 @@ public class BaseTokenFeatures {
                             output = roles_features(output, lang);
 
                             nlpfile=new PipesFile(output);
+                            nlpfile.setLanguage(lang);
                             ((PipesFile) nlpfile).isWellFormedOptimist();
                             String model = nlpfile.getFile().toString().substring(0, nlpfile.getFile().toString().lastIndexOf(".plain"));
                             if (model.endsWith("\\.tml")) {
@@ -124,6 +125,7 @@ public class BaseTokenFeatures {
                                 output = lemmaPOS2TempEval2_features((PipesFile) nlpfile, lang);
 
                                 nlpfile=new PipesFile(output);
+                                nlpfile.setLanguage(lang);
                                 ((PipesFile) nlpfile).isWellFormedOptimist();
                                 String model = nlpfile.getFile().toString().substring(0, nlpfile.getFile().toString().lastIndexOf(".word"));
                                 System.err.println("Pairing PIPES");
@@ -142,6 +144,7 @@ public class BaseTokenFeatures {
 
                         if (feature_vector.equalsIgnoreCase("DynamicWin-features")) {
                             nlpfile=new PipesFile(output);
+                            nlpfile.setLanguage(lang);
                             ((PipesFile) nlpfile).isWellFormedOptimist();
                             System.err.println("Executing DynamicWin features");
                             output = BaseTokenFeatures.getDynamicWin((PipesFile) nlpfile);
@@ -150,6 +153,7 @@ public class BaseTokenFeatures {
 
                         if (feature_vector.equalsIgnoreCase("StaticWin-features")) {
                             nlpfile=new PipesFile(output);
+                            nlpfile.setLanguage(lang);
                             ((PipesFile) nlpfile).isWellFormedOptimist();
                             System.err.println("Executing StaticcWin features");
                             output = BaseTokenFeatures.getStaticWin((PipesFile) nlpfile);
@@ -188,6 +192,7 @@ public class BaseTokenFeatures {
                             output = lemmaPOS2TempEval2_features((PipesFile) nlpfile, lang);
 
                             nlpfile=new PipesFile(output);
+                            nlpfile.setLanguage(lang);
                             ((PipesFile) nlpfile).isWellFormedOptimist();
                             String model = nlpfile.getFile().toString().substring(0, nlpfile.getFile().toString().lastIndexOf(".word"));
                             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
@@ -226,6 +231,7 @@ public class BaseTokenFeatures {
                             output = lemmaPOS2TempEval2_features((PipesFile) nlpfile, lang);
 
                             nlpfile=new PipesFile(output);
+                            nlpfile.setLanguage(lang);
                             ((PipesFile) nlpfile).isWellFormedOptimist();
                             String model = nlpfile.getFile().toString().substring(0, nlpfile.getFile().toString().lastIndexOf(".word"));
                             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
@@ -360,6 +366,7 @@ public class BaseTokenFeatures {
                             output = lemmaPOS2TempEval2_features((PipesFile) nlpfile, lang);
 
                             nlpfile=new PipesFile(output);
+                            nlpfile.setLanguage(lang);
                             ((PipesFile) nlpfile).isWellFormedOptimist();
                             output = GetPairSpecialTempEval2_features(((PipesFile) nlpfile), file);
 
@@ -389,6 +396,7 @@ public class BaseTokenFeatures {
                             output = lemmaPOS2TempEval2_features((PipesFile) nlpfile, lang);
 
                             nlpfile=new PipesFile(output);
+                            nlpfile.setLanguage(lang);
                             ((PipesFile) nlpfile).isWellFormedOptimist();
                             output = GetPairSpecialTempEval2_features(((PipesFile) nlpfile), file);
                         }
@@ -474,6 +482,7 @@ public class BaseTokenFeatures {
             output = getVerbRoleconfig((PipesFile) nlpfile);
 
             nlpfile=new PipesFile(output);
+            nlpfile.setLanguage(lang);
             ((PipesFile) nlpfile).isWellFormedOptimist();
             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                 System.err.println("Executing SIMPLEROLES");
@@ -481,6 +490,7 @@ public class BaseTokenFeatures {
             output = getSimpleRoles((PipesFile) nlpfile);
 
             nlpfile=new PipesFile(output);
+            nlpfile.setLanguage(lang);
             ((PipesFile) nlpfile).isWellFormedOptimist();
             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                 System.err.println("Executing MAINPHRASES");
