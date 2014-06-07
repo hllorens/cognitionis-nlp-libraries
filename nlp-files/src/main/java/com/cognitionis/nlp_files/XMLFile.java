@@ -159,7 +159,9 @@ public class XMLFile extends NLPFile {
         }
     }
 
-
+    public String toPlain(){
+        return toPlain(this.getFile().toString() + ".plain");
+    }
 
     @Override
     public String toPlain(String filename) {
