@@ -5,7 +5,7 @@
 	<version>1.0.0</version>  <!-- version. NOTE: update it manually -->        
 	<packaging>jar</packaging>
         <name>external tools</name>                 <!-- Full name (not id) -->
-        <description>Java implementation of Time and Number NL knowledge.</description>
+        <description>Java wrappers for common NLP tools such as taggers, parsers, etc.</description>
         <url>http://www.cognitionis.com</url>
         <licenses>
                 <license>
