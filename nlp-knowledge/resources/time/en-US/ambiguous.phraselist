@@ -1,0 +1,4 @@
+^ second | c_ord
+ (one|a) second | one c_tunit
+ quarter to | c_keep to
+ (quarter|half) past | c_keep c_keep

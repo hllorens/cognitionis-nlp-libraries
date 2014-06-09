@@ -160,6 +160,63 @@ public class FileUtils {
         }
     }
 
+    
+    /*
+     * The path in which the application code/class/jar/executable is located
+     */
+    public static String getApplicationPath(Class app_class) {
+        try {
+            String innerpath = FileUtils.ApplicationPath;
+            if (FileUtils.ApplicationPath == null) {
+                //innerpath = FileUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+                //innerpath = FileUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+
+                // probably won't work for Windows non ascii folder names
+            URL url = app_class.getProtectionDomain().getCodeSource().getLocation();
+            innerpath = (new File(URLDecoder.decode(url.getFile(), "UTF-8"))).getAbsolutePath();
+
+
+                //System.out.println("dfdf "+innerpath);
+                if (innerpath.contains(".jar")) {
+                    innerpath = innerpath.substring(0, innerpath.lastIndexOf(File.separator) + 1);
+                    // Go up from app local libraries
+                    if (innerpath.endsWith(File.separator + "lib" + File.separator)) {
+                        innerpath = innerpath.substring(0, innerpath.length() - 4);
+                    }
+                    // When you release the final dist you must use a name different than "dist"
+                    // NOOOO YOU MUST say to ant (build.xml) that lib and program-data must be copied to dist
+                    /*if (innerpath.endsWith("dist"+File.separator)) {
+                        innerpath = innerpath.substring(0, innerpath.length() - 5);
+                    }*/
+                } else {
+                    /*if (innerpath.endsWith("/lib/")) {
+                    innerpath = innerpath.substring(0, innerpath.length() - 4);
+                    }*/
+                    if (innerpath.endsWith("build" + File.separator + "classes" + File.separator)) {
+                        innerpath = innerpath.substring(0, innerpath.length() - 14);
+                    }
+                }
+                /*if (innerpath.matches(".*Utils_BasicKit.*")) { // DELETE THIS
+                // Hack for debugging (executed from NetBeans... and project added, not compiled)
+                innerpath = "/home/hector/Dropbox/JApplications/TIMEE/";
+                //System.err.println("utils_bk FileUtils.java. This must be solved in some other way.");
+                //System.exit(0);
+                }*/
+                // DONE DONE DONE: PASSING THE class as a parameter
+                //we have a problem if this library is just in the classpath I guess, test it.
+                //FileUtils.ApplicationPath = innerpath;
+            }
+            return innerpath;
+        } catch (Exception e) {
+            System.err.println("Errors found (FileUtils):\n\tApplication path not found: " + e.getMessage() + "\n");
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                e.printStackTrace(System.err);
+            }
+            return "";
+        }
+    }    
+    
+    
     public static String ensureURL(String URLName) {
         // replace windows by linux
         if (File.separator.equals("\\") && URLName.contains("\\")) {
@@ -271,6 +328,70 @@ public class FileUtils {
         return res_path;
     }
 
+    
+    /**
+     * Return an existing resources path given a subdir (trying to find it
+     * inside or outside to classes)
+     *
+     * @param subdir
+     * @return res_path
+     * @throws Exception if resources are not found
+     */
+    public static String getResourcesPath(Class appclass, String subdir) throws Exception {
+        String app_path = FileUtils.getApplicationPath(appclass);
+        String res_path = app_path + File.separator + subdir;
+        //System.out.println(res_path);
+
+        if (!URL_exists(res_path)) { // Check for external resoucre (outside classes)
+            // For our beloved Windows
+            String extra = ""; // TODO check if this is really needed, it is but could be avoided if we transform res_path to URI at the beginiing
+            if (File.separator.equals("\\")) {
+                extra = "\\";
+            }
+            res_path=res_path.replaceAll(extra + File.separator + "classes", ""); // see if we need \\ for windows
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.out.println("look outside classes: "+ensureURL(res_path));
+            }            
+        }
+        
+
+
+        if (!URL_exists(res_path)) { // Check for JAR resoucre
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.out.println("look into jar");
+            }
+            // replace \ by / since URL always use that even in windows
+            URL res = FileUtils.class.getClassLoader().getResource(subdir.replaceAll("\\\\", "/"));
+            //InputStream res = FileUtils.class.getClassLoader().getResourceAsStream(subdir);
+            if (res == null) {
+                            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.out.println("java jar res not found " + subdir);
+                            }
+            } else {
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.out.println("java jar res " + res.toString());
+                System.out.println("file: " + new File(res.getPath())); // path part of the URL
+                }
+                Enumeration<URL> resources = FileUtils.class.getClassLoader().getResources(subdir.replaceAll("\\\\", "/")); //
+                            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                                System.out.println("exists = " + resources.hasMoreElements());
+                            }
+                res_path = res.toString();
+            }
+        }
+
+        // ANOTHER OPTION IS SEARCH ON THE WEB 
+        //cognitionis.com/resources/... 
+
+        if (!URL_exists(res_path)) { //Set to null if does not exist
+            throw new Exception("Resources " + subdir + " do not exist neither interal or external to 'classes' in " + app_path + " or inside jar.");
+        }
+
+        return res_path;
+    }
+    
+    
+    
     public static void copyFileUtil(File in, File out) throws IOException {
         FileChannel inChannel = new FileInputStream(in).getChannel();
         FileChannel outChannel = new FileOutputStream(out).getChannel();

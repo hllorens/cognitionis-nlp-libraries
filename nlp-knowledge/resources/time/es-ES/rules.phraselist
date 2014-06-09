@@ -1,0 +1,4 @@
+c_card c_month c_card|["timex":{"start":{"date":{"year":"$3", "month":"$2", "day":"$1"}}}]
+hace c_card c_tunit|["timex":{"start":{"relative":{"step":"$3", "increment":"-$2"}}}]
+(la|las) c_card [la] c_time_of_day|["timex":{"start":{"time":{"hour":"$1","ampm":"$3"}}}]
+(la|las) c_card|["timex":{"start":{"time":{"hour":"$2"}}}]
