@@ -1,0 +1,3 @@
+todo todo
+            set_re = "(?i)(?:each(\\s|_)+.*|every(?:\\s|_)+.*|.*" + tweekdays_re + "s.*|(?:hour|day|week|month|quarter|year)ly)";
+

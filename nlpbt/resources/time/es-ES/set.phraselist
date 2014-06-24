@@ -1,0 +1,3 @@
+todo todo
+          set_re = "(?i)(?:cada(?:\\s|_)+.*|todos(?:\\s|_)+los.*|.*" + tweekdays_re + "s.*|(?:diari|diaria|semanal|mensual|trimestral|anual|bienal)(?:mente|(?:a|e|o)(?:s)?))";
+

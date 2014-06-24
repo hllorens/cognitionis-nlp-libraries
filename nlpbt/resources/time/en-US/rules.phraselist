@@ -1,0 +1,16 @@
+c_card c_month c_card|[{"start":{"date":{"year":"$3","month":"$2", "day":"$1"}}}]
+c_month c_card|if($2 > 31){[{"start":{"date":{"year":"$2","month":"$1"}}}]}else{[{"start":{"date":{"month":"$1","day":"$2"}}}]}
+c_card c_tunit ago|[{"start":{"relative":{"step":"$2", "increment":"-$1"}}}]
+half past c_card c_time_of_day|[{"start":{"time":{"hour":"$3","minute":"30","ampm":"$4"}}}]
+half past c_card|[{"start":{"time":{"hour":"$3","minute":"30"}}}]
+quarter to c_card|[{"start":{"time":{"hour":"add($3,-1)","minute":"45"}}}]
+quarter past c_card|[{"start":{"time":{"hour":"$3","minute":"15"}}}]
+c_card c_card|if($1 < 13 && $2 < 60){[{"start":{"time":{"hour":"$1","minute":"$2"}}}]}else{[{"start":{"date":{"year":"$(1)$(2)"}}}]}
+c_card in the c_time_of_day|[{"start":{"time":{"hour":"$2""ampm":"$5"}}}]
+at c_card c_card|[{"start":{"time":{"hour":"$2","minute":"$3"}}}]
+at c_card|[{"start":{"time":{"hour":"$2"}}}]
+at c_isotime|[{"start":{"time":{"hour":"$(2,:,1)","minute":"$(2,:,2)"}}}]
+c_card c_card c_time_of_day|[{"start":{"time":{"hour":"$1","minute":"$2","ampm":"$3"}}}]
+c_card c_time_of_day|[{"start":{"time":{"hour":"$1","ampm":"$2"}}}]
+c_deictic|[{"start":{"relative":{"step":"$(1,_,1)", "increment":"$(1,_,2)"}}}]
+c_weekday|[{"start":{"relative":{"step":"$1"}}}]

@@ -1,0 +1,9 @@
+April 18 th||april ord__18|c_month c_ord
+Apr. second||april ord__2|c_month c_ord
+Apre second||apre ord__2|apre c_ord
+April twenty first||april ord__21|c_month c_ord
+April 21st||april ord__21|c_month c_ord
+April twenty-first||april ord__21|c_month c_ord
+April first||april ord__1|c_month c_ord
+one second||1 second|c_card c_tunit
+thirty three seconds||33 second|c_card c_tunit

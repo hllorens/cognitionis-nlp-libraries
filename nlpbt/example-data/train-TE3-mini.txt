@@ -1,0 +1,73 @@
+financial O
+week B-TIMEX3
+for O
+1 O
+. O
+
+financial O
+week B-TIMEX3
+for O
+1 O
+. O
+
+financial O
+week B-TIMEX3
+for O
+1 O
+. O
+
+financial O
+week B-TIMEX3
+for O
+1 O
+. O
+
+financial O
+week B-TIMEX3
+for O
+1 O
+. O
+
+financial O
+week B-TIMEX3
+for O
+1 O
+. O
+
+The O
+financial O
+assistance O
+from O
+the O
+World O
+Bank O
+and O
+the O
+International O
+Monetary O
+Fund O
+are O
+not O
+helping O
+. O
+
+In O
+the B-TIMEX3
+last I-TIMEX3
+twenty I-TIMEX3
+four I-TIMEX3
+hours I-TIMEX3
+, O
+the O
+value O
+of O
+the O
+Indonesian O
+stock O
+market O
+has O
+fallen O
+by O
+twelve O
+percent O
+. O

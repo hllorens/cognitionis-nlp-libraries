@@ -1,0 +1,3 @@
+ [0-9]+ (st|nd|rd|th) | c_ord c_ord
+ (twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety) (first|second|third|fourth|fifth|sixth|seventh|eighth|ninth) | c_ord c_ord
+ (twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety) | c_card 

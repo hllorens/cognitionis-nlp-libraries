@@ -1,0 +1,2 @@
+1996 Ratnaparkhi - A Maximum Entropy Model for Part-Of-Speech Tagging (example of feature vectors and log-linear models, SVM)
+1994 Canvar&Trenkle - Text Categorization (example of language models)
