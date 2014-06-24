@@ -340,7 +340,8 @@ public class TML_file_utils {
     }
 
     /**
-     * Converts a TimeML 1.2 file into a non-taged TE3 TimeML input
+     * Converts a TimeML 1.2 file into a non-tagged TE3 TimeML input
+     * get TE3-input, TE3input from tml
      *
      * @param tmlfile
      * @return

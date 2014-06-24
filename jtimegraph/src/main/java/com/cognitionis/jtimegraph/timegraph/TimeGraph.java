@@ -4,7 +4,6 @@ import java.text.*;
 import java.util.*;
 import com.cognitionis.utils_basickit.*;
 
-
 /**
  * TimeGraph implementation
  *
@@ -47,6 +46,9 @@ public class TimeGraph {
             String y2 = entity2 + "_e";
 
             if (greginterval1_s != null && greginterval1_e != null) {
+                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                    System.err.println(entity1 + " is an interval (" + greginterval1_s + "-" + greginterval1_e + ")");
+                }
                 Date d1 = (Date) iso.parse(greginterval1_s);
                 Date d2 = (Date) iso.parse(greginterval1_e);
                 if (!d1.before(d2)) {
@@ -57,6 +59,9 @@ public class TimeGraph {
             }
 
             if (greginterval2_s != null && greginterval2_e != null) {
+                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                    System.err.println(entity2 + " is an interval (" + greginterval2_s + "-" + greginterval2_e + ")");
+                }
                 Date d1 = (Date) iso.parse(greginterval2_s);
                 Date d2 = (Date) iso.parse(greginterval2_e);
                 if (!d1.before(d2)) {
@@ -68,6 +73,9 @@ public class TimeGraph {
 
             if (greginterval1_s != null && greginterval1_e != null && greginterval2_s != null && greginterval2_e != null) {
                 // check relation correspondence with the dates
+                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                    System.err.println(entity1 + " (" + greginterval1_s + "-" + greginterval1_e + ") and " + entity2 + " (" + greginterval2_s + "-" + greginterval2_e + ") are both intervals.");
+                }
             }
 
             // Allen's OVERLAP (o)  x1 < y1 < x2 < y2 and OVERLAPED_BY are not included in TimeML, although they could be INCLUDED and INCLUDED_BY...
@@ -134,6 +142,9 @@ public class TimeGraph {
      * @param relation
      */
     public void addBothEntitiesInNewChain(String x1, String x2, String y1, String y2, String rel) {
+        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+            System.err.println("addBothEntitiesInNewChain");
+        }
         int c = createOrSelectNewChain();
         if (rel.equals("BEFORE")) { // Allen (<)  x1 < x2 < y1 < y2
             TimePoint tp1 = new TimePoint(c, x1);
@@ -241,6 +252,9 @@ public class TimeGraph {
      * @param relation
      */
     public void addOnlyFirstEntity(String x1, String x2, String y1, String y2, String rel) {
+        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+            System.err.println("addOnlyFirstEntity");
+        }
         // Y(y1,y2) is already known. Add only X(x1,x2).
         TimePoint tpy1 = entity_tp_map.get(y1);
         TimePoint tpy2 = entity_tp_map.get(y2);
@@ -652,6 +666,9 @@ public class TimeGraph {
      * @param rel
      */
     public void addOnlyRelation(String x1, String x2, String y1, String y2, String rel) {
+        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+            System.err.println("addOnlyRelation");
+        }
         // TimePoints are already known
         TimePoint tpx1 = entity_tp_map.get(x1);
         TimePoint tpx2 = entity_tp_map.get(x2);
@@ -665,10 +682,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + x2 + pointrel + y1 + ") in " + rel);
+                        System.out.println("offense not x2<y1 (" + x2 + pointrel + y1 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -686,10 +703,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + x2 + pointrel + y1 + ") in " + rel);
+                        System.out.println("offense x2!=y1 (" + x2 + pointrel + y1 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -709,10 +726,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + x1 + pointrel + y1 + ") in " + rel);
+                        System.out.println("offense x1!=y1 (" + x1 + pointrel + y1 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -731,10 +748,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + x2 + pointrel + y2 + ") in " + rel);
+                        System.out.println("offense not x2<y2 (" + x2 + pointrel + y2 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -757,10 +774,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + x2 + pointrel + y2 + ") in " + rel);
+                        System.out.println("offense x2!=y2 (" + x2 + pointrel + y2 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -779,10 +796,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + y1 + pointrel + x1 + ") in " + rel);
+                        System.out.println("offense not y1<x1 (" + y1 + pointrel + x1 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -802,10 +819,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + x1 + pointrel + y1 + ") in " + rel);
+                        System.out.println("offense not x1 < y1 (" + x1 + pointrel + y1 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -824,10 +841,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + y1 + pointrel + x2 + ") in " + rel);
+                        System.out.println("offense not y1<x2 (" + y1 + pointrel + x2 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -846,10 +863,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + y1 + pointrel + x1 + ") in " + rel);
+                        System.out.println("offense not y1<x1 (" + y1 + pointrel + x1 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -868,10 +885,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + x2 + pointrel + y2 + ") in " + rel);
+                        System.out.println("offense not x2<y2 (" + x2 + pointrel + y2 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -890,10 +907,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + x1 + pointrel + y1 + ") in " + rel);
+                        System.out.println("offense x1!=y1 (" + x1 + pointrel + y1 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -912,10 +929,10 @@ public class TimeGraph {
                     System.out.println("already in graph");
                 }
             } else {
-                //ofense
+                //offense
                 if (!pointrel.equals("UNKNOWN")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense! (" + x2 + pointrel + y2 + ") in " + rel);
+                        System.out.println("offense x2!=y2 (" + x2 + pointrel + y2 + ") in " + rel);
                     }
                     // break? ignore?
                 } //unknown
@@ -1907,38 +1924,53 @@ public class TimeGraph {
     }
 
     /**
-     * Given the implementation model it may happen that a chain (max. one
-     * chain) ends up empty after the construction of the graph.
+     * Given the implementation model it might happen that a chain or some
+     * chains end up empty after the construction of the graph.
      *
-     * This function removes such chain: if it is the last one it is just
+     * That happens when chains are collapsed due to new relations between
+     * existing entities.
+     *
+     * This function removes such chains: if it is the last one it is just
      * removed, if not the last one is moved in its place and then the empty
-     * reamains the last one and it is removed
+     * remains the last one and it is removed
      *
      */
-    public void removeEmptyChain() {
-        int empty = -1;
-        int lastchain = metagraph.size() - 1;
+    public void removeEmptyChains() {
         try {
             for (int i = 0; i < metagraph.size(); i++) {
                 if (metagraph.get(i).isEmptyChain()) {
-                    if (empty == -1) {
-                        empty = i;
-                    } else {
-                        throw new Exception("More than one empty chains found.");
-                    }
+                    removeEmptyChain(i);
                 }
             }
+        } catch (Exception e) {
+            System.err.println("Errors found (TimeGraph):\n\t" + e.toString() + "\n");
+            e.printStackTrace(System.err);
+            System.exit(1);
+        }
+    }
 
-            if (empty == -1) {
-                return;
-            }
-
-            if (empty != lastchain) {
+    /**
+     *
+     * Remove an chain_number chain: if it is the last one it is just removed, if not,
+     * if the last one is not chain_number it is moved in its place, if the last one
+     * is chain_number it is removed and the last non-chain_number chain is used instead.
+     * Then the new last one is chain_number and is removed.
+     *
+     * @param chain_number chain_number chain number
+     */
+    public void removeEmptyChain(int chain_number) {
+        try {
+            int lastchain = metagraph.size() - 1;
+            if (chain_number != lastchain) {
+                while (metagraph.get(lastchain).isEmptyChain()) {
+                    metagraph.remove(lastchain);
+                    lastchain -= 1;
+                }
                 // replace with last one
                 for (TimePoint tp : metagraph.get(lastchain).getTimePoints().values()) {
                     // add new point to metagraph
-                    TimePoint np = new TimePoint(empty, tp.getPosition(), tp.getAssociatedEntities());
-                    metagraph.get(empty).getTimePoints().put(np.getPosition(), np);
+                    TimePoint np = new TimePoint(chain_number, tp.getPosition(), tp.getAssociatedEntities());
+                    metagraph.get(chain_number).getTimePoints().put(np.getPosition(), np);
 
                     HashMap<Integer, TimePoint> conns = metagraph.get(lastchain).getAfterConnections(tp.getPosition());
                     if (conns != null) {
@@ -2973,10 +3005,4 @@ public class TimeGraph {
         }
 
     }
-
-
-
-
-
-
 }
