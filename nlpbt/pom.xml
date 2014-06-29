@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cognitionis</groupId>
-    <artifactId>cognitionis-nlp</artifactId>
+    <artifactId>cognitionis-nlpbt</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <name>Cognitionis NLP</name>
-    <description>Cognitionis Natural Language Processing Basic Tools</description>
+    <name>Cognitionis NLPBT</name>
+    <description>Cognitionis Natural Language Processing Basic Tools. A usable wrapper app for other cognitionis libs</description>
     <url>http://nlpbt.cognitionis.com</url>
     <licenses>
         <license>

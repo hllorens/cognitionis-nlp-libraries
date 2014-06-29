@@ -22,7 +22,8 @@ public class Main {
     public static enum Action {
 
         TAG, TOKENIZE, XML2TOK, TOK2XML, EVAL_ANNOT, GET_NGRAMS,
-        TRAIN_BASELINE_TAGGER, TEST_BASELINE_TAGGER
+        TRAIN_BASELINE_TAGGER, TEST_BASELINE_TAGGER,
+        TRAIN_HMM_TAGGER, TEST_HMM_TAGGER
         
     };
 
@@ -228,10 +229,15 @@ public class Main {
                     if (classes == null) {
                         classes="default";
                     }
+                    Boolean sort_model_bool=false;
+                    String sort_model = getParameter(action_parameters, "sort_model");
+                    if (sort_model != null) {
+                        sort_model_bool=true;
+                    }
                     for (String file : input_files) {
                         Baseline_MostFrequentTag tagger = new Baseline_MostFrequentTag();
                         tagger.train_model(file,Integer.parseInt(n),classes);
-                        tagger.write_model(null);
+                        tagger.write_model(null,sort_model_bool);
                     }
                 }
                 break;
