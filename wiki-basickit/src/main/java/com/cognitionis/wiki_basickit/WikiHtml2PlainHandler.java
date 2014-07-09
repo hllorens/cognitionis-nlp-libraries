@@ -8,25 +8,28 @@ import com.cognitionis.utils_basickit.SAXReader;
  * @author Hector Llorens
  * @since 2011
  */
-
 public class WikiHtml2PlainHandler extends SAXReader {
 
-    boolean inText = false, inSection = false, hasText=false, hasSentence=false, inSentence=false;
-    boolean inH=false; // section titles
-    boolean inSup=false; // references / citations
-    int inTable=0;
+    boolean inText = false, inSection = false, hasText = false, hasSentence = false, inSentence = false;
+    boolean inH = false; // section titles
+    boolean inSup = false; // references / citations
+    int inTable = 0;
     //    StringBuilder docidStrb;
     StringBuilder textStrb;
     StringBuilder sentenceStrb;
     StringBuilder H2Strb;
-
 //    String docid;
     String root_tag = null;
     ArrayList<String> sentences;
+    String encoding = "utf8";
+
+    public void init(String charset) {
+        encoding = charset;
+    }
 
     @Override
     public void startElement(final String uri, final String localName,
-        final String tag, final Attributes attributes) throws SAXException {
+            final String tag, final Attributes attributes) throws SAXException {
         //System.err.println("found "+tag);
         if (textStrb == null) {
             textStrb = new StringBuilder();
@@ -40,12 +43,12 @@ public class WikiHtml2PlainHandler extends SAXReader {
             inTable++;
         }
         if (tag.equalsIgnoreCase("sup")) {
-            inSup=true;
+            inSup = true;
         }
         if (tag.matches("h[1234]")) {
-            H2Strb=null;
-            H2Strb=new StringBuilder();
-            inH=true;
+            H2Strb = null;
+            H2Strb = new StringBuilder();
+            inH = true;
         }
         if (tag.equalsIgnoreCase("html")) {
             if (!hasText) {
@@ -84,16 +87,16 @@ public class WikiHtml2PlainHandler extends SAXReader {
     public void characters(final char[] c, final int start, final int length) {
         //System.err.print(c);
 /*        if (inDocid) {
-        docidStrb.append(c, start, length);
-        }
+         docidStrb.append(c, start, length);
+         }
          */
         if (hasText) {
             if (inText) {
                 if (hasSentence) {
-                    if (inSentence && inTable==0 && !inSup) {
+                    if (inSentence && inTable == 0 && !inSup) {
                         sentenceStrb.append(c, start, length);
                     }
-                    if (inH && inTable==0 && !inSup) {
+                    if (inH && inTable == 0 && !inSup) {
                         H2Strb.append(c, start, length);
                     }
                 } else {
@@ -102,7 +105,7 @@ public class WikiHtml2PlainHandler extends SAXReader {
             }
         } else {
             if (hasSentence) {
-                if (inSentence && inTable==0 && !inSup) {
+                if (inSentence && inTable == 0 && !inSup) {
                     sentenceStrb.append(c, start, length);
                 }
             } else {
@@ -128,8 +131,8 @@ public class WikiHtml2PlainHandler extends SAXReader {
                 strBuilder = textStrb;
             } else {
                 int n = sentences.size() - 1;
-                for (int i = 0; i <
-                        n; i++) {
+                for (int i = 0; i
+                        < n; i++) {
                     strBuilder.append(sentences.get(i) + "\n\n");
                 }
 
@@ -142,30 +145,34 @@ public class WikiHtml2PlainHandler extends SAXReader {
 
         if (tag.equalsIgnoreCase("p") && inSentence) {
             inSentence = false;
-            if(sentenceStrb.length()>0){
-                 String temp=sentenceStrb.toString().replaceAll("(\n|\r|\\p{javaSpaceChar})", " ").replaceAll("\\s+", " ").replaceAll("(—|–)", " - ").replaceAll("’", "'").trim();
-                 //temp=java.text.Normalizer.normalize(temp, java.text.Normalizer.Form.NFD);
-                 //sentences.add(temp.replaceAll("[^\\p{ASCII}]",""));
-                 sentences.add(temp);
+            if (sentenceStrb.length() > 0) {
+                String temp = sentenceStrb.toString().replaceAll("(\n|\r|\\p{javaSpaceChar})", " ").replaceAll("\\s+", " ").replaceAll("(—|–)", " - ").replaceAll("’", "'").trim();
+                if (encoding.equals("ascii")) {
+                    temp = java.text.Normalizer.normalize(temp, java.text.Normalizer.Form.NFD);
+                    temp = temp.replaceAll("[^\\p{ASCII}]", "");
+                }
+                sentences.add(temp);
             }
             sentenceStrb = null; // For the garbage collector - free memory
         }
 
-        if (tag.equalsIgnoreCase("table") && inTable>0) {
+        if (tag.equalsIgnoreCase("table") && inTable > 0) {
             inTable--;
         }
 
         if (tag.equalsIgnoreCase("sup") && inSup) {
-            inSup=false;
+            inSup = false;
         }
         if (tag.matches("h[1234]")) {
-            inH=false;
-            if(H2Strb.length()>0 && !H2Strb.toString().replaceAll("(\n|\r|\\s*\\[\\s*edit(ar)?\\s*\\]\\s*)", "").matches("(Media|Animated maps|See also|Notes|References|External links)")){
-                 String temp=H2Strb.toString().replaceAll("(\n|\r|\\s*\\[\\s*edit(ar)?\\s*\\]\\s*|\t)", " ").replaceAll("\\s+", " ").replaceAll("(—|–)", " - ").replaceAll("’", "'").trim();
-                 // NOT ALWAYS WORK THAT BELOW NFD + ASCII
-                 //temp=java.text.Normalizer.normalize(temp, java.text.Normalizer.Form.NFD);
-                 //sentences.add(temp.replaceAll("[^\\p{ASCII}]","")+".");
-                 sentences.add(temp+".");
+            inH = false;
+            if (H2Strb.length() > 0 && !H2Strb.toString().replaceAll("(\n|\r|\\s*\\[\\s*edit(ar)?\\s*\\]\\s*)", "").matches("(Media|Animated maps|See also|Notes|References|External links)")) {
+                String temp = H2Strb.toString().replaceAll("(\n|\r|\\s*\\[\\s*edit(ar)?\\s*\\]\\s*|\t)", " ").replaceAll("\\s+", " ").replaceAll("(—|–)", " - ").replaceAll("’", "'").trim();
+                // NOT ALWAYS WORK THAT BELOW NFD + ASCII
+                if (encoding.equals("ascii")) {
+                    temp = java.text.Normalizer.normalize(temp, java.text.Normalizer.Form.NFD);
+                    temp = temp.replaceAll("[^\\p{ASCII}]", "");
+                }
+                sentences.add(temp + ".");
             }
             H2Strb = null; // For the garbage collector - free memory
         }
@@ -176,8 +183,8 @@ public class WikiHtml2PlainHandler extends SAXReader {
             if (!hasText) {
                 if (hasSentence) {
                     int n = sentences.size() - 1;
-                    for (int i = 0; i <
-                            n; i++) {
+                    for (int i = 0; i
+                            < n; i++) {
                         strBuilder.append(sentences.get(i) + "\n");
                     }
 
@@ -197,7 +204,3 @@ public class WikiHtml2PlainHandler extends SAXReader {
     }
     //es pot gastar start i enddocument...a.
 }
-
-
-
-

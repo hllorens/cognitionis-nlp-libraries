@@ -12,10 +12,18 @@ import java.net.URL;
 public class Wiki_bk {
 
     public static String wiki2txt(String title) {
-        return wiki2txt(title, "en");
+        return wiki2txt(title, "en", "ascii");
     }
 
     public static String wiki2txt(String title, String lang) {
+        String charset="ascii";
+        if (!lang.equalsIgnoreCase("en")){
+            charset="utf8";
+        }
+        return wiki2txt(title, "en", charset);
+    }    
+    
+    public static String wiki2txt(String title, String lang, String charset) {
         try {
             title = title.trim().replaceAll(" ", "_");
             if (title.matches("(http://)?(en|es).wikipedia.*")) {
@@ -59,9 +67,10 @@ public class Wiki_bk {
                         }
                     }
 
-                // NOTE THAT NOW EN AND ES ARE THE SAME (THEY LEAVE NON-ASCII CHARS)
+                // NOTE THAT NOW EN AND ES ARE THE SAME (unless charset is set)
                 if (lang.equalsIgnoreCase("en")) {
                     WikiHtml2PlainHandler wikihtml2plain = new WikiHtml2PlainHandler();
+                    wikihtml2plain.init(charset);
                     wikihtml2plain.saveFile(title.replaceAll("/", "-") + ".cleanhtml", title.replaceAll("/", "-") + "-" + lang + ".txt");
                 } else {
                     System.err.println("Leaving accents an non-ascii chars");

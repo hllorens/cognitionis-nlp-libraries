@@ -1,0 +1,3687 @@
+EXISTS? file:///home/hector/development/cognitionis/cognitionis-nlp-libraries/nlp-taggers/example-data/train-TimeBankTE3-TIMEX3.txt
+NGRAM-LEVEL CONFIG 3
+HANDLE-LOW-FREQ CONFIG default
+- ENDCONFIG -
+9509 WORDTAG _RARE_ O
+3096 WORDTAG , O
+2550 WORDTAG . O
+2517 WORDTAG the O
+1592 WORDTAG of O
+1513 WORDTAG to O
+1293 WORDTAG a O
+1185 WORDTAG _SOMEDIGITS_ O
+1024 WORDTAG in O
+1003 WORDTAG and O
+705 WORDTAG 's O
+627 WORDTAG said O
+571 WORDTAG million O
+560 WORDTAG for O
+506 WORDTAG The O
+482 WORDTAG that O
+470 WORDTAG " O
+442 WORDTAG is O
+358 WORDTAG from O
+351 WORDTAG it O
+321 WORDTAG company O
+320 WORDTAG on O
+300 WORDTAG its O
+293 WORDTAG by O
+288 WORDTAG share O
+277 WORDTAG will O
+277 WORDTAG has O
+275 WORDTAG with O
+273 WORDTAG at O
+254 WORDTAG be O
+252 WORDTAG or O
+248 WORDTAG as O
+246 WORDTAG was O
+219 WORDTAG the B-TIMEX3
+217 WORDTAG an O
+214 WORDTAG are O
+209 WORDTAG shares O
+209 WORDTAG _DIGITS2_ O
+198 WORDTAG have O
+182 WORDTAG which O
+180 WORDTAG about O
+171 WORDTAG year I-TIMEX3
+162 WORDTAG n't O
+157 WORDTAG Mr. O
+156 WORDTAG In O
+155 WORDTAG _ALLCAP_ O
+142 WORDTAG would O
+141 WORDTAG he O
+133 WORDTAG been O
+130 WORDTAG cents O
+129 WORDTAG had O
+124 WORDTAG U.S. O
+123 WORDTAG they O
+121 WORDTAG - O
+118 WORDTAG billion O
+116 WORDTAG also O
+115 WORDTAG stock O
+113 WORDTAG Iraq O
+111 WORDTAG more O
+109 WORDTAG were O
+107 WORDTAG up O
+107 WORDTAG market O
+106 WORDTAG not O
+105 WORDTAG but O
+103 WORDTAG his O
+99 WORDTAG Inc. O
+96 WORDTAG new O
+93 WORDTAG Corp. O
+90 WORDTAG quarter I-TIMEX3
+87 WORDTAG `` O
+86 WORDTAG trading O
+85 WORDTAG than O
+84 WORDTAG _DIGITS2_ I-TIMEX3
+84 WORDTAG '' O
+83 WORDTAG other O
+81 WORDTAG net O
+80 WORDTAG their O
+73 WORDTAG New O
+72 WORDTAG offer O
+70 WORDTAG who O
+70 WORDTAG But O
+69 WORDTAG a B-TIMEX3
+69 WORDTAG _DIGITS3_ O
+69 WORDTAG ) O
+69 WORDTAG ( O
+67 WORDTAG some O
+66 WORDTAG earnings O
+66 WORDTAG because O
+65 WORDTAG through O
+65 WORDTAG last B-TIMEX3
+65 WORDTAG all O
+63 WORDTAG one O
+63 WORDTAG after O
+62 WORDTAG York O
+61 WORDTAG into O
+61 WORDTAG common O
+61 WORDTAG Friday B-TIMEX3
+60 WORDTAG when O
+60 WORDTAG _DIGITS4_ B-TIMEX3
+59 WORDTAG says O
+59 WORDTAG Iraqi O
+58 WORDTAG sales O
+58 WORDTAG could O
+58 WORDTAG business O
+58 WORDTAG any O
+56 WORDTAG out O
+56 WORDTAG down O
+56 WORDTAG _RARE_ I-TIMEX3
+54 WORDTAG this B-TIMEX3
+54 WORDTAG price O
+54 WORDTAG president O
+54 WORDTAG over O
+54 WORDTAG group O
+54 WORDTAG I O
+53 WORDTAG we O
+53 WORDTAG loss O
+53 WORDTAG Kuwait O
+52 WORDTAG It O
+51 WORDTAG say O
+51 WORDTAG government O
+51 WORDTAG Exchange O
+50 WORDTAG rose O
+50 WORDTAG no O
+50 WORDTAG Saddam O
+49 WORDTAG officials O
+49 WORDTAG We O
+48 WORDTAG two O
+48 WORDTAG months I-TIMEX3
+48 WORDTAG do O
+48 WORDTAG _RARE_ B-TIMEX3
+48 WORDTAG A O
+47 WORDTAG years I-TIMEX3
+47 WORDTAG most O
+47 WORDTAG expected O
+47 WORDTAG Co. O
+46 WORDTAG if O
+46 WORDTAG _DIGITS4_ I-TIMEX3
+46 WORDTAG American O
+45 WORDTAG off O
+45 WORDTAG income O
+45 WORDTAG Bush O
+44 WORDTAG yesterday B-TIMEX3
+44 WORDTAG this O
+44 WORDTAG closed O
+44 WORDTAG chief O
+44 WORDTAG Stock O
+43 WORDTAG operations O
+43 WORDTAG fell O
+43 WORDTAG Hussein O
+43 WORDTAG He O
+42 WORDTAG week I-TIMEX3
+42 WORDTAG under O
+42 WORDTAG shareholders O
+42 WORDTAG profit O
+42 WORDTAG outstanding O
+42 WORDTAG each O
+42 WORDTAG ' O
+41 WORDTAG unit O
+41 WORDTAG reported O
+41 WORDTAG only O
+41 WORDTAG oil O
+41 WORDTAG amp O
+40 WORDTAG prices O
+40 WORDTAG now B-TIMEX3
+40 WORDTAG can O
+40 WORDTAG ago I-TIMEX3
+39 WORDTAG war O
+39 WORDTAG there O
+39 WORDTAG people O
+39 WORDTAG many O
+39 WORDTAG debt O
+39 WORDTAG against O
+39 WORDTAG Saudi O
+39 WORDTAG And O
+38 WORDTAG made O
+38 WORDTAG executive O
+38 WORDTAG British O
+37 WORDTAG buy O
+37 WORDTAG _ O
+36 WORDTAG stake O
+36 WORDTAG may O
+36 WORDTAG including O
+36 WORDTAG capital O
+36 WORDTAG assets O
+35 WORDTAG value O
+35 WORDTAG spokesman O
+35 WORDTAG plan O
+35 WORDTAG first O
+35 WORDTAG chairman O
+34 WORDTAG time O
+34 WORDTAG third-quarter B-TIMEX3
+34 WORDTAG such O
+34 WORDTAG sale O
+34 WORDTAG news O
+34 WORDTAG military O
+34 WORDTAG forces O
+34 WORDTAG companies O
+34 WORDTAG bid O
+33 WORDTAG until O
+33 WORDTAG three O
+33 WORDTAG major O
+33 WORDTAG just O
+33 WORDTAG interest O
+33 WORDTAG force O
+33 WORDTAG dividend O
+33 WORDTAG before O
+33 WORDTAG _DIGITS1_ I-TIMEX3
+32 WORDTAG part O
+32 WORDTAG own O
+32 WORDTAG operating O
+32 WORDTAG higher O
+32 WORDTAG computer O
+32 WORDTAG composite O
+32 WORDTAG between O
+32 WORDTAG back O
+32 WORDTAG announced O
+32 WORDTAG agreement O
+31 WORDTAG world O
+31 WORDTAG third I-TIMEX3
+31 WORDTAG so O
+31 WORDTAG sell O
+31 WORDTAG move O
+31 WORDTAG month I-TIMEX3
+31 WORDTAG maker O
+31 WORDTAG going O
+31 WORDTAG costs O
+31 WORDTAG For O
+30 WORDTAG today B-TIMEX3
+30 WORDTAG revenue O
+30 WORDTAG results O
+30 WORDTAG restructuring O
+30 WORDTAG products O
+30 WORDTAG lower O
+30 WORDTAG being O
+30 WORDTAG agreed O
+30 WORDTAG President O
+29 WORDTAG percent O
+29 WORDTAG holders O
+29 WORDTAG did O
+29 WORDTAG called O
+29 WORDTAG analysts O
+29 WORDTAG already O
+29 WORDTAG United O
+29 WORDTAG 're O
+28 WORDTAG program O
+28 WORDTAG problems O
+28 WORDTAG plans O
+28 WORDTAG our O
+28 WORDTAG much O
+28 WORDTAG does O
+28 WORDTAG compared O
+28 WORDTAG close O
+28 WORDTAG That O
+27 WORDTAG troops O
+27 WORDTAG total O
+27 WORDTAG still O
+27 WORDTAG pay O
+27 WORDTAG investors O
+27 WORDTAG expects O
+27 WORDTAG Bank O
+26 WORDTAG you O
+26 WORDTAG while O
+26 WORDTAG well O
+26 WORDTAG uh O
+26 WORDTAG since O
+26 WORDTAG police O
+26 WORDTAG industry O
+26 WORDTAG financial O
+26 WORDTAG businesses O
+26 WORDTAG bank O
+26 WORDTAG GM O
+25 WORDTAG used O
+25 WORDTAG told O
+25 WORDTAG think O
+25 WORDTAG them O
+25 WORDTAG preferred O
+25 WORDTAG officer O
+25 WORDTAG nearly O
+25 WORDTAG likely O
+25 WORDTAG increase O
+25 WORDTAG gain O
+25 WORDTAG earlier I-TIMEX3
+25 WORDTAG continue O
+25 WORDTAG concern O
+25 WORDTAG addition O
+25 WORDTAG LIN O
+25 WORDTAG : O
+24 WORDTAG women O
+24 WORDTAG past I-TIMEX3
+24 WORDTAG make O
+24 WORDTAG even O
+24 WORDTAG board O
+24 WORDTAG Thursday B-TIMEX3
+24 WORDTAG Columbia O
+24 WORDTAG Canadian O
+24 WORDTAG BellSouth O
+24 WORDTAG At O
+24 WORDTAG Arabia O
+23 WORDTAG two I-TIMEX3
+23 WORDTAG takeover O
+23 WORDTAG take O
+23 WORDTAG rights O
+23 WORDTAG purchase O
+23 WORDTAG offering O
+23 WORDTAG losses O
+23 WORDTAG holding O
+23 WORDTAG high O
+23 WORDTAG growth O
+23 WORDTAG economic O
+23 WORDTAG added O
+23 WORDTAG acquisition O
+23 WORDTAG acquire O
+23 WORDTAG U.N. O
+23 WORDTAG Nov. B-TIMEX3
+23 WORDTAG Israel O
+22 WORDTAG within O
+22 WORDTAG where O
+22 WORDTAG use O
+22 WORDTAG reports O
+22 WORDTAG public O
+22 WORDTAG official O
+22 WORDTAG money O
+22 WORDTAG issue O
+22 WORDTAG international O
+22 WORDTAG certain O
+22 WORDTAG cash O
+22 WORDTAG big O
+22 WORDTAG based O
+22 WORDTAG _DIGITS1_ O
+22 WORDTAG There O
+22 WORDTAG Jones O
+22 WORDTAG America O
+21 WORDTAG what O
+21 WORDTAG stocks O
+21 WORDTAG see O
+21 WORDTAG result O
+21 WORDTAG record O
+21 WORDTAG rate O
+21 WORDTAG him O
+21 WORDTAG further O
+21 WORDTAG ended O
+21 WORDTAG early O
+21 WORDTAG control O
+21 WORDTAG charge O
+21 WORDTAG This O
+21 WORDTAG Sales O
+21 WORDTAG Group O
+21 WORDTAG Dow O
+21 WORDTAG 50% O
+20 WORDTAG weapons O
+20 WORDTAG volume O
+20 WORDTAG very O
+20 WORDTAG those O
+20 WORDTAG support O
+20 WORDTAG she O
+20 WORDTAG set O
+20 WORDTAG remains O
+20 WORDTAG nine I-TIMEX3
+20 WORDTAG might O
+20 WORDTAG management O
+20 WORDTAG makers O
+20 WORDTAG investment O
+20 WORDTAG fund O
+20 WORDTAG food O
+20 WORDTAG earned O
+20 WORDTAG country O
+20 WORDTAG began O
+20 WORDTAG They O
+20 WORDTAG States O
+20 WORDTAG Sansui O
+20 WORDTAG London O
+20 WORDTAG Kellogg O
+20 WORDTAG Jaguar O
+20 WORDTAG House O
+20 WORDTAG ; O
+20 WORDTAG , I-TIMEX3
+19 WORDTAG these O
+19 WORDTAG strong O
+19 WORDTAG right O
+19 WORDTAG power O
+19 WORDTAG payments O
+19 WORDTAG of I-TIMEX3
+19 WORDTAG less O
+19 WORDTAG largest O
+19 WORDTAG junk O
+19 WORDTAG held O
+19 WORDTAG general O
+19 WORDTAG funds O
+19 WORDTAG far O
+19 WORDTAG declined O
+19 WORDTAG court O
+19 WORDTAG convertible O
+19 WORDTAG change O
+19 WORDTAG both O
+19 WORDTAG asked O
+19 WORDTAG Unisys O
+19 WORDTAG Securities O
+19 WORDTAG Paribas O
+19 WORDTAG McCaw O
+19 WORDTAG John O
+19 WORDTAG James O
+19 WORDTAG Intel O
+19 WORDTAG If O
+19 WORDTAG First O
+19 WORDTAG Data O
+18 WORDTAG transaction O
+18 WORDTAG thrift O
+18 WORDTAG talks O
+18 WORDTAG selling O
+18 WORDTAG reserves O
+18 WORDTAG proposed O
+18 WORDTAG peace O
+18 WORDTAG next I-TIMEX3
+18 WORDTAG next B-TIMEX3
+18 WORDTAG nation O
+18 WORDTAG half O
+18 WORDTAG financing O
+18 WORDTAG eight O
+18 WORDTAG dollar O
+18 WORDTAG directors O
+18 WORDTAG days I-TIMEX3
+18 WORDTAG become O
+18 WORDTAG analyst O
+18 WORDTAG West O
+18 WORDTAG Navigation O
+18 WORDTAG National O
+18 WORDTAG Mixte O
+18 WORDTAG Japanese O
+17 WORDTAG vice O
+17 WORDTAG top O
+17 WORDTAG then O
+17 WORDTAG senior O
+17 WORDTAG related O
+17 WORDTAG recent B-TIMEX3
+17 WORDTAG period I-TIMEX3
+17 WORDTAG pence O
+17 WORDTAG long O
+17 WORDTAG hundred O
+17 WORDTAG how O
+17 WORDTAG holds O
+17 WORDTAG here O
+17 WORDTAG help O
+17 WORDTAG foreign O
+17 WORDTAG estimated O
+17 WORDTAG dollars O
+17 WORDTAG bonds O
+17 WORDTAG around O
+17 WORDTAG additional O
+17 WORDTAG according O
+17 WORDTAG Telerate O
+17 WORDTAG Sun O
+17 WORDTAG Sept. B-TIMEX3
+17 WORDTAG Arab O
+17 WORDTAG Antar O
+16 WORDTAG trade O
+16 WORDTAG took O
+16 WORDTAG this I-TIMEX3
+16 WORDTAG tax O
+16 WORDTAG special O
+16 WORDTAG small O
+16 WORDTAG shareholder O
+16 WORDTAG report O
+16 WORDTAG possible O
+16 WORDTAG level O
+16 WORDTAG latest I-TIMEX3
+16 WORDTAG joint O
+16 WORDTAG insurance O
+16 WORDTAG include O
+16 WORDTAG however O
+16 WORDTAG four O
+16 WORDTAG five O
+16 WORDTAG firm O
+16 WORDTAG family O
+16 WORDTAG due O
+16 WORDTAG defense O
+16 WORDTAG chip O
+16 WORDTAG another O
+16 WORDTAG among O
+16 WORDTAG Washington O
+16 WORDTAG US O
+16 WORDTAG Security O
+16 WORDTAG Revenue O
+16 WORDTAG Pont O
+16 WORDTAG Jordan O
+16 WORDTAG International O
+16 WORDTAG Du O
+16 WORDTAG Drabinsky O
+16 WORDTAG Baghdad O
+16 WORDTAG Anheuser O
+16 WORDTAG Americans O
+16 WORDTAG Acquisition O
+16 WORDTAG $4 O
+15 WORDTAG work O
+15 WORDTAG whether O
+15 WORDTAG terms O
+15 WORDTAG statement O
+15 WORDTAG sources O
+15 WORDTAG should O
+15 WORDTAG seeking O
+15 WORDTAG security O
+15 WORDTAG securities O
+15 WORDTAG real O
+15 WORDTAG potential O
+15 WORDTAG political O
+15 WORDTAG plant O
+15 WORDTAG owns O
+15 WORDTAG must O
+15 WORDTAG members O
+15 WORDTAG markets O
+15 WORDTAG like O
+15 WORDTAG led O
+15 WORDTAG leader O
+15 WORDTAG last I-TIMEX3
+15 WORDTAG go O
+15 WORDTAG gains O
+15 WORDTAG face O
+15 WORDTAG economy O
+15 WORDTAG dropped O
+15 WORDTAG continued O
+15 WORDTAG completed O
+15 WORDTAG charges O
+15 WORDTAG believe O
+15 WORDTAG White O
+15 WORDTAG Tuesday B-TIMEX3
+15 WORDTAG Soviet O
+15 WORDTAG Roy O
+15 WORDTAG RJR O
+15 WORDTAG Provigo O
+15 WORDTAG Nashua O
+15 WORDTAG Britain O
+15 WORDTAG AP O
+15 WORDTAG 10% O
+14 WORDTAG without O
+14 WORDTAG tender O
+14 WORDTAG saying O
+14 WORDTAG proposal O
+14 WORDTAG posted O
+14 WORDTAG planned O
+14 WORDTAG paid O
+14 WORDTAG over-the-counter O
+14 WORDTAG number O
+14 WORDTAG north O
+14 WORDTAG naval O
+14 WORDTAG national O
+14 WORDTAG merger O
+14 WORDTAG means O
+14 WORDTAG least O
+14 WORDTAG lawyers O
+14 WORDTAG information O
+14 WORDTAG index O
+14 WORDTAG hurt O
+14 WORDTAG hold O
+14 WORDTAG her O
+14 WORDTAG groups O
+14 WORDTAG ground O
+14 WORDTAG gas O
+14 WORDTAG future O
+14 WORDTAG filed O
+14 WORDTAG federal O
+14 WORDTAG during O
+14 WORDTAG demand O
+14 WORDTAG debentures O
+14 WORDTAG customers O
+14 WORDTAG crisis O
+14 WORDTAG cost O
+14 WORDTAG corporate O
+14 WORDTAG construction O
+14 WORDTAG border O
+14 WORDTAG again O
+14 WORDTAG acquired O
+14 WORDTAG Under O
+14 WORDTAG Savings O
+14 WORDTAG Lebanon O
+14 WORDTAG Federal O
+14 WORDTAG Control O
+14 WORDTAG 15% O
+13 WORDTAG yet O
+13 WORDTAG trying O
+13 WORDTAG strategy O
+13 WORDTAG state O
+13 WORDTAG split O
+13 WORDTAG soldiers O
+13 WORDTAG six O
+13 WORDTAG services O
+13 WORDTAG seen O
+13 WORDTAG rates O
+13 WORDTAG put O
+13 WORDTAG production O
+13 WORDTAG need O
+13 WORDTAG named O
+13 WORDTAG home O
+13 WORDTAG good O
+13 WORDTAG give O
+13 WORDTAG get O
+13 WORDTAG former O
+13 WORDTAG first I-TIMEX3
+13 WORDTAG expect O
+13 WORDTAG effort O
+13 WORDTAG drop O
+13 WORDTAG computers O
+13 WORDTAG comment O
+13 WORDTAG chemical O
+13 WORDTAG bugs O
+13 WORDTAG boost O
+13 WORDTAG begin O
+13 WORDTAG attributed O
+13 WORDTAG approval O
+13 WORDTAG amount O
+13 WORDTAG allow O
+13 WORDTAG _SOMEDIGITS_ B-TIMEX3
+13 WORDTAG Some O
+13 WORDTAG Schwarz O
+13 WORDTAG On O
+13 WORDTAG Oct. B-TIMEX3
+13 WORDTAG Minister O
+13 WORDTAG Milton O
+13 WORDTAG Hewlett-Packard O
+13 WORDTAG DPC O
+13 WORDTAG Cineplex O
+13 WORDTAG As O
+13 WORDTAG $1 O
+12 WORDTAG } O
+12 WORDTAG { O
+12 WORDTAG year O
+12 WORDTAG weeks I-TIMEX3
+12 WORDTAG way O
+12 WORDTAG visit O
+12 WORDTAG thousands O
+12 WORDTAG technology O
+12 WORDTAG subsidiary O
+12 WORDTAG sold O
+12 WORDTAG remain O
+12 WORDTAG reason O
+12 WORDTAG previously O
+12 WORDTAG personal O
+12 WORDTAG minister O
+12 WORDTAG meeting O
+12 WORDTAG loan O
+12 WORDTAG large O
+12 WORDTAG issues O
+12 WORDTAG increased O
+12 WORDTAG includes O
+12 WORDTAG included O
+12 WORDTAG following O
+12 WORDTAG fees O
+12 WORDTAG facility O
+12 WORDTAG extended O
+12 WORDTAG equity O
+12 WORDTAG employees O
+12 WORDTAG either O
+12 WORDTAG early B-TIMEX3
+12 WORDTAG division O
+12 WORDTAG designed O
+12 WORDTAG decline O
+12 WORDTAG decision O
+12 WORDTAG de O
+12 WORDTAG county O
+12 WORDTAG countries O
+12 WORDTAG come O
+12 WORDTAG cellular O
+12 WORDTAG cases O
+12 WORDTAG calls O
+12 WORDTAG attack O
+12 WORDTAG approved O
+12 WORDTAG Williams O
+12 WORDTAG While O
+12 WORDTAG Trust O
+12 WORDTAG She O
+12 WORDTAG Polly O
+12 WORDTAG Peck O
+12 WORDTAG Nasdaq O
+12 WORDTAG Monday B-TIMEX3
+12 WORDTAG Ltd. O
+12 WORDTAG Lawrence O
+12 WORDTAG Last B-TIMEX3
+12 WORDTAG Internet O
+12 WORDTAG General O
+12 WORDTAG French O
+12 WORDTAG Dec. B-TIMEX3
+12 WORDTAG Courtaulds O
+12 WORDTAG Compaq O
+12 WORDTAG Australia O
+12 WORDTAG Asia O
+11 WORDTAG withdraw O
+11 WORDTAG wants O
+11 WORDTAG toward O
+11 WORDTAG thousand O
+11 WORDTAG taking O
+11 WORDTAG systems O
+11 WORDTAG start O
+11 WORDTAG source O
+11 WORDTAG sites O
+11 WORDTAG service O
+11 WORDTAG seek O
+11 WORDTAG rise O
+11 WORDTAG retirement O
+11 WORDTAG remaining O
+11 WORDTAG recently B-TIMEX3
+11 WORDTAG pressure O
+11 WORDTAG point O
+11 WORDTAG place O
+11 WORDTAG patients O
+11 WORDTAG offered O
+11 WORDTAG low O
+11 WORDTAG little O
+11 WORDTAG line O
+11 WORDTAG legal O
+11 WORDTAG leaders O
+11 WORDTAG killed O
+11 WORDTAG jobs O
+11 WORDTAG independent O
+11 WORDTAG hope O
+11 WORDTAG hit O
+11 WORDTAG giant O
+11 WORDTAG getting O
+11 WORDTAG francs O
+11 WORDTAG found O
+11 WORDTAG filing O
+11 WORDTAG executives O
+11 WORDTAG end O
+11 WORDTAG embargo O
+11 WORDTAG effective O
+11 WORDTAG director O
+11 WORDTAG deal O
+11 WORDTAG cut O
+11 WORDTAG conference O
+11 WORDTAG concerns O
+11 WORDTAG closing O
+11 WORDTAG case O
+11 WORDTAG available O
+11 WORDTAG agency O
+11 WORDTAG administration O
+11 WORDTAG Ukraine O
+11 WORDTAG Toronto O
+11 WORDTAG Sununu O
+11 WORDTAG Sunday B-TIMEX3
+11 WORDTAG Rally O
+11 WORDTAG PLC O
+11 WORDTAG News O
+11 WORDTAG Nestle O
+11 WORDTAG March B-TIMEX3
+11 WORDTAG Ireland O
+11 WORDTAG However O
+11 WORDTAG Gulf O
+11 WORDTAG Fournier O
+11 WORDTAG Financial O
+11 WORDTAG Commission O
+11 WORDTAG Australian O
+11 WORDTAG Aug. B-TIMEX3
+11 WORDTAG An O
+11 WORDTAG 20% O
+11 WORDTAG $2 O
+11 WORDTAG $100 O
+10 WORDTAG yen O
+10 WORDTAG want O
+10 WORDTAG too O
+10 WORDTAG though O
+10 WORDTAG team O
+10 WORDTAG subordinated O
+10 WORDTAG staff O
+10 WORDTAG space O
+10 WORDTAG ships O
+10 WORDTAG several O
+10 WORDTAG sanctions O
+10 WORDTAG risk O
+10 WORDTAG response O
+10 WORDTAG rejected O
+10 WORDTAG reflecting O
+10 WORDTAG receive O
+10 WORDTAG raise O
+10 WORDTAG quarterly O
+10 WORDTAG profits O
+10 WORDTAG product O
+10 WORDTAG problem O
+10 WORDTAG post O
+10 WORDTAG portfolio O
+10 WORDTAG party O
+10 WORDTAG order O
+10 WORDTAG open O
+10 WORDTAG offset O
+10 WORDTAG now O
+10 WORDTAG nor O
+10 WORDTAG nations O
+10 WORDTAG message O
+10 WORDTAG meet O
+10 WORDTAG making O
+10 WORDTAG look O
+10 WORDTAG left O
+10 WORDTAG leave O
+10 WORDTAG law O
+10 WORDTAG last O
+10 WORDTAG largely O
+10 WORDTAG know O
+10 WORDTAG keep O
+10 WORDTAG issued O
+10 WORDTAG initial O
+10 WORDTAG hopes O
+10 WORDTAG followed O
+10 WORDTAG finance O
+10 WORDTAG end I-TIMEX3
+10 WORDTAG diplomatic O
+10 WORDTAG day I-TIMEX3
+10 WORDTAG currently B-TIMEX3
+10 WORDTAG core O
+10 WORDTAG continues O
+10 WORDTAG connection O
+10 WORDTAG conditions O
+10 WORDTAG commercial O
+10 WORDTAG coming O
+10 WORDTAG changes O
+10 WORDTAG bought O
+10 WORDTAG bomb O
+10 WORDTAG banks O
+10 WORDTAG allies O
+10 WORDTAG allied O
+10 WORDTAG air O
+10 WORDTAG accounts O
+10 WORDTAG William O
+10 WORDTAG Wall O
+10 WORDTAG Waertsilae O
+10 WORDTAG Street O
+10 WORDTAG Steel O
+10 WORDTAG San O
+10 WORDTAG Ratners O
+10 WORDTAG Prime O
+10 WORDTAG Price O
+10 WORDTAG Pope O
+10 WORDTAG Police O
+10 WORDTAG One O
+10 WORDTAG OTC O
+10 WORDTAG Ms. O
+10 WORDTAG Medical O
+10 WORDTAG Marine O
+10 WORDTAG June B-TIMEX3
+10 WORDTAG January B-TIMEX3
+10 WORDTAG Industries O
+10 WORDTAG Howes O
+10 WORDTAG Ford O
+10 WORDTAG Erbamont O
+10 WORDTAG Clinton O
+10 WORDTAG Castro O
+10 WORDTAG ABC O
+10 WORDTAG $3 O
+10 WORDTAG $15 O
+9 WORDTAG wo O
+9 WORDTAG whole O
+9 WORDTAG warrants O
+9 WORDTAG warning O
+9 WORDTAG units O
+9 WORDTAG two B-TIMEX3
+9 WORDTAG three I-TIMEX3
+9 WORDTAG thing O
+9 WORDTAG taken O
+9 WORDTAG subject O
+9 WORDTAG sought O
+9 WORDTAG soared O
+9 WORDTAG showed O
+9 WORDTAG shipping O
+9 WORDTAG segment O
+9 WORDTAG second O
+9 WORDTAG school O
+9 WORDTAG run O
+9 WORDTAG role O
+9 WORDTAG rest O
+9 WORDTAG regulatory O
+9 WORDTAG regulators O
+9 WORDTAG received O
+9 WORDTAG reached O
+9 WORDTAG position O
+9 WORDTAG points O
+9 WORDTAG performance O
+9 WORDTAG parent O
+9 WORDTAG pact O
+9 WORDTAG option O
+9 WORDTAG one-time O
+9 WORDTAG once O
+9 WORDTAG notes O
+9 WORDTAG men O
+9 WORDTAG machines O
+9 WORDTAG lost O
+9 WORDTAG lines O
+9 WORDTAG leaving O
+9 WORDTAG later O
+9 WORDTAG jumped O
+9 WORDTAG job O
+9 WORDTAG itself O
+9 WORDTAG invasion O
+9 WORDTAG industrial O
+9 WORDTAG indicated O
+9 WORDTAG imports O
+9 WORDTAG important O
+9 WORDTAG head O
+9 WORDTAG guilders O
+9 WORDTAG goal O
+9 WORDTAG gave O
+9 WORDTAG fully O
+9 WORDTAG full O
+9 WORDTAG figures O
+9 WORDTAG few O
+9 WORDTAG estimates O
+9 WORDTAG effect O
+9 WORDTAG doing O
+9 WORDTAG disclosed O
+9 WORDTAG declines O
+9 WORDTAG declared O
+9 WORDTAG credit O
+9 WORDTAG buying O
+9 WORDTAG break O
+9 WORDTAG body O
+9 WORDTAG biggest O
+9 WORDTAG average O
+9 WORDTAG automotive O
+9 WORDTAG appears O
+9 WORDTAG apparently O
+9 WORDTAG active O
+9 WORDTAG acquisitions O
+9 WORDTAG accord O
+9 WORDTAG With O
+9 WORDTAG Weisfield O
+9 WORDTAG Upjohn O
+9 WORDTAG Texas O
+9 WORDTAG So O
+9 WORDTAG Separately O
+9 WORDTAG Secretary O
+9 WORDTAG Reuters O
+9 WORDTAG Phoenix O
+9 WORDTAG Persian O
+9 WORDTAG Pentagon O
+9 WORDTAG Orkem O
+9 WORDTAG Northern O
+9 WORDTAG Nations O
+9 WORDTAG N.J. O
+9 WORDTAG Merieux O
+9 WORDTAG MGM O
+9 WORDTAG Kuwaiti O
+9 WORDTAG Israeli O
+9 WORDTAG Grand O
+9 WORDTAG German O
+9 WORDTAG Dataproducts O
+9 WORDTAG Crossland O
+9 WORDTAG Court O
+9 WORDTAG Council O
+9 WORDTAG Connaught O
+9 WORDTAG Class O
+9 WORDTAG Chairman O
+9 WORDTAG Catholic O
+9 WORDTAG Capital O
+9 WORDTAG Canada O
+9 WORDTAG California O
+9 WORDTAG Big O
+9 WORDTAG Amir O
+9 WORDTAG ? O
+9 WORDTAG 5% O
+8 WORDTAG year-earlier I-TIMEX3
+8 WORDTAG willing O
+8 WORDTAG whose O
+8 WORDTAG waiting O
+8 WORDTAG venture O
+8 WORDTAG valued O
+8 WORDTAG using O
+8 WORDTAG us O
+8 WORDTAG turn O
+8 WORDTAG system O
+8 WORDTAG suit O
+8 WORDTAG store O
+8 WORDTAG stop O
+8 WORDTAG steel O
+8 WORDTAG slightly O
+8 WORDTAG significant O
+8 WORDTAG signed O
+8 WORDTAG shipments O
+8 WORDTAG sent O
+8 WORDTAG same O
+8 WORDTAG return O
+8 WORDTAG republic O
+8 WORDTAG relations O
+8 WORDTAG regulations O
+8 WORDTAG reduced O
+8 WORDTAG recent O
+8 WORDTAG radio O
+8 WORDTAG quarters I-TIMEX3
+8 WORDTAG protect O
+8 WORDTAG programs O
+8 WORDTAG private O
+8 WORDTAG policy O
+8 WORDTAG owned O
+8 WORDTAG outside O
+8 WORDTAG others O
+8 WORDTAG operation O
+8 WORDTAG operates O
+8 WORDTAG noted O
+8 WORDTAG non-food O
+8 WORDTAG necessary O
+8 WORDTAG moves O
+8 WORDTAG minority O
+8 WORDTAG manufacturing O
+8 WORDTAG manager O
+8 WORDTAG man O
+8 WORDTAG majority O
+8 WORDTAG maintain O
+8 WORDTAG main O
+8 WORDTAG launched O
+8 WORDTAG latest O
+8 WORDTAG junk-bond O
+8 WORDTAG investor O
+8 WORDTAG increasingly O
+8 WORDTAG increasing O
+8 WORDTAG impact O
+8 WORDTAG high-yield O
+8 WORDTAG headquarters O
+8 WORDTAG growing O
+8 WORDTAG fourth I-TIMEX3
+8 WORDTAG few I-TIMEX3
+8 WORDTAG extraordinary O
+8 WORDTAG expectations O
+8 WORDTAG enough O
+8 WORDTAG earlier O
+8 WORDTAG despite O
+8 WORDTAG data O
+8 WORDTAG current O
+8 WORDTAG current B-TIMEX3
+8 WORDTAG conversion O
+8 WORDTAG closely O
+8 WORDTAG city O
+8 WORDTAG chips O
+8 WORDTAG capacity O
+8 WORDTAG candy O
+8 WORDTAG came O
+8 WORDTAG building O
+8 WORDTAG bring O
+8 WORDTAG bond O
+8 WORDTAG below O
+8 WORDTAG became O
+8 WORDTAG basis O
+8 WORDTAG army O
+8 WORDTAG area O
+8 WORDTAG anyone O
+8 WORDTAG along O
+8 WORDTAG almost O
+8 WORDTAG _SOMEDIGITS_ I-TIMEX3
+8 WORDTAG _BIGGERDIGITS_ O
+8 WORDTAG World O
+8 WORDTAG Westinghouse O
+8 WORDTAG Virginia O
+8 WORDTAG Union O
+8 WORDTAG These O
+8 WORDTAG Still O
+8 WORDTAG StatesWest O
+8 WORDTAG Sinn O
+8 WORDTAG Ritter O
+8 WORDTAG Republican O
+8 WORDTAG People O
+8 WORDTAG Other O
+8 WORDTAG North O
+8 WORDTAG No O
+8 WORDTAG Netanyahu O
+8 WORDTAG Net O
+8 WORDTAG Michael O
+8 WORDTAG Mesa O
+8 WORDTAG Meanwhile O
+8 WORDTAG McAlpine O
+8 WORDTAG Magna O
+8 WORDTAG Kosovo O
+8 WORDTAG Kong O
+8 WORDTAG Keating O
+8 WORDTAG Iran O
+8 WORDTAG Insurance O
+8 WORDTAG Hughes O
+8 WORDTAG Hong O
+8 WORDTAG Gen. O
+8 WORDTAG Foreign O
+8 WORDTAG Fein O
+8 WORDTAG Farkas O
+8 WORDTAG Europe O
+8 WORDTAG Eastern O
+8 WORDTAG Earlier B-TIMEX3
+8 WORDTAG Department O
+8 WORDTAG Composite O
+8 WORDTAG Calif. O
+8 WORDTAG Boston O
+8 WORDTAG Board O
+8 WORDTAG Bethlehem O
+8 WORDTAG August B-TIMEX3
+8 WORDTAG Atlanta O
+8 WORDTAG Analysts O
+8 WORDTAG Although O
+8 WORDTAG Albanians O
+8 WORDTAG A. O
+8 WORDTAG 25% O
+8 WORDTAG 've O
+7 WORDTAG yield O
+7 WORDTAG year-ago I-TIMEX3
+7 WORDTAG worth O
+7 WORDTAG working O
+7 WORDTAG times O
+7 WORDTAG ties O
+7 WORDTAG tendered O
+7 WORDTAG target O
+7 WORDTAG supply O
+7 WORDTAG supplies O
+7 WORDTAG strength O
+7 WORDTAG spending O
+7 WORDTAG something O
+7 WORDTAG solution O
+7 WORDTAG situation O
+7 WORDTAG sharp O
+7 WORDTAG series O
+7 WORDTAG sense O
+7 WORDTAG seize O
+7 WORDTAG save O
+7 WORDTAG responsible O
+7 WORDTAG responded O
+7 WORDTAG residents O
+7 WORDTAG region O
+7 WORDTAG reduce O
+7 WORDTAG range O
+7 WORDTAG question O
+7 WORDTAG provide O
+7 WORDTAG prosecutors O
+7 WORDTAG probably O
+7 WORDTAG prime O
+7 WORDTAG positive O
+7 WORDTAG parts O
+7 WORDTAG office O
+7 WORDTAG objections O
+7 WORDTAG note O
+7 WORDTAG negotiations O
+7 WORDTAG nearly B-TIMEX3
+7 WORDTAG mostly O
+7 WORDTAG investments O
+7 WORDTAG investigation O
+7 WORDTAG interview O
+7 WORDTAG interests O
+7 WORDTAG inspectors O
+7 WORDTAG individual O
+7 WORDTAG human O
+7 WORDTAG huge O
+7 WORDTAG helped O
+7 WORDTAG heavy O
+7 WORDTAG having O
+7 WORDTAG hate O
+7 WORDTAG gulf O
+7 WORDTAG great O
+7 WORDTAG gives O
+7 WORDTAG focus O
+7 WORDTAG five B-TIMEX3
+7 WORDTAG fiscal I-TIMEX3
+7 WORDTAG final O
+7 WORDTAG fight O
+7 WORDTAG false O
+7 WORDTAG failed O
+7 WORDTAG fact O
+7 WORDTAG expire O
+7 WORDTAG exchange O
+7 WORDTAG evidence O
+7 WORDTAG ethnic O
+7 WORDTAG equipment O
+7 WORDTAG entire O
+7 WORDTAG else O
+7 WORDTAG efforts O
+7 WORDTAG dividends O
+7 WORDTAG different O
+7 WORDTAG details O
+7 WORDTAG destroy O
+7 WORDTAG departure O
+7 WORDTAG deadline O
+7 WORDTAG created O
+7 WORDTAG cover O
+7 WORDTAG contributed O
+7 WORDTAG continuing O
+7 WORDTAG competition O
+7 WORDTAG committee O
+7 WORDTAG children O
+7 WORDTAG cereal O
+7 WORDTAG calling O
+7 WORDTAG built O
+7 WORDTAG battle O
+7 WORDTAG authorities O
+7 WORDTAG auction O
+7 WORDTAG attempt O
+7 WORDTAG attacks O
+7 WORDTAG article O
+7 WORDTAG announcement O
+7 WORDTAG ambassador O
+7 WORDTAG alone O
+7 WORDTAG aides O
+7 WORDTAG adviser O
+7 WORDTAG adopted O
+7 WORDTAG adding O
+7 WORDTAG actually O
+7 WORDTAG access O
+7 WORDTAG above O
+7 WORDTAG Yeltsin O
+7 WORDTAG U.K. O
+7 WORDTAG Tony O
+7 WORDTAG Those O
+7 WORDTAG TWA O
+7 WORDTAG Services O
+7 WORDTAG S. O
+7 WORDTAG Russian O
+7 WORDTAG Robert O
+7 WORDTAG Rabin O
+7 WORDTAG Protestant O
+7 WORDTAG Partners O
+7 WORDTAG Of O
+7 WORDTAG Newark O
+7 WORDTAG Nadeau O
+7 WORDTAG Montedison O
+7 WORDTAG Middle O
+7 WORDTAG Meridian O
+7 WORDTAG M. O
+7 WORDTAG Loudon O
+7 WORDTAG Lortie O
+7 WORDTAG Kuchma O
+7 WORDTAG Jim O
+7 WORDTAG Irish O
+7 WORDTAG Iraqis O
+7 WORDTAG Innopac O
+7 WORDTAG Index O
+7 WORDTAG Fidelity O
+7 WORDTAG Even O
+7 WORDTAG E. O
+7 WORDTAG Cuba O
+7 WORDTAG Crane O
+7 WORDTAG Computer O
+7 WORDTAG Association O
+7 WORDTAG Annan O
+7 WORDTAG Air O
+7 WORDTAG After O
+7 WORDTAG Afghanistan O
+7 WORDTAG 8% O
+7 WORDTAG 12% O
+7 WORDTAG 'm O
+7 WORDTAG $50 O
+7 WORDTAG $20 O
+6 WORDTAG years O
+6 WORDTAG written O
+6 WORDTAG white O
+6 WORDTAG went O
+6 WORDTAG weakness O
+6 WORDTAG watches O
+6 WORDTAG vote O
+6 WORDTAG unemployment O
+6 WORDTAG unchanged O
+6 WORDTAG turned O
+6 WORDTAG tried O
+6 WORDTAG transplant O
+6 WORDTAG transactions O
+6 WORDTAG traded O
+6 WORDTAG totaled O
+6 WORDTAG together O
+6 WORDTAG throughout O
+6 WORDTAG third O
+6 WORDTAG the I-TIMEX3
+6 WORDTAG television O
+6 WORDTAG talk O
+6 WORDTAG successful O
+6 WORDTAG strike O
+6 WORDTAG strategic O
+6 WORDTAG step O
+6 WORDTAG stay O
+6 WORDTAG started O
+6 WORDTAG spokeswoman O
+6 WORDTAG southern O
+6 WORDTAG soon O
+6 WORDTAG someone O
+6 WORDTAG smaller O
+6 WORDTAG simply O
+6 WORDTAG similar O
+6 WORDTAG signs O
+6 WORDTAG sickest O
+6 WORDTAG scheduled O
+6 WORDTAG ruling O
+6 WORDTAG route O
+6 WORDTAG rival O
+6 WORDTAG resume O
+6 WORDTAG reflect O
+6 WORDTAG realized O
+6 WORDTAG raised O
+6 WORDTAG provides O
+6 WORDTAG protection O
+6 WORDTAG properties O
+6 WORDTAG project O
+6 WORDTAG profitable O
+6 WORDTAG proceeds O
+6 WORDTAG principal O
+6 WORDTAG pricing O
+6 WORDTAG pretax O
+6 WORDTAG port O
+6 WORDTAG placed O
+6 WORDTAG paying O
+6 WORDTAG payable O
+6 WORDTAG partly O
+6 WORDTAG overseas O
+6 WORDTAG orders O
+6 WORDTAG ordered O
+6 WORDTAG or I-TIMEX3
+6 WORDTAG opinion O
+6 WORDTAG offensive O
+6 WORDTAG northern O
+6 WORDTAG needs O
+6 WORDTAG miles O
+6 WORDTAG met O
+6 WORDTAG meanwhile O
+6 WORDTAG marks O
+6 WORDTAG makes O
+6 WORDTAG machine O
+6 WORDTAG lot O
+6 WORDTAG long-term O
+6 WORDTAG listed O
+6 WORDTAG life O
+6 WORDTAG levels O
+6 WORDTAG letter O
+6 WORDTAG leadership O
+6 WORDTAG land O
+6 WORDTAG key O
+6 WORDTAG inflation O
+6 WORDTAG hostile O
+6 WORDTAG guerrillas O
+6 WORDTAG grew O
+6 WORDTAG goods O
+6 WORDTAG friendly O
+6 WORDTAG fourth-quarter B-TIMEX3
+6 WORDTAG four I-TIMEX3
+6 WORDTAG foreigners O
+6 WORDTAG flow O
+6 WORDTAG flights O
+6 WORDTAG find O
+6 WORDTAG fall O
+6 WORDTAG extremely O
+6 WORDTAG expand O
+6 WORDTAG existing O
+6 WORDTAG everything O
+6 WORDTAG estate O
+6 WORDTAG equal O
+6 WORDTAG earlier B-TIMEX3
+6 WORDTAG dlrs O
+6 WORDTAG discovered O
+6 WORDTAG discounting O
+6 WORDTAG directly O
+6 WORDTAG difficult O
+6 WORDTAG developing O
+6 WORDTAG develop O
+6 WORDTAG destruction O
+6 WORDTAG deputy O
+6 WORDTAG decided O
+6 WORDTAG date O
+6 WORDTAG considered O
+6 WORDTAG condition O
+6 WORDTAG competitors O
+6 WORDTAG competitive O
+6 WORDTAG community O
+6 WORDTAG commanders O
+6 WORDTAG clinic O
+6 WORDTAG claims O
+6 WORDTAG child O
+6 WORDTAG centers O
+6 WORDTAG car O
+6 WORDTAG campaign O
+6 WORDTAG buyers O
+6 WORDTAG build O
+6 WORDTAG brands O
+6 WORDTAG block O
+6 WORDTAG benefits O
+6 WORDTAG behind O
+6 WORDTAG auto O
+6 WORDTAG attorney O
+6 WORDTAG associated O
+6 WORDTAG appeared O
+6 WORDTAG aircraft O
+6 WORDTAG address O
+6 WORDTAG across O
+6 WORDTAG abortion O
+6 WORDTAG able O
+6 WORDTAG ability O
+6 WORDTAG Western O
+6 WORDTAG Wednesday B-TIMEX3
+6 WORDTAG VOA O
+6 WORDTAG UN O
+6 WORDTAG Treasury O
+6 WORDTAG Systems O
+6 WORDTAG Syria O
+6 WORDTAG State O
+6 WORDTAG SampP O
+6 WORDTAG SEC O
+6 WORDTAG S.A. O
+6 WORDTAG Russia O
+6 WORDTAG Rudolph O
+6 WORDTAG Rouge O
+6 WORDTAG Reupke O
+6 WORDTAG Republic O
+6 WORDTAG Ralston O
+6 WORDTAG Poughkeepsie O
+6 WORDTAG Philip O
+6 WORDTAG Paul O
+6 WORDTAG Partnership O
+6 WORDTAG Octel O
+6 WORDTAG Morris O
+6 WORDTAG Merrill O
+6 WORDTAG MCA O
+6 WORDTAG Lynch O
+6 WORDTAG Loan O
+6 WORDTAG Lawson O
+6 WORDTAG King O
+6 WORDTAG Khmer O
+6 WORDTAG Justice O
+6 WORDTAG July B-TIMEX3
+6 WORDTAG Jayark O
+6 WORDTAG Japan O
+6 WORDTAG Its O
+6 WORDTAG Investment O
+6 WORDTAG Intergroup O
+6 WORDTAG IMA O
+6 WORDTAG Hugo O
+6 WORDTAG Heritage O
+6 WORDTAG Germany O
+6 WORDTAG Fund O
+6 WORDTAG Esselte O
+6 WORDTAG East O
+6 WORDTAG December B-TIMEX3
+6 WORDTAG Cilcorp O
+6 WORDTAG Both O
+6 WORDTAG Blair O
+6 WORDTAG Belfast O
+6 WORDTAG Associates O
+6 WORDTAG Army O
+6 WORDTAG Aqaba O
+6 WORDTAG Among O
+6 WORDTAG According O
+6 WORDTAG Abacha O
+6 WORDTAG 40% O
+6 WORDTAG 13% O
+6 WORDTAG $30 O
+6 WORDTAG $1.4 O
+5 WORDTAG yesterday I-TIMEX3
+5 WORDTAG year-earlier B-TIMEX3
+5 WORDTAG write-downs O
+5 WORDTAG write-down O
+5 WORDTAG withdrawal O
+5 WORDTAG widely O
+5 WORDTAG why O
+5 WORDTAG weekend I-TIMEX3
+5 WORDTAG weak O
+5 WORDTAG wake O
+5 WORDTAG vital O
+5 WORDTAG various O
+5 WORDTAG values O
+5 WORDTAG unless O
+5 WORDTAG united O
+5 WORDTAG um O
+5 WORDTAG turnover O
+5 WORDTAG trouble O
+5 WORDTAG trend O
+5 WORDTAG treatment O
+5 WORDTAG traditional O
+5 WORDTAG time I-TIMEX3
+5 WORDTAG surprised O
+5 WORDTAG surge O
+5 WORDTAG suggestion O
+5 WORDTAG suffer O
+5 WORDTAG stores O
+5 WORDTAG states O
+5 WORDTAG statements O
+5 WORDTAG stand O
+5 WORDTAG specialty O
+5 WORDTAG south O
+5 WORDTAG software O
+5 WORDTAG six B-TIMEX3
+5 WORDTAG show O
+5 WORDTAG short-term O
+5 WORDTAG short O
+5 WORDTAG shed O
+5 WORDTAG sharply O
+5 WORDTAG several B-TIMEX3
+5 WORDTAG seemed O
+5 WORDTAG secretary O
+5 WORDTAG search O
+5 WORDTAG sea O
+5 WORDTAG saw O
+5 WORDTAG ruled O
+5 WORDTAG roughly O
+5 WORDTAG room O
+5 WORDTAG risks O
+5 WORDTAG retained O
+5 WORDTAG respond O
+5 WORDTAG resort O
+5 WORDTAG resolution O
+5 WORDTAG resigned O
+5 WORDTAG reserve O
+5 WORDTAG requires O
+5 WORDTAG request O
+5 WORDTAG represents O
+5 WORDTAG remained O
+5 WORDTAG reflected O
+5 WORDTAG reduction O
+5 WORDTAG really O
+5 WORDTAG rally O
+5 WORDTAG quoted O
+5 WORDTAG questions O
+5 WORDTAG pushed O
+5 WORDTAG process O
+5 WORDTAG principle O
+5 WORDTAG priced O
+5 WORDTAG previous O
+5 WORDTAG presidential O
+5 WORDTAG powerful O
+5 WORDTAG possibility O
+5 WORDTAG positions O
+5 WORDTAG plunged O
+5 WORDTAG plunge O
+5 WORDTAG pending O
+5 WORDTAG ownership O
+5 WORDTAG owner O
+5 WORDTAG opposed O
+5 WORDTAG operator O
+5 WORDTAG opening O
+5 WORDTAG often O
+5 WORDTAG nothing O
+5 WORDTAG nineteen B-TIMEX3
+5 WORDTAG newsprint O
+5 WORDTAG network O
+5 WORDTAG nearby O
+5 WORDTAG near O
+5 WORDTAG natural O
+5 WORDTAG name O
+5 WORDTAG multinational O
+5 WORDTAG movement O
+5 WORDTAG marketing O
+5 WORDTAG managers O
+5 WORDTAG lose O
+5 WORDTAG looks O
+5 WORDTAG loans O
+5 WORDTAG lives O
+5 WORDTAG labor O
+5 WORDTAG known O
+5 WORDTAG killings O
+5 WORDTAG killing O
+5 WORDTAG kept O
+5 WORDTAG joined O
+5 WORDTAG jewelry O
+5 WORDTAG intent O
+5 WORDTAG intense O
+5 WORDTAG intends O
+5 WORDTAG institutional O
+5 WORDTAG inspection O
+5 WORDTAG inside O
+5 WORDTAG industries O
+5 WORDTAG hundreds O
+5 WORDTAG highly O
+5 WORDTAG healthy O
+5 WORDTAG headline O
+5 WORDTAG grow O
+5 WORDTAG given O
+5 WORDTAG future I-TIMEX3
+5 WORDTAG funded O
+5 WORDTAG flat O
+5 WORDTAG fiscal B-TIMEX3
+5 WORDTAG families O
+5 WORDTAG experts O
+5 WORDTAG expenses O
+5 WORDTAG exercised O
+5 WORDTAG estimate O
+5 WORDTAG ensure O
+5 WORDTAG engineering O
+5 WORDTAG enforcement O
+5 WORDTAG electronic O
+5 WORDTAG education O
+5 WORDTAG earthquake O
+5 WORDTAG each B-TIMEX3
+5 WORDTAG duty-free O
+5 WORDTAG distribution O
+5 WORDTAG dispute O
+5 WORDTAG discuss O
+5 WORDTAG direct O
+5 WORDTAG diplomacy O
+5 WORDTAG development O
+5 WORDTAG desert O
+5 WORDTAG described O
+5 WORDTAG department O
+5 WORDTAG declining O
+5 WORDTAG controls O
+5 WORDTAG controlling O
+5 WORDTAG considering O
+5 WORDTAG consider O
+5 WORDTAG concentrate O
+5 WORDTAG compliance O
+5 WORDTAG commander O
+5 WORDTAG combined O
+5 WORDTAG cleared O
+5 WORDTAG clear O
+5 WORDTAG civil O
+5 WORDTAG citing O
+5 WORDTAG cited O
+5 WORDTAG chemicals O
+5 WORDTAG challenge O
+5 WORDTAG chain O
+5 WORDTAG carrying O
+5 WORDTAG carry O
+5 WORDTAG carrier O
+5 WORDTAG call O
+5 WORDTAG brought O
+5 WORDTAG broad O
+5 WORDTAG book O
+5 WORDTAG bombing O
+5 WORDTAG bids O
+5 WORDTAG bidding O
+5 WORDTAG bidders O
+5 WORDTAG beyond O
+5 WORDTAG better O
+5 WORDTAG believed O
+5 WORDTAG beer O
+5 WORDTAG becoming O
+5 WORDTAG base O
+5 WORDTAG bankruptcy O
+5 WORDTAG bankers O
+5 WORDTAG away O
+5 WORDTAG attorneys O
+5 WORDTAG attempts O
+5 WORDTAG applications O
+5 WORDTAG application O
+5 WORDTAG anything O
+5 WORDTAG annual O
+5 WORDTAG although O
+5 WORDTAG alternatives O
+5 WORDTAG allowed O
+5 WORDTAG airline O
+5 WORDTAG aimed O
+5 WORDTAG affect O
+5 WORDTAG activity O
+5 WORDTAG acknowledged O
+5 WORDTAG accounting O
+5 WORDTAG accounted O
+5 WORDTAG academy O
+5 WORDTAG a I-TIMEX3
+5 WORDTAG _DIGITS4_ O
+5 WORDTAG _DIGITS2_ B-TIMEX3
+5 WORDTAG You O
+5 WORDTAG York-based O
+5 WORDTAG Women O
+5 WORDTAG UNOS O
+5 WORDTAG To O
+5 WORDTAG The B-TIMEX3
+5 WORDTAG T. O
+5 WORDTAG Stronach O
+5 WORDTAG St. O
+5 WORDTAG Sony O
+5 WORDTAG Since O
+5 WORDTAG Shearson O
+5 WORDTAG Service O
+5 WORDTAG September I-TIMEX3
+5 WORDTAG Sea O
+5 WORDTAG Saudis O
+5 WORDTAG Sachs O
+5 WORDTAG Ranariddh O
+5 WORDTAG Qantas O
+5 WORDTAG Profit O
+5 WORDTAG Potach O
+5 WORDTAG Perlman O
+5 WORDTAG Pattison O
+5 WORDTAG Pacific O
+5 WORDTAG POP O
+5 WORDTAG Once O
+5 WORDTAG Ogden O
+5 WORDTAG Ocean O
+5 WORDTAG Now B-TIMEX3
+5 WORDTAG Norwood O
+5 WORDTAG Norton O
+5 WORDTAG Nhek O
+5 WORDTAG Netherlands O
+5 WORDTAG Nadir O
+5 WORDTAG Nabisco O
+5 WORDTAG NASA O
+5 WORDTAG N.Y. O
+5 WORDTAG Moscow O
+5 WORDTAG Mills O
+5 WORDTAG Marous O
+5 WORDTAG Mark O
+5 WORDTAG Marines O
+5 WORDTAG Los O
+5 WORDTAG Lama O
+5 WORDTAG La O
+5 WORDTAG Journal O
+5 WORDTAG Jordanian O
+5 WORDTAG Jolla O
+5 WORDTAG Jan. B-TIMEX3
+5 WORDTAG Intelogic O
+5 WORDTAG IRA O
+5 WORDTAG IBM O
+5 WORDTAG Hurricane O
+5 WORDTAG Howard O
+5 WORDTAG Home O
+5 WORDTAG His O
+5 WORDTAG Har-Shefi O
+5 WORDTAG Goldman O
+5 WORDTAG Franklin O
+5 WORDTAG Francisco O
+5 WORDTAG February B-TIMEX3
+5 WORDTAG Feb. B-TIMEX3
+5 WORDTAG F. O
+5 WORDTAG European O
+5 WORDTAG Egypt O
+5 WORDTAG Each O
+5 WORDTAG Dunkin O
+5 WORDTAG Despite O
+5 WORDTAG Desert O
+5 WORDTAG Deseret O
+5 WORDTAG Delta O
+5 WORDTAG David O
+5 WORDTAG Daniel O
+5 WORDTAG Currie O
+5 WORDTAG Cuban O
+5 WORDTAG Communications O
+5 WORDTAG City O
+5 WORDTAG Cie. O
+5 WORDTAG Carolina O
+5 WORDTAG Cambodian O
+5 WORDTAG Cambodia O
+5 WORDTAG Cabinet O
+5 WORDTAG CNN O
+5 WORDTAG By O
+5 WORDTAG Business O
+5 WORDTAG Bunchhay O
+5 WORDTAG Bronfman O
+5 WORDTAG Benjamin O
+5 WORDTAG Bell O
+5 WORDTAG Atimadi O
+5 WORDTAG Asian O
+5 WORDTAG Also O
+5 WORDTAG All O
+5 WORDTAG Airlines O
+5 WORDTAG Afghan O
+5 WORDTAG Aetna O
+5 WORDTAG About O
+5 WORDTAG AT O
+5 WORDTAG A B-TIMEX3
+5 WORDTAG 51% O
+5 WORDTAG 33% O
+5 WORDTAG 2% O
+5 WORDTAG 1.8 O
+5 WORDTAG ... O
+5 WORDTAG 's I-TIMEX3
+5 WORDTAG 'll O
+5 WORDTAG $60 O
+5 WORDTAG $300 O
+5 WORDTAG $27 O
+5 WORDTAG $125 O
+5 WORDTAG $10 O
+4 WORDTAG to I-TIMEX3
+4 WORDTAG than I-TIMEX3
+4 WORDTAG summer I-TIMEX3
+4 WORDTAG soon B-TIMEX3
+4 WORDTAG recently O
+4 WORDTAG quarter O
+4 WORDTAG next O
+4 WORDTAG moment O
+4 WORDTAG late O
+4 WORDTAG every O
+4 WORDTAG days O
+4 WORDTAG daily O
+4 WORDTAG currently O
+4 WORDTAG current I-TIMEX3
+4 WORDTAG beginning O
+4 WORDTAG annually O
+4 WORDTAG September B-TIMEX3
+4 WORDTAG Saturday B-TIMEX3
+4 WORDTAG Previously O
+4 WORDTAG Now O
+4 WORDTAG More O
+4 WORDTAG May B-TIMEX3
+4 WORDTAG Friday I-TIMEX3
+4 WORDTAG April I-TIMEX3
+4 WORDTAG April B-TIMEX3
+3 WORDTAG year-ago B-TIMEX3
+3 WORDTAG week O
+3 WORDTAG twenty O
+3 WORDTAG thousand I-TIMEX3
+3 WORDTAG that B-TIMEX3
+3 WORDTAG so I-TIMEX3
+3 WORDTAG second I-TIMEX3
+3 WORDTAG one B-TIMEX3
+3 WORDTAG nine O
+3 WORDTAG night I-TIMEX3
+3 WORDTAG least I-TIMEX3
+3 WORDTAG late B-TIMEX3
+3 WORDTAG half I-TIMEX3
+3 WORDTAG future B-TIMEX3
+3 WORDTAG fourth B-TIMEX3
+3 WORDTAG evening I-TIMEX3
+3 WORDTAG early I-TIMEX3
+3 WORDTAG day O
+3 WORDTAG coming B-TIMEX3
+3 WORDTAG at B-TIMEX3
+3 WORDTAG around B-TIMEX3
+3 WORDTAG and I-TIMEX3
+3 WORDTAG _DIGITS1_ B-TIMEX3
+3 WORDTAG Thursday I-TIMEX3
+3 WORDTAG This B-TIMEX3
+3 WORDTAG October B-TIMEX3
+3 WORDTAG Nov. I-TIMEX3
+3 WORDTAG Earlier O
+2 WORDTAG year B-TIMEX3
+2 WORDTAG weeks B-TIMEX3
+2 WORDTAG week B-TIMEX3
+2 WORDTAG twenty I-TIMEX3
+2 WORDTAG twenty B-TIMEX3
+2 WORDTAG today O
+2 WORDTAG three B-TIMEX3
+2 WORDTAG third B-TIMEX3
+2 WORDTAG then B-TIMEX3
+2 WORDTAG six I-TIMEX3
+2 WORDTAG several I-TIMEX3
+2 WORDTAG second B-TIMEX3
+2 WORDTAG period O
+2 WORDTAG past O
+2 WORDTAG nineteen I-TIMEX3
+2 WORDTAG night O
+2 WORDTAG near I-TIMEX3
+2 WORDTAG more I-TIMEX3
+2 WORDTAG more B-TIMEX3
+2 WORDTAG months O
+2 WORDTAG months B-TIMEX3
+2 WORDTAG month O
+2 WORDTAG later I-TIMEX3
+2 WORDTAG later B-TIMEX3
+2 WORDTAG full I-TIMEX3
+2 WORDTAG fourth O
+2 WORDTAG following I-TIMEX3
+2 WORDTAG five I-TIMEX3
+2 WORDTAG fall I-TIMEX3
+2 WORDTAG every B-TIMEX3
+2 WORDTAG evening O
+2 WORDTAG already B-TIMEX3
+2 WORDTAG almost B-TIMEX3
+2 WORDTAG about B-TIMEX3
+2 WORDTAG _ALLCAP_ I-TIMEX3
+2 WORDTAG Wednesday I-TIMEX3
+2 WORDTAG Sunday I-TIMEX3
+2 WORDTAG Previously B-TIMEX3
+2 WORDTAG October I-TIMEX3
+2 WORDTAG May I-TIMEX3
+2 WORDTAG June I-TIMEX3
+1 WORDTAG yet B-TIMEX3
+1 WORDTAG years B-TIMEX3
+1 WORDTAG year-earlier O
+1 WORDTAG within B-TIMEX3
+1 WORDTAG while I-TIMEX3
+1 WORDTAG up B-TIMEX3
+1 WORDTAG trading I-TIMEX3
+1 WORDTAG third-quarter O
+1 WORDTAG these B-TIMEX3
+1 WORDTAG summer B-TIMEX3
+1 WORDTAG soon I-TIMEX3
+1 WORDTAG some B-TIMEX3
+1 WORDTAG short I-TIMEX3
+1 WORDTAG right B-TIMEX3
+1 WORDTAG recently I-TIMEX3
+1 WORDTAG quarters O
+1 WORDTAG quarter B-TIMEX3
+1 WORDTAG previously B-TIMEX3
+1 WORDTAG previous I-TIMEX3
+1 WORDTAG past B-TIMEX3
+1 WORDTAG part I-TIMEX3
+1 WORDTAG over B-TIMEX3
+1 WORDTAG one I-TIMEX3
+1 WORDTAG once B-TIMEX3
+1 WORDTAG now I-TIMEX3
+1 WORDTAG no B-TIMEX3
+1 WORDTAG moment I-TIMEX3
+1 WORDTAG less B-TIMEX3
+1 WORDTAG late I-TIMEX3
+1 WORDTAG its B-TIMEX3
+1 WORDTAG in I-TIMEX3
+1 WORDTAG hundred I-TIMEX3
+1 WORDTAG good I-TIMEX3
+1 WORDTAG from B-TIMEX3
+1 WORDTAG four B-TIMEX3
+1 WORDTAG flat I-TIMEX3
+1 WORDTAG fiscal O
+1 WORDTAG first B-TIMEX3
+1 WORDTAG days B-TIMEX3
+1 WORDTAG day B-TIMEX3
+1 WORDTAG date I-TIMEX3
+1 WORDTAG daily B-TIMEX3
+1 WORDTAG coming I-TIMEX3
+1 WORDTAG beyond I-TIMEX3
+1 WORDTAG beginning I-TIMEX3
+1 WORDTAG as I-TIMEX3
+1 WORDTAG as B-TIMEX3
+1 WORDTAG annually B-TIMEX3
+1 WORDTAG an I-TIMEX3
+1 WORDTAG an B-TIMEX3
+1 WORDTAG ago O
+1 WORDTAG additional I-TIMEX3
+1 WORDTAG _DIGITS3_ I-TIMEX3
+1 WORDTAG _DIGITS3_ B-TIMEX3
+1 WORDTAG Tuesday I-TIMEX3
+1 WORDTAG Saturday I-TIMEX3
+1 WORDTAG Oct. I-TIMEX3
+1 WORDTAG More B-TIMEX3
+1 WORDTAG Monday I-TIMEX3
+1 WORDTAG March I-TIMEX3
+1 WORDTAG July I-TIMEX3
+1 WORDTAG February I-TIMEX3
+1 WORDTAG December I-TIMEX3
+1 WORDTAG August I-TIMEX3
+59947 1-GRAM O
+1243 1-GRAM B-TIMEX3
+1234 1-GRAM I-TIMEX3
+56200 2-GRAM O O
+5118 2-GRAM * *
+2505 2-GRAM * O
+1188 2-GRAM O B-TIMEX3
+738 2-GRAM B-TIMEX3 I-TIMEX3
+737 2-GRAM I-TIMEX3 O
+505 2-GRAM B-TIMEX3 O
+496 2-GRAM I-TIMEX3 I-TIMEX3
+54 2-GRAM * B-TIMEX3
+1 2-GRAM I-TIMEX3 B-TIMEX3
+52944 3-GRAM O O O
+2505 3-GRAM * * O
+2407 3-GRAM * O O
+2214 3-GRAM O O STOP
+1042 3-GRAM O O B-TIMEX3
+703 3-GRAM O B-TIMEX3 I-TIMEX3
+485 3-GRAM O B-TIMEX3 O
+446 3-GRAM I-TIMEX3 O O
+404 3-GRAM B-TIMEX3 I-TIMEX3 O
+403 3-GRAM B-TIMEX3 O O
+334 3-GRAM B-TIMEX3 I-TIMEX3 I-TIMEX3
+333 3-GRAM I-TIMEX3 I-TIMEX3 O
+257 3-GRAM I-TIMEX3 O STOP
+162 3-GRAM I-TIMEX3 I-TIMEX3 I-TIMEX3
+98 3-GRAM * O B-TIMEX3
+88 3-GRAM B-TIMEX3 O STOP
+54 3-GRAM * * B-TIMEX3
+35 3-GRAM * B-TIMEX3 I-TIMEX3
+34 3-GRAM I-TIMEX3 O B-TIMEX3
+19 3-GRAM * B-TIMEX3 O
+14 3-GRAM B-TIMEX3 O B-TIMEX3
+1 3-GRAM I-TIMEX3 I-TIMEX3 B-TIMEX3
+1 3-GRAM I-TIMEX3 B-TIMEX3 O
+3116 WORD ,
+2742 WORD the
+2550 WORD .
+1611 WORD of
+1517 WORD to
+1367 WORD a
+1025 WORD in
+1006 WORD and
+710 WORD 's
+627 WORD said
+571 WORD million
+560 WORD for
+511 WORD The
+485 WORD that
+470 WORD "
+442 WORD is
+359 WORD from
+351 WORD it
+321 WORD company
+320 WORD on
+301 WORD its
+293 WORD by
+288 WORD share
+277 WORD will
+277 WORD has
+276 WORD at
+275 WORD with
+258 WORD or
+254 WORD be
+250 WORD as
+246 WORD was
+219 WORD an
+214 WORD are
+209 WORD shares
+198 WORD have
+185 WORD year
+182 WORD which
+182 WORD about
+162 WORD n't
+157 WORD Mr.
+156 WORD In
+142 WORD would
+141 WORD he
+133 WORD been
+130 WORD cents
+129 WORD had
+124 WORD U.S.
+123 WORD they
+121 WORD -
+118 WORD billion
+116 WORD also
+115 WORD stock
+115 WORD more
+114 WORD this
+113 WORD Iraq
+109 WORD were
+108 WORD up
+107 WORD market
+106 WORD not
+105 WORD but
+103 WORD his
+99 WORD Inc.
+96 WORD new
+95 WORD quarter
+93 WORD Corp.
+90 WORD last
+89 WORD than
+87 WORD trading
+87 WORD ``
+84 WORD ''
+83 WORD other
+81 WORD net
+80 WORD two
+80 WORD their
+73 WORD New
+72 WORD offer
+70 WORD who
+70 WORD But
+69 WORD )
+69 WORD (
+68 WORD some
+67 WORD one
+66 WORD earnings
+66 WORD because
+65 WORD through
+65 WORD all
+65 WORD Friday
+63 WORD after
+62 WORD York
+61 WORD into
+61 WORD common
+60 WORD when
+59 WORD says
+59 WORD Iraqi
+58 WORD sales
+58 WORD could
+58 WORD business
+58 WORD any
+56 WORD out
+56 WORD down
+55 WORD over
+54 WORD years
+54 WORD price
+54 WORD president
+54 WORD group
+54 WORD I
+53 WORD we
+53 WORD loss
+53 WORD Kuwait
+53 WORD A
+52 WORD months
+52 WORD It
+51 WORD say
+51 WORD now
+51 WORD no
+51 WORD government
+51 WORD Exchange
+50 WORD rose
+50 WORD Saddam
+49 WORD yesterday
+49 WORD officials
+49 WORD first
+49 WORD We
+48 WORD do
+47 WORD week
+47 WORD most
+47 WORD expected
+47 WORD each
+47 WORD Co.
+46 WORD if
+46 WORD American
+45 WORD off
+45 WORD income
+45 WORD Bush
+44 WORD three
+44 WORD closed
+44 WORD chief
+44 WORD Stock
+43 WORD operations
+43 WORD fell
+43 WORD Hussein
+43 WORD He
+42 WORD under
+42 WORD shareholders
+42 WORD profit
+42 WORD outstanding
+42 WORD '
+41 WORD unit
+41 WORD reported
+41 WORD only
+41 WORD oil
+41 WORD amp
+41 WORD ago
+40 WORD prices
+40 WORD next
+40 WORD can
+39 WORD war
+39 WORD time
+39 WORD third
+39 WORD there
+39 WORD people
+39 WORD many
+39 WORD earlier
+39 WORD debt
+39 WORD against
+39 WORD Saudi
+39 WORD And
+38 WORD made
+38 WORD executive
+38 WORD British
+37 WORD buy
+37 WORD _
+36 WORD stake
+36 WORD may
+36 WORD including
+36 WORD early
+36 WORD capital
+36 WORD assets
+35 WORD value
+35 WORD third-quarter
+35 WORD spokesman
+35 WORD plan
+35 WORD chairman
+34 WORD such
+34 WORD so
+34 WORD sale
+34 WORD news
+34 WORD military
+34 WORD forces
+34 WORD companies
+34 WORD bid
+33 WORD until
+33 WORD part
+33 WORD month
+33 WORD major
+33 WORD just
+33 WORD interest
+33 WORD force
+33 WORD dividend
+33 WORD before
+32 WORD today
+32 WORD own
+32 WORD operating
+32 WORD nearly
+32 WORD higher
+32 WORD computer
+32 WORD composite
+32 WORD between
+32 WORD back
+32 WORD announced
+32 WORD agreement
+31 WORD world
+31 WORD sell
+31 WORD move
+31 WORD maker
+31 WORD going
+31 WORD costs
+31 WORD already
+31 WORD For
+30 WORD revenue
+30 WORD results
+30 WORD restructuring
+30 WORD products
+30 WORD lower
+30 WORD being
+30 WORD agreed
+30 WORD President
+29 WORD percent
+29 WORD holders
+29 WORD did
+29 WORD called
+29 WORD analysts
+29 WORD United
+29 WORD 're
+28 WORD program
+28 WORD problems
+28 WORD plans
+28 WORD our
+28 WORD much
+28 WORD does
+28 WORD compared
+28 WORD close
+28 WORD That
+27 WORD while
+27 WORD troops
+27 WORD total
+27 WORD still
+27 WORD pay
+27 WORD past
+27 WORD investors
+27 WORD expects
+27 WORD Thursday
+27 WORD Bank
+26 WORD you
+26 WORD well
+26 WORD uh
+26 WORD since
+26 WORD police
+26 WORD industry
+26 WORD financial
+26 WORD businesses
+26 WORD bank
+26 WORD Nov.
+26 WORD GM
+25 WORD used
+25 WORD told
+25 WORD think
+25 WORD them
+25 WORD recent
+25 WORD preferred
+25 WORD officer
+25 WORD likely
+25 WORD increase
+25 WORD gain
+25 WORD five
+25 WORD continue
+25 WORD concern
+25 WORD addition
+25 WORD LIN
+25 WORD :
+24 WORD women
+24 WORD make
+24 WORD latest
+24 WORD even
+24 WORD board
+24 WORD This
+24 WORD Columbia
+24 WORD Canadian
+24 WORD BellSouth
+24 WORD At
+24 WORD Arabia
+23 WORD within
+23 WORD takeover
+23 WORD take
+23 WORD rights
+23 WORD purchase
+23 WORD offering
+23 WORD nine
+23 WORD losses
+23 WORD holding
+23 WORD high
+23 WORD growth
+23 WORD four
+23 WORD economic
+23 WORD days
+23 WORD added
+23 WORD acquisition
+23 WORD acquire
+23 WORD U.N.
+23 WORD Israel
+22 WORD where
+22 WORD use
+22 WORD reports
+22 WORD public
+22 WORD official
+22 WORD money
+22 WORD issue
+22 WORD international
+22 WORD future
+22 WORD certain
+22 WORD cash
+22 WORD big
+22 WORD based
+22 WORD There
+22 WORD Jones
+22 WORD America
+22 WORD 30
+21 WORD what
+21 WORD stocks
+21 WORD see
+21 WORD result
+21 WORD record
+21 WORD rate
+21 WORD him
+21 WORD half
+21 WORD further
+21 WORD ended
+21 WORD end
+21 WORD control
+21 WORD charge
+21 WORD Sales
+21 WORD Group
+21 WORD Dow
+21 WORD 50%
+20 WORD weapons
+20 WORD volume
+20 WORD very
+20 WORD those
+20 WORD these
+20 WORD support
+20 WORD six
+20 WORD she
+20 WORD set
+20 WORD right
+20 WORD remains
+20 WORD might
+20 WORD management
+20 WORD makers
+20 WORD less
+20 WORD investment
+20 WORD fund
+20 WORD food
+20 WORD earned
+20 WORD current
+20 WORD country
+20 WORD began
+20 WORD around
+20 WORD They
+20 WORD States
+20 WORD Sansui
+20 WORD London
+20 WORD Kellogg
+20 WORD Jaguar
+20 WORD House
+20 WORD ;
+20 WORD 1988
+19 WORD then
+19 WORD strong
+19 WORD power
+19 WORD period
+19 WORD payments
+19 WORD largest
+19 WORD junk
+19 WORD held
+19 WORD general
+19 WORD funds
+19 WORD far
+19 WORD declined
+19 WORD court
+19 WORD convertible
+19 WORD change
+19 WORD both
+19 WORD asked
+19 WORD Unisys
+19 WORD Securities
+19 WORD Paribas
+19 WORD McCaw
+19 WORD John
+19 WORD James
+19 WORD Intel
+19 WORD If
+19 WORD First
+19 WORD Data
+19 WORD 1990
+19 WORD 10
+18 WORD transaction
+18 WORD thrift
+18 WORD talks
+18 WORD selling
+18 WORD reserves
+18 WORD proposed
+18 WORD peace
+18 WORD nation
+18 WORD hundred
+18 WORD financing
+18 WORD eight
+18 WORD dollar
+18 WORD directors
+18 WORD become
+18 WORD analyst
+18 WORD additional
+18 WORD West
+18 WORD Navigation
+18 WORD National
+18 WORD Mixte
+18 WORD Japanese
+18 WORD 15
+17 WORD vice
+17 WORD top
+17 WORD several
+17 WORD senior
+17 WORD related
+17 WORD pence
+17 WORD long
+17 WORD least
+17 WORD how
+17 WORD holds
+17 WORD here
+17 WORD help
+17 WORD foreign
+17 WORD few
+17 WORD estimated
+17 WORD dollars
+17 WORD bonds
+17 WORD according
+17 WORD Telerate
+17 WORD Sun
+17 WORD Sept.
+17 WORD Arab
+17 WORD Antar
+17 WORD 1
+16 WORD trade
+16 WORD took
+16 WORD tax
+16 WORD special
+16 WORD small
+16 WORD shareholder
+16 WORD report
+16 WORD recently
+16 WORD possible
+16 WORD level
+16 WORD joint
+16 WORD insurance
+16 WORD include
+16 WORD however
+16 WORD firm
+16 WORD family
+16 WORD due
+16 WORD defense
+16 WORD chip
+16 WORD another
+16 WORD among
+16 WORD Washington
+16 WORD US
+16 WORD Tuesday
+16 WORD Security
+16 WORD Revenue
+16 WORD Pont
+16 WORD Jordan
+16 WORD International
+16 WORD Du
+16 WORD Drabinsky
+16 WORD Baghdad
+16 WORD Anheuser
+16 WORD Americans
+16 WORD Acquisition
+16 WORD $4
+15 WORD work
+15 WORD whether
+15 WORD terms
+15 WORD statement
+15 WORD sources
+15 WORD should
+15 WORD seeking
+15 WORD security
+15 WORD securities
+15 WORD real
+15 WORD potential
+15 WORD political
+15 WORD plant
+15 WORD owns
+15 WORD must
+15 WORD members
+15 WORD markets
+15 WORD like
+15 WORD led
+15 WORD leader
+15 WORD go
+15 WORD gains
+15 WORD face
+15 WORD economy
+15 WORD dropped
+15 WORD continued
+15 WORD completed
+15 WORD charges
+15 WORD believe
+15 WORD White
+15 WORD Soviet
+15 WORD Roy
+15 WORD RJR
+15 WORD Provigo
+15 WORD Nashua
+15 WORD Britain
+15 WORD AP
+15 WORD 20
+15 WORD 10%
+14 WORD yet
+14 WORD year-earlier
+14 WORD without
+14 WORD weeks
+14 WORD thousand
+14 WORD tender
+14 WORD second
+14 WORD saying
+14 WORD proposal
+14 WORD posted
+14 WORD planned
+14 WORD paid
+14 WORD over-the-counter
+14 WORD number
+14 WORD north
+14 WORD naval
+14 WORD national
+14 WORD merger
+14 WORD means
+14 WORD lawyers
+14 WORD information
+14 WORD index
+14 WORD hurt
+14 WORD hold
+14 WORD her
+14 WORD groups
+14 WORD ground
+14 WORD good
+14 WORD gas
+14 WORD following
+14 WORD filed
+14 WORD federal
+14 WORD during
+14 WORD demand
+14 WORD debentures
+14 WORD day
+14 WORD customers
+14 WORD currently
+14 WORD crisis
+14 WORD cost
+14 WORD corporate
+14 WORD construction
+14 WORD coming
+14 WORD border
+14 WORD again
+14 WORD acquired
+14 WORD Under
+14 WORD Savings
+14 WORD Oct.
+14 WORD Lebanon
+14 WORD Federal
+14 WORD Control
+14 WORD 31
+14 WORD 1989
+14 WORD 15%
+13 WORD trying
+13 WORD strategy
+13 WORD state
+13 WORD split
+13 WORD soldiers
+13 WORD services
+13 WORD seen
+13 WORD rates
+13 WORD put
+13 WORD production
+13 WORD previously
+13 WORD need
+13 WORD named
+13 WORD later
+13 WORD home
+13 WORD give
+13 WORD get
+13 WORD fourth
+13 WORD former
+13 WORD fiscal
+13 WORD expect
+13 WORD effort
+13 WORD drop
+13 WORD computers
+13 WORD comment
+13 WORD chemical
+13 WORD bugs
+13 WORD boost
+13 WORD begin
+13 WORD attributed
+13 WORD approval
+13 WORD amount
+13 WORD allow
+13 WORD Sunday
+13 WORD Some
+13 WORD Schwarz
+13 WORD On
+13 WORD Monday
+13 WORD Minister
+13 WORD Milton
+13 WORD Hewlett-Packard
+13 WORD DPC
+13 WORD Cineplex
+13 WORD As
+13 WORD 6
+13 WORD $1
+12 WORD }
+12 WORD {
+12 WORD way
+12 WORD visit
+12 WORD thousands
+12 WORD technology
+12 WORD subsidiary
+12 WORD sold
+12 WORD remain
+12 WORD reason
+12 WORD personal
+12 WORD minister
+12 WORD meeting
+12 WORD loan
+12 WORD large
+12 WORD issues
+12 WORD increased
+12 WORD includes
+12 WORD included
+12 WORD fees
+12 WORD facility
+12 WORD extended
+12 WORD equity
+12 WORD employees
+12 WORD either
+12 WORD division
+12 WORD designed
+12 WORD decline
+12 WORD decision
+12 WORD de
+12 WORD county
+12 WORD countries
+12 WORD come
+12 WORD cellular
+12 WORD cases
+12 WORD calls
+12 WORD attack
+12 WORD approved
+12 WORD Williams
+12 WORD While
+12 WORD Trust
+12 WORD She
+12 WORD Polly
+12 WORD Peck
+12 WORD Nasdaq
+12 WORD March
+12 WORD Ltd.
+12 WORD Lawrence
+12 WORD Last
+12 WORD June
+12 WORD Internet
+12 WORD General
+12 WORD French
+12 WORD Dec.
+12 WORD Courtaulds
+12 WORD Compaq
+12 WORD Australia
+12 WORD Asia
+11 WORD withdraw
+11 WORD wants
+11 WORD toward
+11 WORD taking
+11 WORD systems
+11 WORD start
+11 WORD source
+11 WORD soon
+11 WORD sites
+11 WORD service
+11 WORD seek
+11 WORD rise
+11 WORD retirement
+11 WORD remaining
+11 WORD pressure
+11 WORD point
+11 WORD place
+11 WORD patients
+11 WORD offered
+11 WORD low
+11 WORD little
+11 WORD line
+11 WORD legal
+11 WORD leaders
+11 WORD killed
+11 WORD jobs
+11 WORD independent
+11 WORD hope
+11 WORD hit
+11 WORD giant
+11 WORD getting
+11 WORD full
+11 WORD francs
+11 WORD found
+11 WORD filing
+11 WORD executives
+11 WORD embargo
+11 WORD effective
+11 WORD director
+11 WORD deal
+11 WORD cut
+11 WORD conference
+11 WORD concerns
+11 WORD closing
+11 WORD case
+11 WORD available
+11 WORD agency
+11 WORD administration
+11 WORD Ukraine
+11 WORD Toronto
+11 WORD Sununu
+11 WORD Rally
+11 WORD PLC
+11 WORD News
+11 WORD Nestle
+11 WORD Ireland
+11 WORD However
+11 WORD Gulf
+11 WORD Fournier
+11 WORD Financial
+11 WORD Earlier
+11 WORD Commission
+11 WORD Australian
+11 WORD Aug.
+11 WORD An
+11 WORD 20%
+11 WORD $2
+11 WORD $100
+10 WORD yen
+10 WORD year-ago
+10 WORD want
+10 WORD too
+10 WORD though
+10 WORD team
+10 WORD subordinated
+10 WORD staff
+10 WORD space
+10 WORD ships
+10 WORD sanctions
+10 WORD risk
+10 WORD response
+10 WORD rejected
+10 WORD reflecting
+10 WORD receive
+10 WORD raise
+10 WORD quarterly
+10 WORD profits
+10 WORD product
+10 WORD problem
+10 WORD post
+10 WORD portfolio
+10 WORD party
+10 WORD order
+10 WORD open
+10 WORD once
+10 WORD offset
+10 WORD nor
+10 WORD nations
+10 WORD message
+10 WORD meet
+10 WORD making
+10 WORD look
+10 WORD left
+10 WORD leave
+10 WORD law
+10 WORD largely
+10 WORD know
+10 WORD keep
+10 WORD issued
+10 WORD initial
+10 WORD hopes
+10 WORD followed
+10 WORD finance
+10 WORD diplomatic
+10 WORD core
+10 WORD continues
+10 WORD connection
+10 WORD conditions
+10 WORD commercial
+10 WORD changes
+10 WORD bought
+10 WORD bomb
+10 WORD banks
+10 WORD almost
+10 WORD allies
+10 WORD allied
+10 WORD air
+10 WORD accounts
+10 WORD William
+10 WORD Wall
+10 WORD Waertsilae
+10 WORD Street
+10 WORD Steel
+10 WORD San
+10 WORD Ratners
+10 WORD Prime
+10 WORD Price
+10 WORD Pope
+10 WORD Police
+10 WORD One
+10 WORD OTC
+10 WORD Ms.
+10 WORD Medical
+10 WORD Marine
+10 WORD January
+10 WORD Industries
+10 WORD Howes
+10 WORD Ford
+10 WORD Erbamont
+10 WORD Clinton
+10 WORD Castro
+10 WORD ABC
+10 WORD 50
+10 WORD $3
+10 WORD $15
+9 WORD wo
+9 WORD whole
+9 WORD warrants
+9 WORD warning
+9 WORD units
+9 WORD thing
+9 WORD taken
+9 WORD subject
+9 WORD sought
+9 WORD soared
+9 WORD showed
+9 WORD shipping
+9 WORD segment
+9 WORD school
+9 WORD run
+9 WORD role
+9 WORD rest
+9 WORD regulatory
+9 WORD regulators
+9 WORD received
+9 WORD reached
+9 WORD quarters
+9 WORD position
+9 WORD points
+9 WORD performance
+9 WORD parent
+9 WORD pact
+9 WORD option
+9 WORD one-time
+9 WORD notes
+9 WORD men
+9 WORD machines
+9 WORD lost
+9 WORD lines
+9 WORD leaving
+9 WORD jumped
+9 WORD job
+9 WORD itself
+9 WORD invasion
+9 WORD industrial
+9 WORD indicated
+9 WORD imports
+9 WORD important
+9 WORD head
+9 WORD guilders
+9 WORD goal
+9 WORD gave
+9 WORD fully
+9 WORD figures
+9 WORD estimates
+9 WORD effect
+9 WORD doing
+9 WORD disclosed
+9 WORD declines
+9 WORD declared
+9 WORD credit
+9 WORD buying
+9 WORD break
+9 WORD body
+9 WORD biggest
+9 WORD average
+9 WORD automotive
+9 WORD appears
+9 WORD apparently
+9 WORD active
+9 WORD acquisitions
+9 WORD accord
+9 WORD With
+9 WORD Weisfield
+9 WORD Upjohn
+9 WORD Texas
+9 WORD So
+9 WORD September
+9 WORD Separately
+9 WORD Secretary
+9 WORD Reuters
+9 WORD Phoenix
+9 WORD Persian
+9 WORD Pentagon
+9 WORD Orkem
+9 WORD Now
+9 WORD Northern
+9 WORD Nations
+9 WORD N.J.
+9 WORD Merieux
+9 WORD MGM
+9 WORD Kuwaiti
+9 WORD Israeli
+9 WORD Grand
+9 WORD German
+9 WORD Dataproducts
+9 WORD Crossland
+9 WORD Court
+9 WORD Council
+9 WORD Connaught
+9 WORD Class
+9 WORD Chairman
+9 WORD Catholic
+9 WORD Capital
+9 WORD Canada
+9 WORD California
+9 WORD Big
+9 WORD August
+9 WORD Amir
+9 WORD ?
+9 WORD 5%
+9 WORD 22
+9 WORD 2
+9 WORD 18
+8 WORD willing
+8 WORD whose
+8 WORD waiting
+8 WORD venture
+8 WORD valued
+8 WORD using
+8 WORD us
+8 WORD turn
+8 WORD system
+8 WORD suit
+8 WORD store
+8 WORD stop
+8 WORD steel
+8 WORD slightly
+8 WORD significant
+8 WORD signed
+8 WORD shipments
+8 WORD sent
+8 WORD same
+8 WORD return
+8 WORD republic
+8 WORD relations
+8 WORD regulations
+8 WORD reduced
+8 WORD radio
+8 WORD protect
+8 WORD programs
+8 WORD private
+8 WORD policy
+8 WORD owned
+8 WORD outside
+8 WORD others
+8 WORD operation
+8 WORD operates
+8 WORD noted
+8 WORD non-food
+8 WORD necessary
+8 WORD moves
+8 WORD minority
+8 WORD manufacturing
+8 WORD manager
+8 WORD man
+8 WORD majority
+8 WORD maintain
+8 WORD main
+8 WORD launched
+8 WORD late
+8 WORD junk-bond
+8 WORD investor
+8 WORD increasingly
+8 WORD increasing
+8 WORD impact
+8 WORD high-yield
+8 WORD headquarters
+8 WORD growing
+8 WORD fall
+8 WORD extraordinary
+8 WORD expectations
+8 WORD enough
+8 WORD despite
+8 WORD data
+8 WORD conversion
+8 WORD closely
+8 WORD city
+8 WORD chips
+8 WORD capacity
+8 WORD candy
+8 WORD came
+8 WORD building
+8 WORD bring
+8 WORD bond
+8 WORD below
+8 WORD became
+8 WORD basis
+8 WORD army
+8 WORD area
+8 WORD anyone
+8 WORD along
+8 WORD World
+8 WORD Westinghouse
+8 WORD Wednesday
+8 WORD Virginia
+8 WORD Union
+8 WORD These
+8 WORD Still
+8 WORD StatesWest
+8 WORD Sinn
+8 WORD Ritter
+8 WORD Republican
+8 WORD People
+8 WORD Other
+8 WORD North
+8 WORD No
+8 WORD Netanyahu
+8 WORD Net
+8 WORD Michael
+8 WORD Mesa
+8 WORD Meanwhile
+8 WORD McAlpine
+8 WORD Magna
+8 WORD Kosovo
+8 WORD Kong
+8 WORD Keating
+8 WORD Iran
+8 WORD Insurance
+8 WORD Hughes
+8 WORD Hong
+8 WORD Gen.
+8 WORD Foreign
+8 WORD Fein
+8 WORD Farkas
+8 WORD Europe
+8 WORD Eastern
+8 WORD Department
+8 WORD Composite
+8 WORD Calif.
+8 WORD Boston
+8 WORD Board
+8 WORD Bethlehem
+8 WORD Atlanta
+8 WORD April
+8 WORD Analysts
+8 WORD Although
+8 WORD Albanians
+8 WORD A.
+8 WORD 486
+8 WORD 25%
+8 WORD 25
+8 WORD 14
+8 WORD 12
+8 WORD 've
+7 WORD yield
+7 WORD worth
+7 WORD working
+7 WORD twenty
+7 WORD times
+7 WORD ties
+7 WORD tendered
+7 WORD target
+7 WORD supply
+7 WORD supplies
+7 WORD strength
+7 WORD spending
+7 WORD something
+7 WORD solution
+7 WORD situation
+7 WORD sharp
+7 WORD series
+7 WORD sense
+7 WORD seize
+7 WORD save
+7 WORD responsible
+7 WORD responded
+7 WORD residents
+7 WORD region
+7 WORD reduce
+7 WORD range
+7 WORD question
+7 WORD provide
+7 WORD prosecutors
+7 WORD probably
+7 WORD prime
+7 WORD positive
+7 WORD parts
+7 WORD office
+7 WORD objections
+7 WORD note
+7 WORD nineteen
+7 WORD negotiations
+7 WORD near
+7 WORD mostly
+7 WORD investments
+7 WORD investigation
+7 WORD interview
+7 WORD interests
+7 WORD inspectors
+7 WORD individual
+7 WORD human
+7 WORD huge
+7 WORD helped
+7 WORD heavy
+7 WORD having
+7 WORD hate
+7 WORD gulf
+7 WORD great
+7 WORD gives
+7 WORD focus
+7 WORD final
+7 WORD fight
+7 WORD false
+7 WORD failed
+7 WORD fact
+7 WORD expire
+7 WORD exchange
+7 WORD evidence
+7 WORD ethnic
+7 WORD equipment
+7 WORD entire
+7 WORD else
+7 WORD efforts
+7 WORD dividends
+7 WORD different
+7 WORD details
+7 WORD destroy
+7 WORD departure
+7 WORD deadline
+7 WORD date
+7 WORD created
+7 WORD cover
+7 WORD contributed
+7 WORD continuing
+7 WORD competition
+7 WORD committee
+7 WORD children
+7 WORD cereal
+7 WORD calling
+7 WORD built
+7 WORD battle
+7 WORD authorities
+7 WORD auction
+7 WORD attempt
+7 WORD attacks
+7 WORD article
+7 WORD announcement
+7 WORD ambassador
+7 WORD alone
+7 WORD aides
+7 WORD adviser
+7 WORD adopted
+7 WORD adding
+7 WORD actually
+7 WORD access
+7 WORD above
+7 WORD Yeltsin
+7 WORD U.K.
+7 WORD Tony
+7 WORD Those
+7 WORD TWA
+7 WORD Services
+7 WORD S.
+7 WORD Russian
+7 WORD Robert
+7 WORD Rabin
+7 WORD Protestant
+7 WORD Partners
+7 WORD Of
+7 WORD Newark
+7 WORD Nadeau
+7 WORD Montedison
+7 WORD Middle
+7 WORD Meridian
+7 WORD M.
+7 WORD Loudon
+7 WORD Lortie
+7 WORD Kuchma
+7 WORD July
+7 WORD Jim
+7 WORD Irish
+7 WORD Iraqis
+7 WORD Innopac
+7 WORD Index
+7 WORD Fidelity
+7 WORD Even
+7 WORD E.
+7 WORD December
+7 WORD Cuba
+7 WORD Crane
+7 WORD Computer
+7 WORD Association
+7 WORD Annan
+7 WORD Air
+7 WORD After
+7 WORD Afghanistan
+7 WORD 8%
+7 WORD 26
+7 WORD 13
+7 WORD 12%
+7 WORD 11
+7 WORD 'm
+7 WORD $50
+7 WORD $20
+6 WORD written
+6 WORD white
+6 WORD went
+6 WORD weakness
+6 WORD watches
+6 WORD vote
+6 WORD unemployment
+6 WORD unchanged
+6 WORD turned
+6 WORD tried
+6 WORD transplant
+6 WORD transactions
+6 WORD traded
+6 WORD totaled
+6 WORD together
+6 WORD throughout
+6 WORD television
+6 WORD talk
+6 WORD successful
+6 WORD strike
+6 WORD strategic
+6 WORD step
+6 WORD stay
+6 WORD started
+6 WORD spokeswoman
+6 WORD southern
+6 WORD someone
+6 WORD smaller
+6 WORD simply
+6 WORD similar
+6 WORD signs
+6 WORD sickest
+6 WORD short
+6 WORD scheduled
+6 WORD ruling
+6 WORD route
+6 WORD rival
+6 WORD resume
+6 WORD reflect
+6 WORD realized
+6 WORD raised
+6 WORD provides
+6 WORD protection
+6 WORD properties
+6 WORD project
+6 WORD profitable
+6 WORD proceeds
+6 WORD principal
+6 WORD pricing
+6 WORD previous
+6 WORD pretax
+6 WORD port
+6 WORD placed
+6 WORD paying
+6 WORD payable
+6 WORD partly
+6 WORD overseas
+6 WORD orders
+6 WORD ordered
+6 WORD opinion
+6 WORD offensive
+6 WORD northern
+6 WORD needs
+6 WORD miles
+6 WORD met
+6 WORD meanwhile
+6 WORD marks
+6 WORD makes
+6 WORD machine
+6 WORD lot
+6 WORD long-term
+6 WORD listed
+6 WORD life
+6 WORD levels
+6 WORD letter
+6 WORD leadership
+6 WORD land
+6 WORD key
+6 WORD inflation
+6 WORD hostile
+6 WORD guerrillas
+6 WORD grew
+6 WORD goods
+6 WORD friendly
+6 WORD fourth-quarter
+6 WORD foreigners
+6 WORD flow
+6 WORD flights
+6 WORD flat
+6 WORD find
+6 WORD extremely
+6 WORD expand
+6 WORD existing
+6 WORD everything
+6 WORD every
+6 WORD estate
+6 WORD equal
+6 WORD dlrs
+6 WORD discovered
+6 WORD discounting
+6 WORD directly
+6 WORD difficult
+6 WORD developing
+6 WORD develop
+6 WORD destruction
+6 WORD deputy
+6 WORD decided
+6 WORD considered
+6 WORD condition
+6 WORD competitors
+6 WORD competitive
+6 WORD community
+6 WORD commanders
+6 WORD clinic
+6 WORD claims
+6 WORD child
+6 WORD centers
+6 WORD car
+6 WORD campaign
+6 WORD buyers
+6 WORD build
+6 WORD brands
+6 WORD block
+6 WORD beyond
+6 WORD benefits
+6 WORD behind
+6 WORD auto
+6 WORD attorney
+6 WORD associated
+6 WORD appeared
+6 WORD aircraft
+6 WORD address
+6 WORD across
+6 WORD abortion
+6 WORD able
+6 WORD ability
+6 WORD Western
+6 WORD VOA
+6 WORD UN
+6 WORD Treasury
+6 WORD Systems
+6 WORD Syria
+6 WORD State
+6 WORD SampP
+6 WORD SEC
+6 WORD S.A.
+6 WORD Russia
+6 WORD Rudolph
+6 WORD Rouge
+6 WORD Reupke
+6 WORD Republic
+6 WORD Ralston
+6 WORD Previously
+6 WORD Poughkeepsie
+6 WORD Philip
+6 WORD Paul
+6 WORD Partnership
+6 WORD Octel
+6 WORD Morris
+6 WORD Merrill
+6 WORD May
+6 WORD MCA
+6 WORD Lynch
+6 WORD Loan
+6 WORD Lawson
+6 WORD King
+6 WORD Khmer
+6 WORD Justice
+6 WORD Jayark
+6 WORD Japan
+6 WORD Its
+6 WORD Investment
+6 WORD Intergroup
+6 WORD IMA
+6 WORD Hugo
+6 WORD Heritage
+6 WORD Germany
+6 WORD Fund
+6 WORD February
+6 WORD Esselte
+6 WORD East
+6 WORD Cilcorp
+6 WORD Both
+6 WORD Blair
+6 WORD Belfast
+6 WORD Associates
+6 WORD Army
+6 WORD Aqaba
+6 WORD Among
+6 WORD According
+6 WORD Abacha
+6 WORD 80486
+6 WORD 500
+6 WORD 40%
+6 WORD 1994
+6 WORD 16
+6 WORD 13%
+6 WORD $30
+6 WORD $1.4
+5 WORD write-downs
+5 WORD write-down
+5 WORD withdrawal
+5 WORD widely
+5 WORD why
+5 WORD weekend
+5 WORD weak
+5 WORD wake
+5 WORD vital
+5 WORD various
+5 WORD values
+5 WORD unless
+5 WORD united
+5 WORD um
+5 WORD turnover
+5 WORD trouble
+5 WORD trend
+5 WORD treatment
+5 WORD traditional
+5 WORD surprised
+5 WORD surge
+5 WORD summer
+5 WORD suggestion
+5 WORD suffer
+5 WORD stores
+5 WORD states
+5 WORD statements
+5 WORD stand
+5 WORD specialty
+5 WORD south
+5 WORD software
+5 WORD show
+5 WORD short-term
+5 WORD shed
+5 WORD sharply
+5 WORD seemed
+5 WORD secretary
+5 WORD search
+5 WORD sea
+5 WORD saw
+5 WORD ruled
+5 WORD roughly
+5 WORD room
+5 WORD risks
+5 WORD retained
+5 WORD respond
+5 WORD resort
+5 WORD resolution
+5 WORD resigned
+5 WORD reserve
+5 WORD requires
+5 WORD request
+5 WORD represents
+5 WORD remained
+5 WORD reflected
+5 WORD reduction
+5 WORD really
+5 WORD rally
+5 WORD quoted
+5 WORD questions
+5 WORD pushed
+5 WORD process
+5 WORD principle
+5 WORD priced
+5 WORD presidential
+5 WORD powerful
+5 WORD possibility
+5 WORD positions
+5 WORD plunged
+5 WORD plunge
+5 WORD pending
+5 WORD ownership
+5 WORD owner
+5 WORD opposed
+5 WORD operator
+5 WORD opening
+5 WORD often
+5 WORD nothing
+5 WORD night
+5 WORD newsprint
+5 WORD network
+5 WORD nearby
+5 WORD natural
+5 WORD name
+5 WORD multinational
+5 WORD movement
+5 WORD moment
+5 WORD marketing
+5 WORD managers
+5 WORD lose
+5 WORD looks
+5 WORD loans
+5 WORD lives
+5 WORD labor
+5 WORD known
+5 WORD killings
+5 WORD killing
+5 WORD kept
+5 WORD joined
+5 WORD jewelry
+5 WORD intent
+5 WORD intense
+5 WORD intends
+5 WORD institutional
+5 WORD inspection
+5 WORD inside
+5 WORD industries
+5 WORD hundreds
+5 WORD highly
+5 WORD healthy
+5 WORD headline
+5 WORD grow
+5 WORD given
+5 WORD funded
+5 WORD families
+5 WORD experts
+5 WORD expenses
+5 WORD exercised
+5 WORD evening
+5 WORD estimate
+5 WORD ensure
+5 WORD engineering
+5 WORD enforcement
+5 WORD electronic
+5 WORD education
+5 WORD earthquake
+5 WORD duty-free
+5 WORD distribution
+5 WORD dispute
+5 WORD discuss
+5 WORD direct
+5 WORD diplomacy
+5 WORD development
+5 WORD desert
+5 WORD described
+5 WORD department
+5 WORD declining
+5 WORD daily
+5 WORD controls
+5 WORD controlling
+5 WORD considering
+5 WORD consider
+5 WORD concentrate
+5 WORD compliance
+5 WORD commander
+5 WORD combined
+5 WORD cleared
+5 WORD clear
+5 WORD civil
+5 WORD citing
+5 WORD cited
+5 WORD chemicals
+5 WORD challenge
+5 WORD chain
+5 WORD carrying
+5 WORD carry
+5 WORD carrier
+5 WORD call
+5 WORD brought
+5 WORD broad
+5 WORD book
+5 WORD bombing
+5 WORD bids
+5 WORD bidding
+5 WORD bidders
+5 WORD better
+5 WORD believed
+5 WORD beginning
+5 WORD beer
+5 WORD becoming
+5 WORD base
+5 WORD bankruptcy
+5 WORD bankers
+5 WORD away
+5 WORD attorneys
+5 WORD attempts
+5 WORD applications
+5 WORD application
+5 WORD anything
+5 WORD annually
+5 WORD annual
+5 WORD although
+5 WORD alternatives
+5 WORD allowed
+5 WORD airline
+5 WORD aimed
+5 WORD affect
+5 WORD activity
+5 WORD acknowledged
+5 WORD accounting
+5 WORD accounted
+5 WORD academy
+5 WORD You
+5 WORD York-based
+5 WORD Women
+5 WORD UNOS
+5 WORD To
+5 WORD T.
+5 WORD Stronach
+5 WORD St.
+5 WORD Sony
+5 WORD Since
+5 WORD Shearson
+5 WORD Service
+5 WORD Sea
+5 WORD Saudis
+5 WORD Saturday
+5 WORD Sachs
+5 WORD Ranariddh
+5 WORD Qantas
+5 WORD Profit
+5 WORD Potach
+5 WORD Perlman
+5 WORD Pattison
+5 WORD Pacific
+5 WORD POP
+5 WORD Once
+5 WORD Ogden
+5 WORD October
+5 WORD Ocean
+5 WORD Norwood
+5 WORD Norton
+5 WORD Nhek
+5 WORD Netherlands
+5 WORD Nadir
+5 WORD Nabisco
+5 WORD NASA
+5 WORD N.Y.
+5 WORD Moscow
+5 WORD More
+5 WORD Mills
+5 WORD Marous
+5 WORD Mark
+5 WORD Marines
+5 WORD Los
+5 WORD Lama
+5 WORD La
+5 WORD Journal
+5 WORD Jordanian
+5 WORD Jolla
+5 WORD Jan.
+5 WORD Intelogic
+5 WORD IRA
+5 WORD IBM
+5 WORD Hurricane
+5 WORD Howard
+5 WORD Home
+5 WORD His
+5 WORD Har-Shefi
+5 WORD Goldman
+5 WORD Franklin
+5 WORD Francisco
+5 WORD Feb.
+5 WORD F.
+5 WORD European
+5 WORD Egypt
+5 WORD Each
+5 WORD Dunkin
+5 WORD Despite
+5 WORD Desert
+5 WORD Deseret
+5 WORD Delta
+5 WORD David
+5 WORD Daniel
+5 WORD Currie
+5 WORD Cuban
+5 WORD Communications
+5 WORD City
+5 WORD Cie.
+5 WORD Carolina
+5 WORD Cambodian
+5 WORD Cambodia
+5 WORD Cabinet
+5 WORD CNN
+5 WORD By
+5 WORD Business
+5 WORD Bunchhay
+5 WORD Bronfman
+5 WORD Benjamin
+5 WORD Bell
+5 WORD Atimadi
+5 WORD Asian
+5 WORD Also
+5 WORD All
+5 WORD Airlines
+5 WORD Afghan
+5 WORD Aetna
+5 WORD About
+5 WORD AT
+5 WORD 9
+5 WORD 75
+5 WORD 58
+5 WORD 55
+5 WORD 51%
+5 WORD 48
+5 WORD 4
+5 WORD 39
+5 WORD 35
+5 WORD 33%
+5 WORD 23
+5 WORD 21
+5 WORD 2%
+5 WORD 1995
+5 WORD 1987
+5 WORD 17
+5 WORD 1.8
+5 WORD ...
+5 WORD 'll
+5 WORD $60
+5 WORD $300
+5 WORD $27
+5 WORD $125
+5 WORD $10

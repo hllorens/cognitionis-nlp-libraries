@@ -17,7 +17,9 @@ public class Baseline_MostFrequentTag {
     private HashMap<String, Integer> word_tag_emission_counts; //DEFINITELY NOT USE NON OBJECTS String [], use just a String (much simpler) or ArrayList (less convenient)
     private ArrayList<HashMap<String, Integer>> tag_ngram_counts; //better store it as string, decide after I implement test...
     private HashSet<String> tagset; // all tags
-    private int token_rare_classes_threshold; // not used by default
+    private int token_rare_classes_threshold; // 0 by default
+    JSONObject rare_classes;
+    JSONObject always_classes;
 
     public Baseline_MostFrequentTag() throws Exception { // default values
         word_tag_emission_counts = new HashMap<>();
@@ -32,16 +34,16 @@ public class Baseline_MostFrequentTag {
     }
 
     private String replace_token_class(String token) {
-        this.token_rare_classes_threshold = Integer.parseInt((String) token_classes.get("rare_threshold"));
-        JSONObject always_classes = (JSONObject) token_classes.get("always_classes");
         for (String token_class : new HashSet<String>(always_classes.keySet())) {
             if (token.matches((String) always_classes.get(token_class))) {
+                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                    System.err.println(token+" replaced class: : "+token_class);
+                }                
                 return token_class;
             }
         }
 
         if (word_counts.get(token) == null || word_counts.get(token) < this.token_rare_classes_threshold) {
-            JSONObject rare_classes = (JSONObject) token_classes.get("rare_classes");
             for (String token_class : new HashSet<String>(rare_classes.keySet())) {
                 if (token.matches((String) rare_classes.get(token_class))) {
                     return token_class;
@@ -57,9 +59,11 @@ public class Baseline_MostFrequentTag {
 
     public void train_model(String tf, int n, String classes_file) throws Exception {
         TokenizedFile training_file = new TokenizedFile(tf, " ");
+        
+        // Initialize model
         ngram_size = n;
-        token_classes_config = classes_file;
-
+        // Classes handling
+        // TODO check arguments with IF
         // For our beloved Windows
         String extra = "";
         if (File.separator.equals("\\")) {
@@ -67,13 +71,24 @@ public class Baseline_MostFrequentTag {
         }
         String app_path = FileUtils.getApplicationPath(Baseline_MostFrequentTag.class).replaceAll(extra + File.separator + "classes", "");
         String res_path = app_path + File.separator + "resources" + File.separator + "taggers" + File.separator + "token_classes" + File.separator;
-
         JSONParser parser = new JSONParser();
+        token_classes_config = classes_file;
         token_classes = (JSONObject) parser.parse(new FileReader(res_path + token_classes_config + ".json"));
+        token_rare_classes_threshold = Integer.parseInt((String) token_classes.get("rare_threshold"));
+        rare_classes = (JSONObject) token_classes.get("rare_classes");
+        always_classes = (JSONObject) token_classes.get("always_classes");
+        
+        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+            System.err.println("rare threshold: "+token_rare_classes_threshold);
+            System.err.println("rare classes: "+rare_classes);
+            System.err.println("always classes: "+always_classes);
+        }
 
         for (int i = 0; i < n; i++) {
             tag_ngram_counts.add(new HashMap<String, Integer>());
         }
+        
+        // TODO: No classes replacement, is it necessary??
         word_counts = training_file.getTokenCount();
 
         NgramHandler ngram_iterator = new NgramHandler(training_file, n);
@@ -175,12 +190,15 @@ public class Baseline_MostFrequentTag {
                 List<Map.Entry<String, Integer>> word_counts_list = new LinkedList<>(word_counts.entrySet());
                 Collections.sort(word_counts_list, new DescStringIntMapEntryListComparator());
                 for (Map.Entry<String, Integer> entry : word_counts_list) {
+                    int temp_count = entry.getValue();
+                    if (temp_count >= token_rare_classes_threshold) {                    
                     out.write(entry.getValue() + " WORD " + entry.getKey() + "\n");
+                    }
                 }
             } else {
                 for (String word : word_counts.keySet()) {
                     int temp_count = word_counts.get(word);
-                    if (temp_count >= this.token_rare_classes_threshold) {
+                    if (temp_count >= token_rare_classes_threshold) {
                         out.write(temp_count + " WORD " + word + "\n");
                     }
                 }

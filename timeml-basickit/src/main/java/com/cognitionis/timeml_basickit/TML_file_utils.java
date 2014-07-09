@@ -10,6 +10,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import com.cognitionis.utils_basickit.FileUtils;
+import java.text.SimpleDateFormat;
 
 /**
  * Class with static methods to handle a TimeML file and convert it o a Java Object of TimML class
@@ -750,4 +751,64 @@ public class TML_file_utils {
         }
         return outputfile;
     }
+    
+    /**
+     * Converts a plain text file into TE3-input file
+     *
+     * @param plainfile
+     * @return
+     */
+    public static String Plain2TE3(String plainfile) {
+        String outputfile = null;
+        try {
+            String line;
+            boolean textfound = false;
+            String header = "";
+            String footer = "";
+            String text = "";
+
+            //process header (and dct)/text/footer
+            outputfile = plainfile + ".TE3input";
+            BufferedWriter te3writer = new BufferedWriter(new FileWriter(new File(outputfile)));
+            BufferedReader inputReader = new BufferedReader(new FileReader(new File(plainfile)));
+
+            try {
+                
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String dctvalue = sdf.format(new Date());
+                
+                te3writer.write("<?xml version=\"1.0\" ?>");
+                te3writer.write("\n<TimeML xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"http://timeml.org/timeMLdocs/TimeML_1.2.1.xsd\">\n");
+                te3writer.write("\n<DOCID>" + (new File(plainfile)).getName() + "</DOCID>\n");
+                te3writer.write("\n<DCT><TIMEX3 tid=\"t0\" type=\"DATE\" value=\"" + dctvalue + "\" temporalFunction=\"false\" functionInDocument=\"CREATION_TIME\">" + dctvalue + "</TIMEX3></DCT>\n");
+                
+                // read out text
+                while ((line = inputReader.readLine()) != null) {
+                    text += line + "\n";
+                }
+
+                te3writer.write("\n<TEXT>\n" + text + "</TEXT>\n");
+                te3writer.write("</TimeML>\n");
+
+
+            } finally {
+                if (inputReader != null) {
+                    inputReader.close();
+                }
+                if (te3writer != null) {
+                    te3writer.close();
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Errors found (TML_file_utils):\n\t" + e.toString() + "\n");
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                e.printStackTrace(System.err);
+            }
+            return null;
+        }
+        return outputfile;
+    }
+    
+    
+    
 }
