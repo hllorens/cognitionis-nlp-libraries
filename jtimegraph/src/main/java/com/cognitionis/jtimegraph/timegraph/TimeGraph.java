@@ -34,6 +34,19 @@ public class TimeGraph {
         //tp_entity_map = new HashMap<TimePoint, String>();
     }
 
+    /**
+     * Add a relation between two entities (time intervals) in the timegraph
+     *
+     * @param lid
+     * @param entity1
+     * @param greginterval1_s
+     * @param greginterval1_e
+     * @param entity2
+     * @param greginterval2_s
+     * @param greginterval2_e
+     * @param relation
+     * @return true if the relation was successfully added
+     */
     public boolean addRelation(String lid, String entity1, String greginterval1_s, String greginterval1_e, String entity2, String greginterval2_s, String greginterval2_e, String relation) {
         try {
             if (entity1 == null || entity2 == null || relation == null) {
@@ -1951,10 +1964,11 @@ public class TimeGraph {
 
     /**
      *
-     * Remove an chain_number chain: if it is the last one it is just removed, if not,
-     * if the last one is not chain_number it is moved in its place, if the last one
-     * is chain_number it is removed and the last non-chain_number chain is used instead.
-     * Then the new last one is chain_number and is removed.
+     * Remove an chain_number chain: if it is the last one it is just removed,
+     * if not, if the last one is not chain_number it is moved in its place, if
+     * the last one is chain_number it is removed and the last non-chain_number
+     * chain is used instead. Then the new last one is chain_number and is
+     * removed.
      *
      * @param chain_number chain_number chain number
      */
@@ -2064,8 +2078,8 @@ public class TimeGraph {
     }
 
     /**
-     * Return if the TimeGraph contains a relation between two intervals
-     * (entities)
+     * Return if the TimeGraph contains a relation between two entities (time
+     * intervals)
      *
      * @param x
      * @param y
@@ -2073,6 +2087,9 @@ public class TimeGraph {
      * @return
      */
     public String checkRelation(String x, String y, String rel) {
+        
+        // Note: entities casing is kept because TimeGraph is not limited to timeml
+        
         rel = rel.toUpperCase();
         // inverse relation if needed
         if (!rel.matches("(BEFORE|IBEFORE|BEGINS|ENDS|OVERLAPS|IS_INCLUDED|SIMULTANEOUS)")) {
@@ -2081,6 +2098,10 @@ public class TimeGraph {
             x = y;
             y = aux;
         }
+
+        x = replace_e_by_ei_if_needed(x);
+        y = replace_e_by_ei_if_needed(y);
+
         // TimePoints are already known
         String x1 = x + "_s";
         String x2 = x + "_e";
@@ -3004,5 +3025,21 @@ public class TimeGraph {
             System.exit(1);
         }
 
+    }
+
+    /**
+     * See if user used eXX instead of eiXX (event instead of ev.instance)
+     *
+     * @param entity
+     * @return
+     */
+    public String replace_e_by_ei_if_needed(String entity) {
+        if (entity_tp_map.get(entity + "_s") == null && entity.matches("e[0-9]+")) {
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.out.println("Replacing e by ei in " + entity);
+            }
+            entity = entity.replace("e", "ei");
+        }
+        return entity;
     }
 }
