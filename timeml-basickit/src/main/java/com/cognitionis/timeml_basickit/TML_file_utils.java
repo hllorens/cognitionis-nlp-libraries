@@ -518,7 +518,8 @@ public class TML_file_utils {
      * It searches for explicit dates and add their timex-timex implicit
      * temporal relations creating a time backbone of the document.
      * This trust the timex date values over other annotated information.
-     * (removes original links if necessary)
+     * (removes original links if explicitly incongruent??)
+     * IN REALITY THIS DOES NOT USE A TIMEGRAPH SO CONSISTENCY IS NOT CHECKED...
      *
      * @param tmlfile
      * @return
@@ -570,7 +571,7 @@ public class TML_file_utils {
             }
 
             NodeList current_node = doc.getElementsByTagName("TLINK");
-            int count = (refs.size() * 2) - 1; // links id starts with n-1 (there is no l0)
+            int count = (refs.size() * 2) - 1; // original links id starts with n-1 (there is no l0). why? probably that is too much... something safe anyway
             for (int s = 0; s < current_node.getLength(); s++) {
                 count++;
                 Element element = (Element) current_node.item(s);
@@ -626,7 +627,7 @@ public class TML_file_utils {
             TreeMap<String, Timex> sorted_refs = new TreeMap(new AscStringTimexMapComparator(refs));
             sorted_refs.putAll(refs);
 
-            // build the new links over sorted refs
+            // build the new links over sorted refs, for each timex ref there is one new relation... right?
             String improved_links = "";
             Timex last_timex = null;
             Timex last_includer_timex = null;
@@ -712,6 +713,7 @@ public class TML_file_utils {
 
             // create new links string (1.tref_tref + 2.original)
             // addAll only adds the links that do not break the timegraph concistency
+            //TODO: IN THIS CASE EVERYTHING IS ADDED!!!! BAD, create a tg and only add relations that can be 
             tref_tref_links.addAll(original_links); 
             for (int i = 0; i < tref_tref_links.size(); i++) {
                 Link l = tref_tref_links.get(i);

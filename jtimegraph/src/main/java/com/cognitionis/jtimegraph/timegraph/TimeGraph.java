@@ -7,6 +7,11 @@ import com.cognitionis.utils_basickit.*;
 /**
  * TimeGraph implementation
  *
+ * TODO: The problem with this implementation is that cross-chain relations are
+ * limited to before/after. If we add equal then we can first add a relation
+ * in dry mode (no chain collapses) and if it is consistent then add it and
+ * collapse chains if needed. TODO
+ * 
  * @author hector
  */
 public class TimeGraph {
@@ -17,16 +22,19 @@ public class TimeGraph {
     public static final String upper_bound = "9999-12-31T23:59:59";
     public static final String lower_bound = "0000-01-01T00:00:00";
     // metagraph contains a list of pointchains, if some chain becomes empty it can be either reused or deleted.
-    private ArrayList<Chain> metagraph;
+    public ArrayList<Chain> metagraph;
     // reference TimePoint
-    private HashMap<String, TimePoint> entity_tp_map;
+    public HashMap<String, TimePoint> entity_tp_map;
     // reference Entities (only used after the creation of the timegraph)
     //DEPRECATED: private HashMap<TimePoint, String> tp_entity_map; (INCLUDED IN TimePoint)
     //timex-refdate HashMap to easyly locate them in the map
     // useful for answering before 1999 (and 1999 is not in the graph) so we need to find all refs before 1999
     // ej: e1_s 1999
-    private TreeMap<Date, String> date_entitypoint_map;
+    public TreeMap<Date, String> date_entitypoint_map;
 
+
+
+    
     public TimeGraph() {
         metagraph = new ArrayList<Chain>();
         entity_tp_map = new HashMap<String, TimePoint>();
@@ -34,6 +42,43 @@ public class TimeGraph {
         //tp_entity_map = new HashMap<TimePoint, String>();
     }
 
+/*        ArrayList<Chain> metagraph_copy;
+        TreeMap<Date, String> date_entitypoint_map_copy;
+        
+    public static ArrayList<Chain> copy_metagraph(ArrayList<Chain> orig_metagraph){
+        ArrayList<Chain> metagraph_copy;
+        return null;
+    }
+
+    public static HashMap<String, TimePoint> copy_entity_tp_map(HashMap<String, TimePoint> orig_entity_tp_map){
+        HashMap<String, TimePoint> entity_tp_map_copy;
+        return null;
+    }
+    
+    public static TreeMap<Date, String> copy_date_entitypoint_map(TreeMap<Date, String> orig_date_entitypoint_map){
+        TreeMap<Date, String> date_entitypoint_map_copy;
+        return null;
+    }    
+    
+  
+    public static TimeGraph copy_timegraph_by_value(TimeGraph orig_tg){
+        TimeGraph tg=new TimeGraph();
+        tg.metagraph=TimeGraph.copy_metagraph(orig_tg.metagraph);        
+        tg.entity_tp_map=TimeGraph.copy_entity_tp_map(orig_tg.entity_tp_map);        
+        tg.date_entitypoint_map=TimeGraph.copy_date_entitypoint_map(orig_tg.date_entitypoint_map);        
+        return tg;
+    }
+
+    public TimeGraph get_deep_copy(){
+        TimeGraph tg=new TimeGraph();
+        tg.metagraph=TimeGraph.copy_metagraph(metagraph);        
+        tg.entity_tp_map=TimeGraph.copy_entity_tp_map(entity_tp_map);        
+        tg.date_entitypoint_map=TimeGraph.copy_date_entitypoint_map(date_entitypoint_map);        
+        return tg;
+    }*/
+    
+    
+    
     /**
      * Add a relation between two entities (time intervals) in the timegraph
      *
@@ -48,11 +93,20 @@ public class TimeGraph {
      * @return true if the relation was successfully added
      */
     public boolean addRelation(String lid, String entity1, String greginterval1_s, String greginterval1_e, String entity2, String greginterval2_s, String greginterval2_e, String relation) {
+        boolean could_be_added=false;
         try {
+            // store a copy to restore timegraph if something fails, it is easier to implement a dry add and then collapse strategy
+            // add equal cross chain relation if necessary
+            // metagraph_copy.=Collections.cop;             entity_tp_map_copy;             date_entitypoint_map_copy;            
+            
             if (entity1 == null || entity2 == null || relation == null) {
                 throw new Exception("ERROR: entity1 entity2 and relation must be not NULL.");
             }
 
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.err.println("Entities "+entity1+"-"+entity2+" relation "+relation+" (lid "+lid+")\n");
+            }
+            
             String x1 = entity1 + "_s";
             String x2 = entity1 + "_e";
             String y1 = entity2 + "_s";
@@ -108,17 +162,17 @@ public class TimeGraph {
             // none of the entities exist
             if (!entity_tp_map.containsKey(x1) && !entity_tp_map.containsKey(x2) && !entity_tp_map.containsKey(y1) && !entity_tp_map.containsKey(y2)) {
                 if (relation.matches("(BEFORE|IBEFORE|BEGINS|ENDS|OVERLAPS|IS_INCLUDED|SIMULTANEOUS)")) {
-                    addBothEntitiesInNewChain(x1, x2, y1, y2, relation);
+                    could_be_added=addBothEntitiesInNewChain(x1, x2, y1, y2, relation);
                 } else {
-                    addBothEntitiesInNewChain(y1, y2, x1, x2, reverseRelationCategory(relation));
+                    could_be_added=addBothEntitiesInNewChain(y1, y2, x1, x2, reverseRelationCategory(relation));
                 }
             } else {
                 // both entities exist
                 if (entity_tp_map.containsKey(x1) && entity_tp_map.containsKey(x2) && entity_tp_map.containsKey(y1) && entity_tp_map.containsKey(y2)) {
                     if (relation.matches("(BEFORE|IBEFORE|BEGINS|ENDS|OVERLAPS|IS_INCLUDED|SIMULTANEOUS)")) {
-                        addOnlyRelation(x1, x2, y1, y2, relation);
+                        could_be_added=addOnlyRelation(x1, x2, y1, y2, relation);
                     } else {
-                        addOnlyRelation(y1, y2, x1, x2, reverseRelationCategory(relation));
+                        could_be_added=addOnlyRelation(y1, y2, x1, x2, reverseRelationCategory(relation));
                     }
                 } // only one exists
                 else {
@@ -130,7 +184,7 @@ public class TimeGraph {
                         y1 = entity1 + "_s";
                         y2 = entity1 + "_e";
                     }
-                    addOnlyFirstEntity(x1, x2, y1, y2, relation);
+                    could_be_added=addOnlyFirstEntity(x1, x2, y1, y2, relation);
                 }
             }
 
@@ -138,11 +192,10 @@ public class TimeGraph {
             System.err.println("Errors found (TimeGraph):\n\t" + e.toString() + "\n");
             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                 e.printStackTrace(System.err);
-                System.exit(1);
             }
             return false;
         }
-        return true;
+        return true; // return could_be_added to avoid inconsitencies or true to only to break in uncaptured exceptions
     }
 
     /**
@@ -154,7 +207,8 @@ public class TimeGraph {
      * @param tpy2
      * @param relation
      */
-    public void addBothEntitiesInNewChain(String x1, String x2, String y1, String y2, String rel) {
+    public boolean addBothEntitiesInNewChain(String x1, String x2, String y1, String y2, String rel) {
+        boolean could_be_added=false;
         if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
             System.err.println("addBothEntitiesInNewChain");
         }
@@ -253,6 +307,7 @@ public class TimeGraph {
             metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
             metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
         }
+        return true;
     }
 
     /**
@@ -264,7 +319,8 @@ public class TimeGraph {
      * @param tpy2
      * @param relation
      */
-    public void addOnlyFirstEntity(String x1, String x2, String y1, String y2, String rel) {
+    public boolean addOnlyFirstEntity(String x1, String x2, String y1, String y2, String rel) {
+        boolean could_be_added=false;
         if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
             System.err.println("addOnlyFirstEntity");
         }
@@ -665,6 +721,7 @@ public class TimeGraph {
             entity_tp_map.put(x2, tpy2);
             tpy2.associateEntities(x2);
         }
+        return true;
     }
 
     /**
@@ -678,9 +735,10 @@ public class TimeGraph {
      * @param y2
      * @param rel
      */
-    public void addOnlyRelation(String x1, String x2, String y1, String y2, String rel) {
+    public boolean addOnlyRelation(String x1, String x2, String y1, String y2, String rel) {
+        boolean could_be_added=false;
         if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-            System.err.println("addOnlyRelation");
+            System.err.println("addOnlyRelation "+x1+x2+" "+rel+" "+y1+y2);
         }
         // TimePoints are already known
         TimePoint tpx1 = entity_tp_map.get(x1);
@@ -955,8 +1013,7 @@ public class TimeGraph {
                 }
             }
         }
-
-
+        return true;
     }
 
     public void make_equal_from_crosschain(TimePoint p1, TimePoint p2) {
@@ -1631,7 +1688,7 @@ public class TimeGraph {
 
     }
 
-    public void collapseChainBefore(TimePoint p1, TimePoint p2) {
+    public boolean collapseChainBefore(TimePoint p1, TimePoint p2) {
         try {
             if (p1.getChain() == p2.getChain() || metagraph.get(p1.getChain()).hasNext(p1) || metagraph.get(p2.getChain()).hasPrevious(p2)) {
                 throw new Exception("Chains can not be collapsed as " + p1 + " before " + p2);
@@ -1826,12 +1883,13 @@ public class TimeGraph {
             System.err.println("Errors found (TimeGraph):\n\t" + e.toString() + "\n");
             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                 e.printStackTrace(System.err);
-                System.exit(1);
             }
+            return false;
         }
+        return true;
     }
 
-    public void collapseChainBetween(int chain, TimePoint p1, TimePoint p2) {
+    public boolean collapseChainBetween(int chain, TimePoint p1, TimePoint p2) {
         try {
             if (chain == p1.getChain() || p1.getChain() != p2.getChain() || !metagraph.get(p1.getChain()).hasNext(p1) || !metagraph.get(p1.getChain()).isNextFor(p1, p2)) {
                 throw new Exception("Chain" + chain + " can not be collapsed between " + p1 + " and " + p2);
@@ -1931,9 +1989,10 @@ public class TimeGraph {
             System.err.println("Errors found (TimeGraph):\n\t" + e.toString() + "\n");
             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                 e.printStackTrace(System.err);
-                System.exit(1);
             }
+            return false;
         }
+        return true;
     }
 
     /**
@@ -1948,7 +2007,7 @@ public class TimeGraph {
      * remains the last one and it is removed
      *
      */
-    public void removeEmptyChains() {
+    public boolean removeEmptyChains() {
         try {
             for (int i = 0; i < metagraph.size(); i++) {
                 if (metagraph.get(i).isEmptyChain()) {
@@ -1958,8 +2017,9 @@ public class TimeGraph {
         } catch (Exception e) {
             System.err.println("Errors found (TimeGraph):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
+        return true;
     }
 
     /**
@@ -1972,7 +2032,7 @@ public class TimeGraph {
      *
      * @param chain_number chain_number chain number
      */
-    public void removeEmptyChain(int chain_number) {
+    public boolean removeEmptyChain(int chain_number) {
         try {
             int lastchain = metagraph.size() - 1;
             if (chain_number != lastchain) {
@@ -2017,8 +2077,9 @@ public class TimeGraph {
         } catch (Exception e) {
             System.err.println("Errors found (TimeGraph):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
+        return true;
     }
 
     @Override
@@ -2107,11 +2168,17 @@ public class TimeGraph {
         String x2 = x + "_e";
         String y1 = y + "_s";
         String y2 = y + "_e";
+        
+        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+            System.err.println("Entities "+x+"-"+y+" relation "+rel+"\n");
+        }
 
         TimePoint tpx1 = entity_tp_map.get(x1);
         TimePoint tpx2 = entity_tp_map.get(x2);
         TimePoint tpy1 = entity_tp_map.get(y1);
         TimePoint tpy2 = entity_tp_map.get(y2);
+        
+        
         try {
             // if the question is about an entity that is not in the graph check if it is an iso date
             if (tpx1 == null || tpx2 == null) {
@@ -2972,7 +3039,7 @@ public class TimeGraph {
         return possible_rels;
     }
 
-    public void checkInconsistentConnections() {
+    public boolean checkInconsistentConnections() {
         try {
             for (int i = 0; i < metagraph.size(); i++) {
 
@@ -3017,13 +3084,14 @@ public class TimeGraph {
 
 
             }
-            System.err.println("Connectons checked!");
+            System.err.println("Connectons checked! (no inconsistencies found)");
 
         } catch (Exception e) {
             System.err.println("Errors found (TimeGraph):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
+        return true;
 
     }
 
@@ -3034,7 +3102,7 @@ public class TimeGraph {
      * @return
      */
     public String replace_e_by_ei_if_needed(String entity) {
-        if (entity_tp_map.get(entity + "_s") == null && entity.matches("e[0-9]+")) {
+        if (entity_tp_map!=null && entity !=null && entity_tp_map.get(entity + "_s") == null && entity.matches("e[0-9]+")) {
             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                 System.out.println("Replacing e by ei in " + entity);
             }

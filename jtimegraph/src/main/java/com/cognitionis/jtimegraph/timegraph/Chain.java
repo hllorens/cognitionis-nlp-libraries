@@ -25,6 +25,10 @@ public class Chain {
     // to the same chain and optimizes the chain information
     private HashMap<Integer, HashMap<Integer, TimePoint>> after_connections;
     private HashMap<Integer, HashMap<Integer, TimePoint>> before_connections;
+    
+    /* difficult and conflictive...
+    public Chain get_deep_copy(){        
+    }*/
 
     public Chain(int i) {
         id = i;
@@ -47,7 +51,7 @@ public class Chain {
         this.timepoints.putAll(tps);
     }
 
-    public void addConnection(Integer local_point, TimePoint dest_point, String relation) {
+    public boolean addConnection(Integer local_point, TimePoint dest_point, String relation) {
         // this must detect other connections and add them and if detects
         //fully connected points of different chains it has to collapse chains (in fact that should be done by TimeGraph itself...)
 
@@ -83,8 +87,9 @@ public class Chain {
         } catch (Exception e) {
             System.err.println("Errors found (Chain):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
+        return true;
     }
 
 
@@ -113,7 +118,7 @@ public class Chain {
         return false;
     }
 
-    public void removeConnection(Integer local_point, TimePoint dest_point, String relation) {
+    public boolean removeConnection(Integer local_point, TimePoint dest_point, String relation) {
         try {
             HashMap<Integer, TimePoint> conn = null;
             if (relation.equals("<")) {
@@ -152,8 +157,9 @@ public class Chain {
         } catch (Exception e) {
             System.err.println("Errors found (Chain):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
+        return true;
     }
 
     public HashMap<Integer, TimePoint> getAfterConnections(int local_point) {
@@ -177,12 +183,12 @@ public class Chain {
     public boolean isEmptyChain() {
         try {
             if (timepoints.isEmpty() && (!after_connections.isEmpty() || !before_connections.isEmpty())) {
-                throw new Exception("Graph Integrity Error: Empty Chain with conextions: " + id);
+                throw new Exception("Graph Integrity Error: Empty Chain with conections: " + id);
             }
         } catch (Exception e) {
             System.err.println("Errors found (Chain):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
         return timepoints.isEmpty();
     }
@@ -198,7 +204,7 @@ public class Chain {
         } catch (Exception e) {
             System.err.println("Errors found (Chain):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
         return true;
     }
@@ -214,7 +220,7 @@ public class Chain {
         } catch (Exception e) {
             System.err.println("Errors found (Chain):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
         return true;
     }
@@ -230,7 +236,7 @@ public class Chain {
         } catch (Exception e) {
             System.err.println("Errors found (Chain):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
         return true;
     }
@@ -246,7 +252,7 @@ public class Chain {
         } catch (Exception e) {
             System.err.println("Errors found (Chain):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
         return true;
     }
@@ -268,7 +274,7 @@ public class Chain {
         } catch (Exception e) {
             System.err.println("Errors found (Chain):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
         return false;
     }
@@ -290,7 +296,7 @@ public class Chain {
         } catch (Exception e) {
             System.err.println("Errors found (Chain):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
         return false;
     }
