@@ -2,7 +2,7 @@
         <modelVersion>4.0.0</modelVersion> <!--maven model type (see schema above) -->
         <groupId>com.cognitionis</groupId>       <!-- base package uri -->
         <artifactId>jtimegraph</artifactId>     <!-- the project name (id) -->
-	<version>1.0.0</version>  <!-- version. NOTE: update it manually -->        
+	<version>1.2.0</version>  <!-- version. NOTE: update it manually -->        
 	<packaging>jar</packaging>
         <name>JTimeGraph</name>                 <!-- Full name (not id) -->
         <description>Java implementation of the TimeGraph abstraction defined in [Miller-Schubert 1990] and a GregorianGraph consisting of a mono-chain simplification for ordering interval events based on Gregorian Calendar dates ({start,end}date). </description>

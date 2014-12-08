@@ -8,10 +8,10 @@ import com.cognitionis.utils_basickit.*;
  * TimeGraph implementation
  *
  * TODO: The problem with this implementation is that cross-chain relations are
- * limited to before/after. If we add equal then we can first add a relation
- * in dry mode (no chain collapses) and if it is consistent then add it and
+ * limited to before/after. If we add equal then we can first add a relation in
+ * dry mode (no chain collapses) and if it is consistent then add it and
  * collapse chains if needed. TODO
- * 
+ *
  * @author hector
  */
 public class TimeGraph {
@@ -32,9 +32,6 @@ public class TimeGraph {
     // ej: e1_s 1999
     public TreeMap<Date, String> date_entitypoint_map;
 
-
-
-    
     public TimeGraph() {
         metagraph = new ArrayList<Chain>();
         entity_tp_map = new HashMap<String, TimePoint>();
@@ -42,42 +39,128 @@ public class TimeGraph {
         //tp_entity_map = new HashMap<TimePoint, String>();
     }
 
-/*        ArrayList<Chain> metagraph_copy;
-        TreeMap<Date, String> date_entitypoint_map_copy;
+    /*        ArrayList<Chain> metagraph_copy;
+     TreeMap<Date, String> date_entitypoint_map_copy;
         
-    public static ArrayList<Chain> copy_metagraph(ArrayList<Chain> orig_metagraph){
-        ArrayList<Chain> metagraph_copy;
-        return null;
-    }
+     public static ArrayList<Chain> copy_metagraph(ArrayList<Chain> orig_metagraph){
+     ArrayList<Chain> metagraph_copy;
+     return null;
+     }
 
-    public static HashMap<String, TimePoint> copy_entity_tp_map(HashMap<String, TimePoint> orig_entity_tp_map){
-        HashMap<String, TimePoint> entity_tp_map_copy;
-        return null;
-    }
+     public static HashMap<String, TimePoint> copy_entity_tp_map(HashMap<String, TimePoint> orig_entity_tp_map){
+     HashMap<String, TimePoint> entity_tp_map_copy;
+     return null;
+     }
     
-    public static TreeMap<Date, String> copy_date_entitypoint_map(TreeMap<Date, String> orig_date_entitypoint_map){
-        TreeMap<Date, String> date_entitypoint_map_copy;
-        return null;
-    }    
+     public static TreeMap<Date, String> copy_date_entitypoint_map(TreeMap<Date, String> orig_date_entitypoint_map){
+     TreeMap<Date, String> date_entitypoint_map_copy;
+     return null;
+     }    
     
   
-    public static TimeGraph copy_timegraph_by_value(TimeGraph orig_tg){
-        TimeGraph tg=new TimeGraph();
-        tg.metagraph=TimeGraph.copy_metagraph(orig_tg.metagraph);        
-        tg.entity_tp_map=TimeGraph.copy_entity_tp_map(orig_tg.entity_tp_map);        
-        tg.date_entitypoint_map=TimeGraph.copy_date_entitypoint_map(orig_tg.date_entitypoint_map);        
-        return tg;
-    }
+     public static TimeGraph copy_timegraph_by_value(TimeGraph orig_tg){
+     TimeGraph tg=new TimeGraph();
+     tg.metagraph=TimeGraph.copy_metagraph(orig_tg.metagraph);        
+     tg.entity_tp_map=TimeGraph.copy_entity_tp_map(orig_tg.entity_tp_map);        
+     tg.date_entitypoint_map=TimeGraph.copy_date_entitypoint_map(orig_tg.date_entitypoint_map);        
+     return tg;
+     }
 
-    public TimeGraph get_deep_copy(){
-        TimeGraph tg=new TimeGraph();
-        tg.metagraph=TimeGraph.copy_metagraph(metagraph);        
-        tg.entity_tp_map=TimeGraph.copy_entity_tp_map(entity_tp_map);        
-        tg.date_entitypoint_map=TimeGraph.copy_date_entitypoint_map(date_entitypoint_map);        
-        return tg;
+     public TimeGraph get_deep_copy(){
+     TimeGraph tg=new TimeGraph();
+     tg.metagraph=TimeGraph.copy_metagraph(metagraph);        
+     tg.entity_tp_map=TimeGraph.copy_entity_tp_map(entity_tp_map);        
+     tg.date_entitypoint_map=TimeGraph.copy_date_entitypoint_map(date_entitypoint_map);        
+     return tg;
+     }*/
+    
+    
+    /**
+     * Check if relation can be added in the timegraph (consistent). 
+     * Add relation in a new chain or chains, check graph consistency, remove relation
+     *
+     * @param lid
+     * @param entity1
+     * @param greginterval1_s
+     * @param greginterval1_e
+     * @param entity2
+     * @param greginterval2_s
+     * @param greginterval2_e
+     * @param relation
+     * @return true if the relation was successfully added
+     */
+    /*
+    public boolean IsAddRelationConsistent(String lid, String entity1, String greginterval1_s, String greginterval1_e, String entity2, String greginterval2_s, String greginterval2_e, String relation) {
+        try {
+            if (entity1 == null || entity2 == null || relation == null) {
+                throw new Exception("ERROR: entity1 entity2 and relation must be not NULL.");
+            }
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                System.err.println("Entities " + entity1 + "-" + entity2 + " relation " + relation + " (lid " + lid + ")\n");
+            }
+            String x1 = entity1 + "_s";
+            String x2 = entity1 + "_e";
+            String y1 = entity2 + "_s";
+            String y2 = entity2 + "_e";
+
+            // greg interval reference ommitted since this is jut a check
+
+            if (greginterval1_s != null && greginterval1_e != null && greginterval2_s != null && greginterval2_e != null) {
+                // TODO: check relation correspondence with the dates
+                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                    System.err.println(entity1 + " (" + greginterval1_s + "-" + greginterval1_e + ") and " + entity2 + " (" + greginterval2_s + "-" + greginterval2_e + ") are both intervals.");
+                }
+            }
+            if (relation.matches("(DURING|DURING_INV|IDENTITY)")) {
+                relation = "SIMULTANEOUS";
+            }
+
+            // basic integrity check e.g., e1-e1 before
+            if (entity1.equals(entity2) && !(relation.equals("IDENTITY") || relation.equals("SIMULTANEOUS"))) {
+                System.err.println("Closure Violation: " + lid + " " + entity1 + "-" + entity2 + "(" + relation + ")");
+            }
+
+            // none of the entities exist
+            if (!entity_tp_map.containsKey(x1) && !entity_tp_map.containsKey(x2) && !entity_tp_map.containsKey(y1) && !entity_tp_map.containsKey(y2)) {
+                if (relation.matches("(BEFORE|IBEFORE|BEGINS|ENDS|OVERLAPS|IS_INCLUDED|SIMULTANEOUS)")) {
+                    TODO ALL BELOW JUST ADD ALWAYS IN NEW CHAIN IF THERE IS ANY ENTITY THAT IS NEW.
+                            IF IS JUST A NEW RELATION AMONG EXISTING ENTITIES PUT AND TRACK CONNECTIONS BUT DO NOT COLLAPSE (WE NEED TO ADD EQUALS CROSS-CHAIN-RELATION...)
+                    could_be_added = addBothEntitiesInNewChain(x1, x2, y1, y2, relation);
+                } else {
+                    could_be_added = addBothEntitiesInNewChain(y1, y2, x1, x2, reverseRelationCategory(relation));
+                }
+            } else {
+                // both entities exist
+                if (entity_tp_map.containsKey(x1) && entity_tp_map.containsKey(x2) && entity_tp_map.containsKey(y1) && entity_tp_map.containsKey(y2)) {
+                    if (relation.matches("(BEFORE|IBEFORE|BEGINS|ENDS|OVERLAPS|IS_INCLUDED|SIMULTANEOUS)")) {
+                        could_be_added = addOnlyRelation(x1, x2, y1, y2, relation);
+                    } else {
+                        could_be_added = addOnlyRelation(y1, y2, x1, x2, reverseRelationCategory(relation));
+                    }
+                } // only one exists
+                else {
+                    // if it is the first make it the second one for simplification
+                    if (entity_tp_map.containsKey(x1) && entity_tp_map.containsKey(x2) && !entity_tp_map.containsKey(y1) && !entity_tp_map.containsKey(y2)) {
+                        relation = reverseRelationCategory(relation);
+                        x1 = entity2 + "_s";
+                        x2 = entity2 + "_e";
+                        y1 = entity1 + "_s";
+                        y2 = entity1 + "_e";
+                    }
+                    could_be_added = addOnlyFirstEntity(x1, x2, y1, y2, relation);
+                }
+            }
+
+        } catch (Exception e) {
+            System.err.println("Errors found (TimeGraph):\n\t" + e.toString() + "\n");
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                e.printStackTrace(System.err);
+            }
+            return false;
+        }
+        return true; // return could_be_added to avoid inconsitencies or true to only to break in uncaptured exceptions
     }*/
-    
-    
+
     
     /**
      * Add a relation between two entities (time intervals) in the timegraph
@@ -93,20 +176,20 @@ public class TimeGraph {
      * @return true if the relation was successfully added
      */
     public boolean addRelation(String lid, String entity1, String greginterval1_s, String greginterval1_e, String entity2, String greginterval2_s, String greginterval2_e, String relation) {
-        boolean could_be_added=false;
+        boolean can_be_added;
         try {
             // store a copy to restore timegraph if something fails, it is easier to implement a dry add and then collapse strategy
             // add equal cross chain relation if necessary
             // metagraph_copy.=Collections.cop;             entity_tp_map_copy;             date_entitypoint_map_copy;            
-            
+
             if (entity1 == null || entity2 == null || relation == null) {
                 throw new Exception("ERROR: entity1 entity2 and relation must be not NULL.");
             }
 
             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                System.err.println("Entities "+entity1+"-"+entity2+" relation "+relation+" (lid "+lid+")\n");
+                System.err.println("Entities " + entity1 + "-" + entity2 + " relation " + relation + " (lid " + lid + ")\n");
             }
-            
+
             String x1 = entity1 + "_s";
             String x2 = entity1 + "_e";
             String y1 = entity2 + "_s";
@@ -162,17 +245,17 @@ public class TimeGraph {
             // none of the entities exist
             if (!entity_tp_map.containsKey(x1) && !entity_tp_map.containsKey(x2) && !entity_tp_map.containsKey(y1) && !entity_tp_map.containsKey(y2)) {
                 if (relation.matches("(BEFORE|IBEFORE|BEGINS|ENDS|OVERLAPS|IS_INCLUDED|SIMULTANEOUS)")) {
-                    could_be_added=addBothEntitiesInNewChain(x1, x2, y1, y2, relation);
+                    can_be_added=addBothEntitiesInNewChain(x1, x2, y1, y2, relation);
                 } else {
-                    could_be_added=addBothEntitiesInNewChain(y1, y2, x1, x2, reverseRelationCategory(relation));
+                    can_be_added=addBothEntitiesInNewChain(y1, y2, x1, x2, reverseRelationCategory(relation));
                 }
             } else {
                 // both entities exist
                 if (entity_tp_map.containsKey(x1) && entity_tp_map.containsKey(x2) && entity_tp_map.containsKey(y1) && entity_tp_map.containsKey(y2)) {
                     if (relation.matches("(BEFORE|IBEFORE|BEGINS|ENDS|OVERLAPS|IS_INCLUDED|SIMULTANEOUS)")) {
-                        could_be_added=addOnlyRelation(x1, x2, y1, y2, relation);
+                        can_be_added=addOnlyRelation(x1, x2, y1, y2, relation);
                     } else {
-                        could_be_added=addOnlyRelation(y1, y2, x1, x2, reverseRelationCategory(relation));
+                        can_be_added=addOnlyRelation(y1, y2, x1, x2, reverseRelationCategory(relation));
                     }
                 } // only one exists
                 else {
@@ -184,18 +267,19 @@ public class TimeGraph {
                         y1 = entity1 + "_s";
                         y2 = entity1 + "_e";
                     }
-                    could_be_added=addOnlyFirstEntity(x1, x2, y1, y2, relation);
+                    can_be_added=addOnlyFirstEntity(x1, x2, y1, y2, relation);
                 }
             }
 
         } catch (Exception e) {
-            System.err.println("Errors found (TimeGraph):\n\t" + e.toString() + "\n");
+            System.err.println("Errors found (TimeGraph AddRelation):\n\t" + e.toString() + "\n");
             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                 e.printStackTrace(System.err);
             }
             return false;
         }
-        return true; // return could_be_added to avoid inconsitencies or true to only to break in uncaptured exceptions
+        //System.out.println("Can be added: "+can_be_added);
+        return can_be_added; // return can_be_added to avoid inconsitencies or true to only to break in uncaptured exceptions
     }
 
     /**
@@ -208,104 +292,111 @@ public class TimeGraph {
      * @param relation
      */
     public boolean addBothEntitiesInNewChain(String x1, String x2, String y1, String y2, String rel) {
-        boolean could_be_added=false;
         if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
             System.err.println("addBothEntitiesInNewChain");
         }
-        int c = createOrSelectNewChain();
-        if (rel.equals("BEFORE")) { // Allen (<)  x1 < x2 < y1 < y2
-            TimePoint tp1 = new TimePoint(c, x1);
-            TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2);
-            TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), y1);
-            TimePoint tp4 = new TimePoint(c, tp3.getPositionAfter(), y2);
-            entity_tp_map.put(x1, tp1);
-            entity_tp_map.put(x2, tp2);
-            entity_tp_map.put(y1, tp3);
-            entity_tp_map.put(y2, tp4);
-            metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-            metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
-            metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
-            metagraph.get(c).getTimePoints().put(tp4.getPosition(), tp4);
-        }
+        try {
+            int c = createOrSelectNewChain();
+            if (rel.equals("BEFORE")) { // Allen (<)  x1 < x2 < y1 < y2
+                TimePoint tp1 = new TimePoint(c, x1);
+                TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2);
+                TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), y1);
+                TimePoint tp4 = new TimePoint(c, tp3.getPositionAfter(), y2);
+                entity_tp_map.put(x1, tp1);
+                entity_tp_map.put(x2, tp2);
+                entity_tp_map.put(y1, tp3);
+                entity_tp_map.put(y2, tp4);
+                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
+                metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
+                metagraph.get(c).getTimePoints().put(tp4.getPosition(), tp4);
+            }
 
-        if (rel.equals("IBEFORE")) { // Allen's meets (m) x1 < (x2 = y1) < y2
-            TimePoint tp1 = new TimePoint(c, x1);
-            TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2 + "," + y1);
-            TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), y2);
-            entity_tp_map.put(x1, tp1);
-            entity_tp_map.put(x2, tp2);
-            entity_tp_map.put(y1, tp2);
-            entity_tp_map.put(y2, tp3);
-            metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-            metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
-            metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
-        }
+            if (rel.equals("IBEFORE")) { // Allen's meets (m) x1 < (x2 = y1) < y2
+                TimePoint tp1 = new TimePoint(c, x1);
+                TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2 + "," + y1);
+                TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), y2);
+                entity_tp_map.put(x1, tp1);
+                entity_tp_map.put(x2, tp2);
+                entity_tp_map.put(y1, tp2);
+                entity_tp_map.put(y2, tp3);
+                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
+                metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
+            }
 
-        if (rel.equals("BEGINS")) { // Allen's starts (s) (x1 = y1) < x2 < y2
-            TimePoint tp1 = new TimePoint(c, x1 + "," + y1);
-            TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2);
-            TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), y2);
-            entity_tp_map.put(x1, tp1);
-            entity_tp_map.put(y1, tp1);
-            entity_tp_map.put(x2, tp2);
-            entity_tp_map.put(y2, tp3);
-            metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-            metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
-            metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
-        }
+            if (rel.equals("BEGINS")) { // Allen's starts (s) (x1 = y1) < x2 < y2
+                TimePoint tp1 = new TimePoint(c, x1 + "," + y1);
+                TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2);
+                TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), y2);
+                entity_tp_map.put(x1, tp1);
+                entity_tp_map.put(y1, tp1);
+                entity_tp_map.put(x2, tp2);
+                entity_tp_map.put(y2, tp3);
+                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
+                metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
+            }
 
-        if (rel.equals("ENDS")) { // Allen's Finishes (f) y1 < x1 < (x2 = y2)
-            TimePoint tp1 = new TimePoint(c, y1);
-            TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x1);
-            TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), x2 + "," + y2);
-            entity_tp_map.put(y1, tp1);
-            entity_tp_map.put(x1, tp2);
-            entity_tp_map.put(x2, tp3);
-            entity_tp_map.put(y2, tp3);
-            metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-            metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
-            metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
-        }
+            if (rel.equals("ENDS")) { // Allen's Finishes (f) y1 < x1 < (x2 = y2)
+                TimePoint tp1 = new TimePoint(c, y1);
+                TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x1);
+                TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), x2 + "," + y2);
+                entity_tp_map.put(y1, tp1);
+                entity_tp_map.put(x1, tp2);
+                entity_tp_map.put(x2, tp3);
+                entity_tp_map.put(y2, tp3);
+                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
+                metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
+            }
 
-        if (rel.equals("OVERLAPS")) { // Allen's Overlaps (o) x1 < y1 < x2 < y2
-            TimePoint tp1 = new TimePoint(c, x1);
-            TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), y1);
-            TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), x2);
-            TimePoint tp4 = new TimePoint(c, tp3.getPositionAfter(), y2);
-            entity_tp_map.put(x1, tp1);
-            entity_tp_map.put(y1, tp2);
-            entity_tp_map.put(x2, tp3);
-            entity_tp_map.put(y2, tp4);
-            metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-            metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
-            metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
-            metagraph.get(c).getTimePoints().put(tp4.getPosition(), tp4);
-        }
+            if (rel.equals("OVERLAPS")) { // Allen's Overlaps (o) x1 < y1 < x2 < y2
+                TimePoint tp1 = new TimePoint(c, x1);
+                TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), y1);
+                TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), x2);
+                TimePoint tp4 = new TimePoint(c, tp3.getPositionAfter(), y2);
+                entity_tp_map.put(x1, tp1);
+                entity_tp_map.put(y1, tp2);
+                entity_tp_map.put(x2, tp3);
+                entity_tp_map.put(y2, tp4);
+                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
+                metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
+                metagraph.get(c).getTimePoints().put(tp4.getPosition(), tp4);
+            }
 
-        if (rel.equals("IS_INCLUDED")) { // Allen's during (d) y1 < x1 < x2 < y2
-            TimePoint tp1 = new TimePoint(c, y1);
-            TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x1);
-            TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), x2);
-            TimePoint tp4 = new TimePoint(c, tp3.getPositionAfter(), y2);
-            entity_tp_map.put(y1, tp1);
-            entity_tp_map.put(x1, tp2);
-            entity_tp_map.put(x2, tp3);
-            entity_tp_map.put(y2, tp4);
-            metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-            metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
-            metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
-            metagraph.get(c).getTimePoints().put(tp4.getPosition(), tp4);
-        }
+            if (rel.equals("IS_INCLUDED")) { // Allen's during (d) y1 < x1 < x2 < y2
+                TimePoint tp1 = new TimePoint(c, y1);
+                TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x1);
+                TimePoint tp3 = new TimePoint(c, tp2.getPositionAfter(), x2);
+                TimePoint tp4 = new TimePoint(c, tp3.getPositionAfter(), y2);
+                entity_tp_map.put(y1, tp1);
+                entity_tp_map.put(x1, tp2);
+                entity_tp_map.put(x2, tp3);
+                entity_tp_map.put(y2, tp4);
+                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
+                metagraph.get(c).getTimePoints().put(tp3.getPosition(), tp3);
+                metagraph.get(c).getTimePoints().put(tp4.getPosition(), tp4);
+            }
 
-        if (rel.equals("SIMULTANEOUS")) { //  # Allen's equal (=) (x1 = y1) < (x2 = y2)
-            TimePoint tp1 = new TimePoint(c, x1 + "," + y1);
-            TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2 + "," + y2);
-            entity_tp_map.put(x1, tp1);
-            entity_tp_map.put(y1, tp1);
-            entity_tp_map.put(x2, tp2);
-            entity_tp_map.put(y2, tp2);
-            metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-            metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
+            if (rel.equals("SIMULTANEOUS")) { //  # Allen's equal (=) (x1 = y1) < (x2 = y2)
+                TimePoint tp1 = new TimePoint(c, x1 + "," + y1);
+                TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2 + "," + y2);
+                entity_tp_map.put(x1, tp1);
+                entity_tp_map.put(y1, tp1);
+                entity_tp_map.put(x2, tp2);
+                entity_tp_map.put(y2, tp2);
+                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
+            }
+        } catch (Exception e) {
+            System.err.println("Errors found (TimeMLGraph addBothEntitiesInNewChain):\n\t" + e.toString() + "\n");
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                e.printStackTrace(System.err);
+            }
+            return false;
         }
         return true;
     }
@@ -320,166 +411,287 @@ public class TimeGraph {
      * @param relation
      */
     public boolean addOnlyFirstEntity(String x1, String x2, String y1, String y2, String rel) {
-        boolean could_be_added=false;
         if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
             System.err.println("addOnlyFirstEntity");
         }
-        // Y(y1,y2) is already known. Add only X(x1,x2).
-        TimePoint tpy1 = entity_tp_map.get(y1);
-        TimePoint tpy2 = entity_tp_map.get(y2);
+        try {
+            // Y(y1,y2) is already known. Add only X(x1,x2).
+            TimePoint tpy1 = entity_tp_map.get(y1);
+            TimePoint tpy2 = entity_tp_map.get(y2);
 
-        if (rel.equals("BEFORE")) { // x1 < x2 < y1 < y2
-            if (!metagraph.get(tpy1.getChain()).hasPrevious(tpy1)) { // add in the same chain
-                TimePoint tp2 = new TimePoint(tpy1.getChain(), tpy1.getPositionBefore(), x2);
-                TimePoint tp1 = new TimePoint(tpy1.getChain(), tp2.getPositionBefore(), x1);
-                entity_tp_map.put(x2, tp2);
-                entity_tp_map.put(x1, tp1);
-                metagraph.get(tpy1.getChain()).getTimePoints().put(tp2.getPosition(), tp2);
-                metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else { // create or select new chain
-                int c = createOrSelectNewChain();
-                TimePoint tp2 = new TimePoint(c, x2);
-                TimePoint tp1 = new TimePoint(c, tp2.getPositionBefore(), x1);
-                entity_tp_map.put(x2, tp2);
-                entity_tp_map.put(x1, tp1);
-                metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
-                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                // add point-chain connections 2 metagraph
-                metagraph.get(c).addConnection(tp2.getPosition(), tpy1, "<");
-                metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp2, ">");
+            if (rel.equals("BEFORE")) { // x1 < x2 < y1 < y2
+                if (!metagraph.get(tpy1.getChain()).hasPrevious(tpy1)) { // add in the same chain
+                    TimePoint tp2 = new TimePoint(tpy1.getChain(), tpy1.getPositionBefore(), x2);
+                    TimePoint tp1 = new TimePoint(tpy1.getChain(), tp2.getPositionBefore(), x1);
+                    entity_tp_map.put(x2, tp2);
+                    entity_tp_map.put(x1, tp1);
+                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp2.getPosition(), tp2);
+                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                } else { // create or select new chain
+                    int c = createOrSelectNewChain();
+                    TimePoint tp2 = new TimePoint(c, x2);
+                    TimePoint tp1 = new TimePoint(c, tp2.getPositionBefore(), x1);
+                    entity_tp_map.put(x2, tp2);
+                    entity_tp_map.put(x1, tp1);
+                    metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
+                    metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                    // add point-chain connections 2 metagraph
+                    metagraph.get(c).addConnection(tp2.getPosition(), tpy1, "<");
+                    metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp2, ">");
+                }
             }
-        }
 
-        if (rel.equals("AFTER")) { // y1 < y2 < x1 < x2
-            if (!metagraph.get(tpy2.getChain()).hasNext(tpy2)) { // add in the same chain
-                TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionAfter(), x1);
-                TimePoint tp2 = new TimePoint(tpy2.getChain(), tp1.getPositionAfter(), x2);
-                entity_tp_map.put(x1, tp1);
-                entity_tp_map.put(x2, tp2);
-                metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-                metagraph.get(tpy2.getChain()).getTimePoints().put(tp2.getPosition(), tp2);
-            } else { // create or select new chain
-                int c = createOrSelectNewChain();
-                TimePoint tp1 = new TimePoint(c, x1);
-                TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2);
-                entity_tp_map.put(x1, tp1);
-                entity_tp_map.put(x2, tp2);
-                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
-                // add point-chain connections 2 metagraph
-                metagraph.get(c).addConnection(tp1.getPosition(), tpy2, ">");
-                metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, "<");
+            if (rel.equals("AFTER")) { // y1 < y2 < x1 < x2
+                if (!metagraph.get(tpy2.getChain()).hasNext(tpy2)) { // add in the same chain
+                    TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionAfter(), x1);
+                    TimePoint tp2 = new TimePoint(tpy2.getChain(), tp1.getPositionAfter(), x2);
+                    entity_tp_map.put(x1, tp1);
+                    entity_tp_map.put(x2, tp2);
+                    metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                    metagraph.get(tpy2.getChain()).getTimePoints().put(tp2.getPosition(), tp2);
+                } else { // create or select new chain
+                    int c = createOrSelectNewChain();
+                    TimePoint tp1 = new TimePoint(c, x1);
+                    TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2);
+                    entity_tp_map.put(x1, tp1);
+                    entity_tp_map.put(x2, tp2);
+                    metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                    metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
+                    // add point-chain connections 2 metagraph
+                    metagraph.get(c).addConnection(tp1.getPosition(), tpy2, ">");
+                    metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, "<");
+                }
             }
-        }
 
-        if (rel.equals("IBEFORE")) { // Allen's MEET (m) x1 < (x2 = y1) < y2
-            if (!metagraph.get(tpy1.getChain()).hasPrevious(tpy1)) { // add in the same chain
-                TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionBefore(), x1);
-                tpy1.associateEntities(x2);
-                entity_tp_map.put(x1, tp1);
-                entity_tp_map.put(x2, tpy1);
-                metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else { // create a new chain
-                int c = createOrSelectNewChain();
-                TimePoint tp1 = new TimePoint(c, x1);
-                tpy1.associateEntities(x2);
-                entity_tp_map.put(x1, tp1);
-                entity_tp_map.put(x2, tpy1);
-                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                // add point-chain connections 2 metagraph
-                metagraph.get(c).addConnection(tp1.getPosition(), tpy1, "<");
-                metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, ">");
+            if (rel.equals("IBEFORE")) { // Allen's MEET (m) x1 < (x2 = y1) < y2
+                if (!metagraph.get(tpy1.getChain()).hasPrevious(tpy1)) { // add in the same chain
+                    TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionBefore(), x1);
+                    tpy1.associateEntities(x2);
+                    entity_tp_map.put(x1, tp1);
+                    entity_tp_map.put(x2, tpy1);
+                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                } else { // create a new chain
+                    int c = createOrSelectNewChain();
+                    TimePoint tp1 = new TimePoint(c, x1);
+                    tpy1.associateEntities(x2);
+                    entity_tp_map.put(x1, tp1);
+                    entity_tp_map.put(x2, tpy1);
+                    metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                    // add point-chain connections 2 metagraph
+                    metagraph.get(c).addConnection(tp1.getPosition(), tpy1, "<");
+                    metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, ">");
+                }
             }
-        }
 
-        if (rel.equals("IAFTER")) { // Allen's METBY (mi) y1 < (y2 = x1) < x2
-            if (!metagraph.get(tpy2.getChain()).hasNext(tpy2)) { // add in the same chain
-                TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionAfter(), x2);
-                tpy2.associateEntities(x1);
-                entity_tp_map.put(x1, tpy2);
-                entity_tp_map.put(x2, tp1);
-                metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else { // create or select new chain
-                int c = createOrSelectNewChain();
-                TimePoint tp1 = new TimePoint(c, x2);
-                tpy2.associateEntities(x1);
-                entity_tp_map.put(x1, tpy2);
-                entity_tp_map.put(x2, tp1);
-                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                // add point-chain connections 2 metagraph
-                metagraph.get(c).addConnection(tp1.getPosition(), tpy2, ">");
-                metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, "<");
+            if (rel.equals("IAFTER")) { // Allen's METBY (mi) y1 < (y2 = x1) < x2
+                if (!metagraph.get(tpy2.getChain()).hasNext(tpy2)) { // add in the same chain
+                    TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionAfter(), x2);
+                    tpy2.associateEntities(x1);
+                    entity_tp_map.put(x1, tpy2);
+                    entity_tp_map.put(x2, tp1);
+                    metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                } else { // create or select new chain
+                    int c = createOrSelectNewChain();
+                    TimePoint tp1 = new TimePoint(c, x2);
+                    tpy2.associateEntities(x1);
+                    entity_tp_map.put(x1, tpy2);
+                    entity_tp_map.put(x2, tp1);
+                    metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                    // add point-chain connections 2 metagraph
+                    metagraph.get(c).addConnection(tp1.getPosition(), tpy2, ">");
+                    metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, "<");
+                }
             }
-        }
 
-        if (rel.equals("BEGINS")) { // Allen's START (s) (x1 = y1) < x2 < y2
-            entity_tp_map.put(x1, tpy1);
-            tpy1.associateEntities(x1);
-            if (metagraph.get(tpy1.getChain()).isNextFor(tpy1, tpy2)) { // add in the same chain
-                TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPosition() + ((tpy2.getPosition() - tpy1.getPosition()) / 2), x2);
-                entity_tp_map.put(x2, tp1);
-                metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else {
-                // tpy1 and tpy2 are in the same chain or different chains but already related, create new chain for x2
-                if (tpy1.getChain() == tpy2.getChain() || (tpy1.getChain() != tpy2.getChain() && metagraph.get(tpy1.getChain()).hasNext(tpy1) && metagraph.get(tpy2.getChain()).hasPrevious(tpy2))) {
+            if (rel.equals("BEGINS")) { // Allen's START (s) (x1 = y1) < x2 < y2
+                entity_tp_map.put(x1, tpy1);
+                tpy1.associateEntities(x1);
+                if (metagraph.get(tpy1.getChain()).isNextFor(tpy1, tpy2)) { // add in the same chain
+                    TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPosition() + ((tpy2.getPosition() - tpy1.getPosition()) / 2), x2);
+                    entity_tp_map.put(x2, tp1);
+                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                } else {
+                    // tpy1 and tpy2 are in the same chain or different chains but already related, create new chain for x2
+                    if (tpy1.getChain() == tpy2.getChain() || (tpy1.getChain() != tpy2.getChain() && metagraph.get(tpy1.getChain()).hasNext(tpy1) && metagraph.get(tpy2.getChain()).hasPrevious(tpy2))) {
+                        int c = createOrSelectNewChain();
+                        TimePoint tp1 = new TimePoint(c, x2);
+                        entity_tp_map.put(x2, tp1);
+                        metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                        // add point-chain connections to metagraph
+                        metagraph.get(c).addConnection(tp1.getPosition(), tpy1, ">");
+                        metagraph.get(c).addConnection(tp1.getPosition(), tpy2, "<");
+                        metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
+                        metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, ">");
+                    } else {
+                        // chose chain to put tp1
+                        if (!metagraph.get(tpy1.getChain()).hasNext(tpy1)) {
+                            TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionAfter(), x2);
+                            entity_tp_map.put(x2, tp1);
+                            metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                            // add point-chain connections to metagraph
+                            metagraph.get(tpy1.getChain()).addConnection(tp1.getPosition(), tpy2, "<");
+                            metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, ">");
+                        } else {
+                            TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionBefore(), x2);
+                            entity_tp_map.put(x2, tp1);
+                            metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                            // add point-chain connections to metagraph
+                            metagraph.get(tpy2.getChain()).addConnection(tp1.getPosition(), tpy1, ">");
+                            metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
+                        }
+                    }
+                }
+            }
+
+
+            if (rel.equals("BEGUN_BY")) { // Allen's STARTED_BY (si) (x1 = y1) < y2 < x2
+                entity_tp_map.put(x1, tpy1);
+                tpy1.associateEntities(x1);
+                if (metagraph.get(tpy2.getChain()).hasNext(tpy2)) { // add in the same chain (it doesn't matter if they are in diff chains)
+                    TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionAfter(), x2);
+                    entity_tp_map.put(x2, tp1);
+                    metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                } else {
                     int c = createOrSelectNewChain();
                     TimePoint tp1 = new TimePoint(c, x2);
                     entity_tp_map.put(x2, tp1);
                     metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
                     // add point-chain connections to metagraph
-                    metagraph.get(c).addConnection(tp1.getPosition(), tpy1, ">");
-                    metagraph.get(c).addConnection(tp1.getPosition(), tpy2, "<");
-                    metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
-                    metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, ">");
+                    metagraph.get(c).addConnection(tp1.getPosition(), tpy2, ">");
+                    metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, "<");
+                }
+            }
+
+
+            if (rel.equals("ENDS")) { // Allen's FINISHES (f) y1 < x1 < (x2 = y2)
+                entity_tp_map.put(x2, tpy2);
+                tpy2.associateEntities(x2);
+                if (metagraph.get(tpy1.getChain()).isNextFor(tpy1, tpy2)) { // add in the same chain
+                    TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPosition() + ((tpy2.getPosition() - tpy1.getPosition()) / 2), x1);
+                    entity_tp_map.put(x1, tp1);
+                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
                 } else {
-                    // chose chain to put tp1
-                    if (!metagraph.get(tpy1.getChain()).hasNext(tpy1)) {
-                        TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionAfter(), x2);
-                        entity_tp_map.put(x2, tp1);
-                        metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                    // tpy1 and tpy2 are in the same chain or different chains but already related, create new chain for x2
+                    if (tpy1.getChain() == tpy2.getChain() || (tpy1.getChain() != tpy2.getChain() && metagraph.get(tpy1.getChain()).hasNext(tpy1) && metagraph.get(tpy2.getChain()).hasPrevious(tpy2))) {
+                        int c = createOrSelectNewChain();
+                        TimePoint tp1 = new TimePoint(c, x1);
+                        entity_tp_map.put(x1, tp1);
+                        metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
                         // add point-chain connections to metagraph
-                        metagraph.get(tpy1.getChain()).addConnection(tp1.getPosition(), tpy2, "<");
+                        metagraph.get(c).addConnection(tp1.getPosition(), tpy1, ">");
+                        metagraph.get(c).addConnection(tp1.getPosition(), tpy2, "<");
+                        metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
                         metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, ">");
                     } else {
-                        TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionBefore(), x2);
-                        entity_tp_map.put(x2, tp1);
-                        metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-                        // add point-chain connections to metagraph
-                        metagraph.get(tpy2.getChain()).addConnection(tp1.getPosition(), tpy1, ">");
-                        metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
+                        // chose chain to put tp1
+                        if (!metagraph.get(tpy1.getChain()).hasNext(tpy1)) {
+                            TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionAfter(), x1);
+                            entity_tp_map.put(x1, tp1);
+                            metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                            // add point-chain connections to metagraph
+                            metagraph.get(tpy1.getChain()).addConnection(tp1.getPosition(), tpy2, "<");
+                            metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, ">");
+                        } else {
+                            TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionBefore(), x1);
+                            entity_tp_map.put(x1, tp1);
+                            metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                            // add point-chain connections to metagraph
+                            metagraph.get(tpy2.getChain()).addConnection(tp1.getPosition(), tpy1, ">");
+                            metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
+                        }
                     }
                 }
             }
-        }
 
-
-        if (rel.equals("BEGUN_BY")) { // Allen's STARTED_BY (si) (x1 = y1) < y2 < x2
-            entity_tp_map.put(x1, tpy1);
-            tpy1.associateEntities(x1);
-            if (metagraph.get(tpy2.getChain()).hasNext(tpy2)) { // add in the same chain (it doesn't matter if they are in diff chains)
-                TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionAfter(), x2);
-                entity_tp_map.put(x2, tp1);
-                metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else {
-                int c = createOrSelectNewChain();
-                TimePoint tp1 = new TimePoint(c, x2);
-                entity_tp_map.put(x2, tp1);
-                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                // add point-chain connections to metagraph
-                metagraph.get(c).addConnection(tp1.getPosition(), tpy2, ">");
-                metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, "<");
+            if (rel.equals("ENDED_BY")) { // Allen's ENDED_BY (fi) x1 < y1 < (y2 = x2)
+                entity_tp_map.put(x2, tpy2);
+                tpy2.associateEntities(x2);
+                if (metagraph.get(tpy1.getChain()).hasPrevious(tpy1)) { // add in the same chain (it doesn't matter if they are in diff chains)
+                    TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionBefore(), x1);
+                    entity_tp_map.put(x1, tp1);
+                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                } else {
+                    int c = createOrSelectNewChain();
+                    TimePoint tp1 = new TimePoint(c, x1);
+                    entity_tp_map.put(x1, tp1);
+                    metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                    // add point-chain connections to metagraph
+                    metagraph.get(c).addConnection(tp1.getPosition(), tpy1, "<");
+                    metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, ">");
+                }
             }
-        }
 
+            if (rel.equals("OVERLAPS")) { // Allen's (o)  x1 < y1 < x2 < y2
+                // x1
+                if (!metagraph.get(tpy1.getChain()).hasPrevious(tpy1)) { // add in the same chain
+                    TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionBefore(), x1);
+                    entity_tp_map.put(x1, tp1);
+                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                } else {
+                    int c = createOrSelectNewChain();
+                    TimePoint tp1 = new TimePoint(c, x1);
+                    entity_tp_map.put(x1, tp1);
+                    metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                    // add point-chain connections to metagraph
+                    metagraph.get(c).addConnection(tp1.getPosition(), tpy1, "<");
+                    metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, ">");
+                }
 
-        if (rel.equals("ENDS")) { // Allen's FINISHES (f) y1 < x1 < (x2 = y2)
-            entity_tp_map.put(x2, tpy2);
-            tpy2.associateEntities(x2);
-            if (metagraph.get(tpy1.getChain()).isNextFor(tpy1, tpy2)) { // add in the same chain
-                TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPosition() + ((tpy2.getPosition() - tpy1.getPosition()) / 2), x1);
-                entity_tp_map.put(x1, tp1);
-                metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else {
+                //x2
+                if (metagraph.get(tpy1.getChain()).isNextFor(tpy1, tpy2)) { // add in the same chain
+                    TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPosition() + ((tpy2.getPosition() - tpy1.getPosition()) / 2), x2);
+                    entity_tp_map.put(x2, tp1);
+                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                } else {
+                    // tpy1 and tpy2 are in the same chain or different chains but already related, create new chain for x2
+                    if (tpy1.getChain() == tpy2.getChain() || (tpy1.getChain() != tpy2.getChain() && metagraph.get(tpy1.getChain()).hasNext(tpy1) && metagraph.get(tpy2.getChain()).hasPrevious(tpy2))) {
+                        int c = createOrSelectNewChain();
+                        TimePoint tp1 = new TimePoint(c, x2);
+                        entity_tp_map.put(x2, tp1);
+                        metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                        // add point-chain connections to metagraph
+                        metagraph.get(c).addConnection(tp1.getPosition(), tpy1, ">");
+                        metagraph.get(c).addConnection(tp1.getPosition(), tpy2, "<");
+                        metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
+                        metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, ">");
+                    } else {
+                        // chose chain to put tp1
+                        if (!metagraph.get(tpy1.getChain()).hasNext(tpy1)) {
+                            TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionAfter(), x2);
+                            entity_tp_map.put(x2, tp1);
+                            metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                            // add point-chain connections to metagraph
+                            metagraph.get(tpy1.getChain()).addConnection(tp1.getPosition(), tpy2, "<");
+                            metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, ">");
+                        } else {
+                            TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionBefore(), x2);
+                            entity_tp_map.put(x2, tp1);
+                            metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                            // add point-chain connections to metagraph
+                            metagraph.get(tpy2.getChain()).addConnection(tp1.getPosition(), tpy1, ">");
+                            metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
+                        }
+                    }
+                }
+            }
+
+            if (rel.equals("OVERLAPPED_BY")) { // Allen's (oi)  y1 < x1 < y2 < x2
+                // x2
+                if (!metagraph.get(tpy2.getChain()).hasNext(tpy2)) { // add in the same chain
+                    TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionAfter(), x2);
+                    entity_tp_map.put(x2, tp1);
+                    metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                } else {
+                    int c = createOrSelectNewChain();
+                    TimePoint tp1 = new TimePoint(c, x2);
+                    entity_tp_map.put(x2, tp1);
+                    metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                    // add point-chain connections to metagraph
+                    metagraph.get(c).addConnection(tp1.getPosition(), tpy2, ">");
+                    metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, "<");
+                }
+
+                // x1
                 // tpy1 and tpy2 are in the same chain or different chains but already related, create new chain for x2
                 if (tpy1.getChain() == tpy2.getChain() || (tpy1.getChain() != tpy2.getChain() && metagraph.get(tpy1.getChain()).hasNext(tpy1) && metagraph.get(tpy2.getChain()).hasPrevious(tpy2))) {
                     int c = createOrSelectNewChain();
@@ -510,216 +722,106 @@ public class TimeGraph {
                     }
                 }
             }
-        }
 
-        if (rel.equals("ENDED_BY")) { // Allen's ENDED_BY (fi) x1 < y1 < (y2 = x2)
-            entity_tp_map.put(x2, tpy2);
-            tpy2.associateEntities(x2);
-            if (metagraph.get(tpy1.getChain()).hasPrevious(tpy1)) { // add in the same chain (it doesn't matter if they are in diff chains)
-                TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionBefore(), x1);
-                entity_tp_map.put(x1, tp1);
-                metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else {
-                int c = createOrSelectNewChain();
-                TimePoint tp1 = new TimePoint(c, x1);
-                entity_tp_map.put(x1, tp1);
-                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                // add point-chain connections to metagraph
-                metagraph.get(c).addConnection(tp1.getPosition(), tpy1, "<");
-                metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, ">");
+
+            if (rel.equals("IS_INCLUDED")) { // Allen's During (d) y1 < x1 < x2 < y2
+                if (metagraph.get(tpy1.getChain()).isNextFor(tpy1, tpy2)) { // add in the same chain
+                    TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPosition() + ((tpy2.getPosition() - tpy1.getPosition()) / 3), x1);
+                    TimePoint tp2 = new TimePoint(tpy1.getChain(), tpy1.getPosition() + ((tpy2.getPosition() - tpy1.getPosition()) / 3) * 2, x2);
+                    entity_tp_map.put(x1, tp1);
+                    entity_tp_map.put(x2, tp2);
+                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp2.getPosition(), tp2);
+                } else {
+                    // tpy1 and tpy2 are in the same chain or different chains but already related, create new chain for x2
+                    if (tpy1.getChain() == tpy2.getChain() || (tpy1.getChain() != tpy2.getChain() && metagraph.get(tpy1.getChain()).hasNext(tpy1) && metagraph.get(tpy2.getChain()).hasPrevious(tpy2))) {
+                        int c = createOrSelectNewChain();
+                        TimePoint tp1 = new TimePoint(c, x1);
+                        TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2);
+                        entity_tp_map.put(x1, tp1);
+                        entity_tp_map.put(x2, tp2);
+                        metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                        metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
+                        // add point-chain connections to metagraph
+                        metagraph.get(c).addConnection(tp1.getPosition(), tpy1, ">");
+                        metagraph.get(c).addConnection(tp2.getPosition(), tpy2, "<");
+                        metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
+                        metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp2, ">");
+                    } else {
+                        // chose chain to put tp1 and tp2
+                        if (!metagraph.get(tpy1.getChain()).hasNext(tpy1)) {
+                            TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionAfter(), x1);
+                            TimePoint tp2 = new TimePoint(tpy1.getChain(), tp1.getPositionAfter(), x2);
+                            entity_tp_map.put(x1, tp1);
+                            entity_tp_map.put(x2, tp2);
+                            metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                            metagraph.get(tpy1.getChain()).getTimePoints().put(tp2.getPosition(), tp2);
+                            // add point-chain connections to metagraph
+                            metagraph.get(tpy1.getChain()).addConnection(tp2.getPosition(), tpy2, "<");
+                            metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp2, ">");
+                        } else {
+                            TimePoint tp2 = new TimePoint(tpy2.getChain(), tpy2.getPositionBefore(), x2);
+                            TimePoint tp1 = new TimePoint(tpy2.getChain(), tp2.getPositionBefore(), x1);
+                            entity_tp_map.put(x2, tp2);
+                            entity_tp_map.put(x1, tp1);
+                            metagraph.get(tpy2.getChain()).getTimePoints().put(tp2.getPosition(), tp2);
+                            metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                            // add point-chain connections to metagraph
+                            metagraph.get(tpy2.getChain()).addConnection(tp1.getPosition(), tpy1, ">");
+                            metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
+                        }
+                    }
+                }
             }
-        }
 
-        if (rel.equals("OVERLAPS")) { // Allen's (o)  x1 < y1 < x2 < y2
-            // x1
-            if (!metagraph.get(tpy1.getChain()).hasPrevious(tpy1)) { // add in the same chain
-                TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionBefore(), x1);
-                entity_tp_map.put(x1, tp1);
-                metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else {
-                int c = createOrSelectNewChain();
-                TimePoint tp1 = new TimePoint(c, x1);
-                entity_tp_map.put(x1, tp1);
-                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                // add point-chain connections to metagraph
-                metagraph.get(c).addConnection(tp1.getPosition(), tpy1, "<");
-                metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, ">");
-            }
+            if (rel.equals("INCLUDES")) { // Allen's contains (di) x1 < y1 < y2 < x2 (two independent point relations)
+                // x1
+                if (!metagraph.get(tpy1.getChain()).hasPrevious(tpy1)) { // add in the same chain
+                    TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionBefore(), x1);
+                    entity_tp_map.put(x1, tp1);
+                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                } else {
+                    int c = createOrSelectNewChain();
+                    TimePoint tp1 = new TimePoint(c, x1);
+                    entity_tp_map.put(x1, tp1);
+                    metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
+                    // add point-chain connections to metagraph
+                    metagraph.get(c).addConnection(tp1.getPosition(), tpy1, "<");
+                    metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, ">");
+                }
 
-            //x2
-            if (metagraph.get(tpy1.getChain()).isNextFor(tpy1, tpy2)) { // add in the same chain
-                TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPosition() + ((tpy2.getPosition() - tpy1.getPosition()) / 2), x2);
-                entity_tp_map.put(x2, tp1);
-                metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else {
-                // tpy1 and tpy2 are in the same chain or different chains but already related, create new chain for x2
-                if (tpy1.getChain() == tpy2.getChain() || (tpy1.getChain() != tpy2.getChain() && metagraph.get(tpy1.getChain()).hasNext(tpy1) && metagraph.get(tpy2.getChain()).hasPrevious(tpy2))) {
+                // x2
+                if (!metagraph.get(tpy2.getChain()).hasNext(tpy2)) { // add in the same chain
+                    TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionAfter(), x2);
+                    entity_tp_map.put(x2, tp1);
+                    metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
+                } else {
                     int c = createOrSelectNewChain();
                     TimePoint tp1 = new TimePoint(c, x2);
                     entity_tp_map.put(x2, tp1);
                     metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
                     // add point-chain connections to metagraph
-                    metagraph.get(c).addConnection(tp1.getPosition(), tpy1, ">");
-                    metagraph.get(c).addConnection(tp1.getPosition(), tpy2, "<");
-                    metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
-                    metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, ">");
-                } else {
-                    // chose chain to put tp1
-                    if (!metagraph.get(tpy1.getChain()).hasNext(tpy1)) {
-                        TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionAfter(), x2);
-                        entity_tp_map.put(x2, tp1);
-                        metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-                        // add point-chain connections to metagraph
-                        metagraph.get(tpy1.getChain()).addConnection(tp1.getPosition(), tpy2, "<");
-                        metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, ">");
-                    } else {
-                        TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionBefore(), x2);
-                        entity_tp_map.put(x2, tp1);
-                        metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-                        // add point-chain connections to metagraph
-                        metagraph.get(tpy2.getChain()).addConnection(tp1.getPosition(), tpy1, ">");
-                        metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
-                    }
+                    metagraph.get(c).addConnection(tp1.getPosition(), tpy2, ">");
+                    metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, "<");
                 }
             }
-        }
 
-        if (rel.equals("OVERLAPPED_BY")) { // Allen's (oi)  y1 < x1 < y2 < x2
-            // x2
-            if (!metagraph.get(tpy2.getChain()).hasNext(tpy2)) { // add in the same chain
-                TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionAfter(), x2);
-                entity_tp_map.put(x2, tp1);
-                metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else {
-                int c = createOrSelectNewChain();
-                TimePoint tp1 = new TimePoint(c, x2);
-                entity_tp_map.put(x2, tp1);
-                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                // add point-chain connections to metagraph
-                metagraph.get(c).addConnection(tp1.getPosition(), tpy2, ">");
-                metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, "<");
-            }
-
-            // x1
-            // tpy1 and tpy2 are in the same chain or different chains but already related, create new chain for x2
-            if (tpy1.getChain() == tpy2.getChain() || (tpy1.getChain() != tpy2.getChain() && metagraph.get(tpy1.getChain()).hasNext(tpy1) && metagraph.get(tpy2.getChain()).hasPrevious(tpy2))) {
-                int c = createOrSelectNewChain();
-                TimePoint tp1 = new TimePoint(c, x1);
-                entity_tp_map.put(x1, tp1);
-                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                // add point-chain connections to metagraph
-                metagraph.get(c).addConnection(tp1.getPosition(), tpy1, ">");
-                metagraph.get(c).addConnection(tp1.getPosition(), tpy2, "<");
-                metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
-                metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, ">");
-            } else {
-                // chose chain to put tp1
-                if (!metagraph.get(tpy1.getChain()).hasNext(tpy1)) {
-                    TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionAfter(), x1);
-                    entity_tp_map.put(x1, tp1);
-                    metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-                    // add point-chain connections to metagraph
-                    metagraph.get(tpy1.getChain()).addConnection(tp1.getPosition(), tpy2, "<");
-                    metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, ">");
-                } else {
-                    TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionBefore(), x1);
-                    entity_tp_map.put(x1, tp1);
-                    metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-                    // add point-chain connections to metagraph
-                    metagraph.get(tpy2.getChain()).addConnection(tp1.getPosition(), tpy1, ">");
-                    metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
+            if (rel.equals("SIMULTANEOUS")) { //  # Allen's equal (=) (x1 = y1) < (x2 = y2)
+                entity_tp_map.put(x1, tpy1);
+                if (!tpy1.associateEntities(x1)) {
+                    return false;
+                }
+                entity_tp_map.put(x2, tpy2);
+                if (!tpy2.associateEntities(x2)) {
+                    return false;
                 }
             }
-        }
-
-
-        if (rel.equals("IS_INCLUDED")) { // Allen's During (d) y1 < x1 < x2 < y2
-            if (metagraph.get(tpy1.getChain()).isNextFor(tpy1, tpy2)) { // add in the same chain
-                TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPosition() + ((tpy2.getPosition() - tpy1.getPosition()) / 3), x1);
-                TimePoint tp2 = new TimePoint(tpy1.getChain(), tpy1.getPosition() + ((tpy2.getPosition() - tpy1.getPosition()) / 3) * 2, x2);
-                entity_tp_map.put(x1, tp1);
-                entity_tp_map.put(x2, tp2);
-                metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-                metagraph.get(tpy1.getChain()).getTimePoints().put(tp2.getPosition(), tp2);
-            } else {
-                // tpy1 and tpy2 are in the same chain or different chains but already related, create new chain for x2
-                if (tpy1.getChain() == tpy2.getChain() || (tpy1.getChain() != tpy2.getChain() && metagraph.get(tpy1.getChain()).hasNext(tpy1) && metagraph.get(tpy2.getChain()).hasPrevious(tpy2))) {
-                    int c = createOrSelectNewChain();
-                    TimePoint tp1 = new TimePoint(c, x1);
-                    TimePoint tp2 = new TimePoint(c, tp1.getPositionAfter(), x2);
-                    entity_tp_map.put(x1, tp1);
-                    entity_tp_map.put(x2, tp2);
-                    metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                    metagraph.get(c).getTimePoints().put(tp2.getPosition(), tp2);
-                    // add point-chain connections to metagraph
-                    metagraph.get(c).addConnection(tp1.getPosition(), tpy1, ">");
-                    metagraph.get(c).addConnection(tp2.getPosition(), tpy2, "<");
-                    metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
-                    metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp2, ">");
-                } else {
-                    // chose chain to put tp1 and tp2
-                    if (!metagraph.get(tpy1.getChain()).hasNext(tpy1)) {
-                        TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionAfter(), x1);
-                        TimePoint tp2 = new TimePoint(tpy1.getChain(), tp1.getPositionAfter(), x2);
-                        entity_tp_map.put(x1, tp1);
-                        entity_tp_map.put(x2, tp2);
-                        metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-                        metagraph.get(tpy1.getChain()).getTimePoints().put(tp2.getPosition(), tp2);
-                        // add point-chain connections to metagraph
-                        metagraph.get(tpy1.getChain()).addConnection(tp2.getPosition(), tpy2, "<");
-                        metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp2, ">");
-                    } else {
-                        TimePoint tp2 = new TimePoint(tpy2.getChain(), tpy2.getPositionBefore(), x2);
-                        TimePoint tp1 = new TimePoint(tpy2.getChain(), tp2.getPositionBefore(), x1);
-                        entity_tp_map.put(x2, tp2);
-                        entity_tp_map.put(x1, tp1);
-                        metagraph.get(tpy2.getChain()).getTimePoints().put(tp2.getPosition(), tp2);
-                        metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-                        // add point-chain connections to metagraph
-                        metagraph.get(tpy2.getChain()).addConnection(tp1.getPosition(), tpy1, ">");
-                        metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, "<");
-                    }
-                }
+        } catch (Exception e) {
+            System.err.println("Errors found (TimeMLGraph addOnlyFirstEntity):\n\t" + e.toString() + "\n");
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                e.printStackTrace(System.err);
             }
-        }
-
-        if (rel.equals("INCLUDES")) { // Allen's contains (di) x1 < y1 < y2 < x2 (two independent point relations)
-            // x1
-            if (!metagraph.get(tpy1.getChain()).hasPrevious(tpy1)) { // add in the same chain
-                TimePoint tp1 = new TimePoint(tpy1.getChain(), tpy1.getPositionBefore(), x1);
-                entity_tp_map.put(x1, tp1);
-                metagraph.get(tpy1.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else {
-                int c = createOrSelectNewChain();
-                TimePoint tp1 = new TimePoint(c, x1);
-                entity_tp_map.put(x1, tp1);
-                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                // add point-chain connections to metagraph
-                metagraph.get(c).addConnection(tp1.getPosition(), tpy1, "<");
-                metagraph.get(tpy1.getChain()).addConnection(tpy1.getPosition(), tp1, ">");
-            }
-
-            // x2
-            if (!metagraph.get(tpy2.getChain()).hasNext(tpy2)) { // add in the same chain
-                TimePoint tp1 = new TimePoint(tpy2.getChain(), tpy2.getPositionAfter(), x2);
-                entity_tp_map.put(x2, tp1);
-                metagraph.get(tpy2.getChain()).getTimePoints().put(tp1.getPosition(), tp1);
-            } else {
-                int c = createOrSelectNewChain();
-                TimePoint tp1 = new TimePoint(c, x2);
-                entity_tp_map.put(x2, tp1);
-                metagraph.get(c).getTimePoints().put(tp1.getPosition(), tp1);
-                // add point-chain connections to metagraph
-                metagraph.get(c).addConnection(tp1.getPosition(), tpy2, ">");
-                metagraph.get(tpy2.getChain()).addConnection(tpy2.getPosition(), tp1, "<");
-            }
-        }
-
-        if (rel.equals("SIMULTANEOUS")) { //  # Allen's equal (=) (x1 = y1) < (x2 = y2)
-            entity_tp_map.put(x1, tpy1);
-            tpy1.associateEntities(x1);
-            entity_tp_map.put(x2, tpy2);
-            tpy2.associateEntities(x2);
+            return false;
         }
         return true;
     }
@@ -736,610 +838,622 @@ public class TimeGraph {
      * @param rel
      */
     public boolean addOnlyRelation(String x1, String x2, String y1, String y2, String rel) {
-        boolean could_be_added=false;
         if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-            System.err.println("addOnlyRelation "+x1+x2+" "+rel+" "+y1+y2);
+            System.err.println("addOnlyRelation " + x1 + x2 + " " + rel + " " + y1 + y2);
         }
-        // TimePoints are already known
-        TimePoint tpx1 = entity_tp_map.get(x1);
-        TimePoint tpx2 = entity_tp_map.get(x2);
-        TimePoint tpy1 = entity_tp_map.get(y1);
-        TimePoint tpy2 = entity_tp_map.get(y2);
+        try {
+            // TimePoints are already known
+            TimePoint tpx1 = entity_tp_map.get(x1);
+            TimePoint tpx2 = entity_tp_map.get(x2);
+            TimePoint tpy1 = entity_tp_map.get(y1);
+            TimePoint tpy2 = entity_tp_map.get(y2);
 
-        if (rel.equals("BEFORE")) { // Allen (<)  x1 < x2 < y1 < y2
-            String pointrel = getPointRelation(tpx2, tpy1);
-            if (pointrel.equals("<")) {
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
+            if (rel.equals("BEFORE")) { // Allen (<)  x1 < x2 < y1 < y2
+                String pointrel = getPointRelation(tpx2, tpy1);
+                if (pointrel.equals("<")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense not x2<y1 (" + x2 + pointrel + y1 + ") in " + rel);
+                        System.out.println("already in graph");
                     }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    add_after_crosschain(tpy1, tpx2);
-                }
-            }
-        }
-
-        if (rel.equals("IBEFORE")) { // Allen's meets (m) x1 < (x2 = y1) < y2
-            String pointrel = getPointRelation(tpx2, tpy1);
-            if (pointrel.equals("=")) { // same as tpx2.equals(tpy1)
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
-                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense x2!=y1 (" + x2 + pointrel + y1 + ") in " + rel);
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense not x2<y1 (" + x2 + pointrel + y1 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        add_after_crosschain(tpy1, tpx2);
                     }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    make_equal_from_crosschain(tpy1, tpx2); // NOOOOOOOOO EQUAL RELATION ---> can be a function
                 }
             }
 
-        }
-
-        if (rel.equals("BEGINS")) { // Allen's starts (s) (x1 = y1) < x2 < y2
-            //x1=y1
-            String pointrel = getPointRelation(tpx1, tpy1);
-            if (pointrel.equals("=")) {
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
+            if (rel.equals("IBEFORE")) { // Allen's meets (m) x1 < (x2 = y1) < y2
+                String pointrel = getPointRelation(tpx2, tpy1);
+                if (pointrel.equals("=")) { // same as tpx2.equals(tpy1)
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense x1!=y1 (" + x1 + pointrel + y1 + ") in " + rel);
+                        System.out.println("already in graph");
                     }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    make_equal_from_crosschain(tpy1, tpx1); // NOOOOOOOOO EQUAL RELATION ---> can be a function
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense x2!=y1 (" + x2 + pointrel + y1 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        make_equal_from_crosschain(tpy1, tpx2); // NOOOOOOOOO EQUAL RELATION ---> can be a function
+                    }
+                }
+
+            }
+
+            if (rel.equals("BEGINS")) { // Allen's starts (s) (x1 = y1) < x2 < y2
+                //x1=y1
+                String pointrel = getPointRelation(tpx1, tpy1);
+                if (pointrel.equals("=")) {
+                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                        System.out.println("already in graph");
+                    }
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense x1!=y1 (" + x1 + pointrel + y1 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        make_equal_from_crosschain(tpy1, tpx1); // NOOOOOOOOO EQUAL RELATION ---> can be a function
+                    }
+                }
+
+                // x2<y2
+                tpx2 = entity_tp_map.get(x2);
+                tpy2 = entity_tp_map.get(y2);
+                pointrel = getPointRelation(tpx2, tpy2);
+                if (pointrel.equals("<")) {
+                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                        System.out.println("already in graph");
+                    }
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense not x2<y2 (" + x2 + pointrel + y2 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        add_after_crosschain(tpy2, tpx2);
+                    }
+                }
+
+
+
+            }
+
+            if (rel.equals("ENDS")) { // Allen's Finishes (f) y1 < x1 < (x2 = y2)
+
+                //x2=y2
+                String pointrel = getPointRelation(tpx2, tpy2);
+                if (pointrel.equals("=")) {
+                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                        System.out.println("already in graph");
+                    }
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense x2!=y2 (" + x2 + pointrel + y2 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        make_equal_from_crosschain(tpy2, tpx2);
+                    }
+                }
+
+                // y1 < x1
+                tpx1 = entity_tp_map.get(x1);
+                tpy1 = entity_tp_map.get(y1);
+                pointrel = getPointRelation(tpy1, tpx1);
+                if (pointrel.equals("<")) {
+                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                        System.out.println("already in graph");
+                    }
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense not y1<x1 (" + y1 + pointrel + x1 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        add_after_crosschain(tpx1, tpy1);
+                    }
+                }
+
+            }
+
+            if (rel.equals("OVERLAPS")) { // Allen's Overlaps (o) x1 < y1 < x2 < y2
+                // x1 < y1
+                String pointrel = getPointRelation(tpx1, tpy1);
+                if (pointrel.equals("<")) {
+                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                        System.out.println("already in graph");
+                    }
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense not x1 < y1 (" + x1 + pointrel + y1 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        add_after_crosschain(tpy1, tpx1);
+                    }
+                }
+
+                // y1<x2
+                tpx2 = entity_tp_map.get(x2);
+                tpy2 = entity_tp_map.get(y2);
+                pointrel = getPointRelation(tpy1, tpx2);
+                if (pointrel.equals("<")) {
+                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                        System.out.println("already in graph");
+                    }
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense not y1<x2 (" + y1 + pointrel + x2 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        add_after_crosschain(tpx2, tpy1);
+                    }
                 }
             }
 
-            // x2<y2
-            tpx2 = entity_tp_map.get(x2);
-            tpy2 = entity_tp_map.get(y2);
-            pointrel = getPointRelation(tpx2, tpy2);
-            if (pointrel.equals("<")) {
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
+            if (rel.equals("IS_INCLUDED")) { // Allen's during (d) y1 < x1 < x2 < y2
+                // y1 < x1
+                String pointrel = getPointRelation(tpy1, tpx1);
+                if (pointrel.equals("<")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense not x2<y2 (" + x2 + pointrel + y2 + ") in " + rel);
+                        System.out.println("already in graph");
                     }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    add_after_crosschain(tpy2, tpx2);
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense not y1<x1 (" + y1 + pointrel + x1 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        add_after_crosschain(tpx1, tpy1);
+                    }
+                }
+
+                // x2<y2
+                tpx2 = entity_tp_map.get(x2);
+                tpy2 = entity_tp_map.get(y2);
+                pointrel = getPointRelation(tpx2, tpy2);
+                if (pointrel.equals("<")) {
+                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                        System.out.println("already in graph");
+                    }
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense not x2<y2 (" + x2 + pointrel + y2 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        add_after_crosschain(tpy2, tpx2);
+                    }
                 }
             }
 
-
-
-        }
-
-        if (rel.equals("ENDS")) { // Allen's Finishes (f) y1 < x1 < (x2 = y2)
-
-            //x2=y2
-            String pointrel = getPointRelation(tpx2, tpy2);
-            if (pointrel.equals("=")) {
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
+            if (rel.equals("SIMULTANEOUS")) { //  # Allen's equal (=) (x1 = y1) < (x2 = y2)
+                //x1=y1
+                String pointrel = getPointRelation(tpx1, tpy1);
+                if (pointrel.equals("=")) {
                     if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense x2!=y2 (" + x2 + pointrel + y2 + ") in " + rel);
+                        System.out.println("already in graph");
                     }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    make_equal_from_crosschain(tpy2, tpx2);
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense x1!=y1 (" + x1 + pointrel + y1 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        make_equal_from_crosschain(tpy1, tpx1); // NOOOOOOOOO EQUAL RELATION ---> can be a function
+                    }
+                }
+
+                //x2=y2
+                tpx2 = entity_tp_map.get(x2);
+                tpy2 = entity_tp_map.get(y2);
+                pointrel = getPointRelation(tpx2, tpy2);
+                if (pointrel.equals("=")) {
+                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                        System.out.println("already in graph");
+                    }
+                } else {
+                    //offense
+                    if (!pointrel.equals("UNKNOWN")) {
+                        if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                            System.out.println("offense x2!=y2 (" + x2 + pointrel + y2 + ") in " + rel);
+                        }
+                        // break? ignore?
+                    } //unknown
+                    else {
+                        //System.out.println("add new relation");
+                        make_equal_from_crosschain(tpy2, tpx2); // NOOOOOOOOO EQUAL RELATION ---> can be a function
+                    }
                 }
             }
-
-            // y1 < x1
-            tpx1 = entity_tp_map.get(x1);
-            tpy1 = entity_tp_map.get(y1);
-            pointrel = getPointRelation(tpy1, tpx1);
-            if (pointrel.equals("<")) {
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
-                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense not y1<x1 (" + y1 + pointrel + x1 + ") in " + rel);
-                    }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    add_after_crosschain(tpx1, tpy1);
-                }
+        } catch (Exception e) {
+            System.err.println("Errors found (TimeGraph addOnlyRelation):\n\t" + e.toString() + "\n");
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                e.printStackTrace(System.err);
             }
-
-        }
-
-        if (rel.equals("OVERLAPS")) { // Allen's Overlaps (o) x1 < y1 < x2 < y2
-            // x1 < y1
-            String pointrel = getPointRelation(tpx1, tpy1);
-            if (pointrel.equals("<")) {
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
-                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense not x1 < y1 (" + x1 + pointrel + y1 + ") in " + rel);
-                    }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    add_after_crosschain(tpy1, tpx1);
-                }
-            }
-
-            // y1<x2
-            tpx2 = entity_tp_map.get(x2);
-            tpy2 = entity_tp_map.get(y2);
-            pointrel = getPointRelation(tpy1, tpx2);
-            if (pointrel.equals("<")) {
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
-                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense not y1<x2 (" + y1 + pointrel + x2 + ") in " + rel);
-                    }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    add_after_crosschain(tpx2, tpy1);
-                }
-            }
-        }
-
-        if (rel.equals("IS_INCLUDED")) { // Allen's during (d) y1 < x1 < x2 < y2
-            // y1 < x1
-            String pointrel = getPointRelation(tpy1, tpx1);
-            if (pointrel.equals("<")) {
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
-                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense not y1<x1 (" + y1 + pointrel + x1 + ") in " + rel);
-                    }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    add_after_crosschain(tpx1, tpy1);
-                }
-            }
-
-            // x2<y2
-            tpx2 = entity_tp_map.get(x2);
-            tpy2 = entity_tp_map.get(y2);
-            pointrel = getPointRelation(tpx2, tpy2);
-            if (pointrel.equals("<")) {
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
-                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense not x2<y2 (" + x2 + pointrel + y2 + ") in " + rel);
-                    }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    add_after_crosschain(tpy2, tpx2);
-                }
-            }
-        }
-
-        if (rel.equals("SIMULTANEOUS")) { //  # Allen's equal (=) (x1 = y1) < (x2 = y2)
-            //x1=y1
-            String pointrel = getPointRelation(tpx1, tpy1);
-            if (pointrel.equals("=")) {
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
-                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense x1!=y1 (" + x1 + pointrel + y1 + ") in " + rel);
-                    }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    make_equal_from_crosschain(tpy1, tpx1); // NOOOOOOOOO EQUAL RELATION ---> can be a function
-                }
-            }
-
-            //x2=y2
-            tpx2 = entity_tp_map.get(x2);
-            tpy2 = entity_tp_map.get(y2);
-            pointrel = getPointRelation(tpx2, tpy2);
-            if (pointrel.equals("=")) {
-                if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                    System.out.println("already in graph");
-                }
-            } else {
-                //offense
-                if (!pointrel.equals("UNKNOWN")) {
-                    if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-                        System.out.println("offense x2!=y2 (" + x2 + pointrel + y2 + ") in " + rel);
-                    }
-                    // break? ignore?
-                } //unknown
-                else {
-                    //System.out.println("add new relation");
-                    make_equal_from_crosschain(tpy2, tpx2); // NOOOOOOOOO EQUAL RELATION ---> can be a function
-                }
-            }
+            return false;
         }
         return true;
     }
 
-    public void make_equal_from_crosschain(TimePoint p1, TimePoint p2) {
+    public void make_equal_from_crosschain(TimePoint p1, TimePoint p2) throws Exception {
+            // chose which point is easier to merge
+            int p1score = 0;
+            int p2score = 0;
 
-        // chose which point is easier to merge
-        int p1score = 0;
-        int p2score = 0;
+            if (!metagraph.get(p1.getChain()).hasNext(p1)) {
+                p1score++;
+            }
+            if (!metagraph.get(p1.getChain()).hasPrevious(p1)) {
+                p1score++;
+            }
+            if (!metagraph.get(p2.getChain()).hasNext(p2)) {
+                p2score++;
+            }
+            if (!metagraph.get(p2.getChain()).hasPrevious(p2)) {
+                p2score++;
+            }
 
-        if (!metagraph.get(p1.getChain()).hasNext(p1)) {
-            p1score++;
-        }
-        if (!metagraph.get(p1.getChain()).hasPrevious(p1)) {
-            p1score++;
-        }
-        if (!metagraph.get(p2.getChain()).hasNext(p2)) {
-            p2score++;
-        }
-        if (!metagraph.get(p2.getChain()).hasPrevious(p2)) {
-            p2score++;
-        }
+            // by default p2 is moved to p1, switch if p1 is easier
+            if (p1score > p2score) {
+                TimePoint aux = p1;
+                p1 = p2;
+                p2 = aux;
+            }
 
-        // by default p2 is moved to p1, switch if p1 is easier
-        if (p1score > p2score) {
-            TimePoint aux = p1;
-            p1 = p2;
-            p2 = aux;
-        }
-
-        // merge p2 in p1
-        TimePoint p2next = metagraph.get(p2.getChain()).getNextTimePoint(p2);
-        TimePoint p2prev = metagraph.get(p2.getChain()).getPreviousTimePoint(p2);
-
-
-        // copy everything to p1
-        p1.associateEntities(p2.getAssociatedEntities());
-        String[] associated_entities = p2.getAssociatedEntities().split(",");
-        for (int aen = 0; aen < associated_entities.length; aen++) {
-            entity_tp_map.put(associated_entities[aen], p1);
-        }
-
-        // remove connections between the unified point and the chain and vice-versa
-        if (metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()) != null && metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()).containsKey(p1.getChain())) {
-            TimePoint aux = metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()).get(p1.getChain());
-            metagraph.get(p2.getChain()).removeConnection(p2.getPosition(), aux, ">");
-            metagraph.get(aux.getChain()).removeConnection(aux.getPosition(), p2, "<");
-        }
-        if (metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()) != null && metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()).containsKey(p1.getChain())) {
-            TimePoint aux = metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()).get(p1.getChain());
-            metagraph.get(p2.getChain()).removeConnection(p2.getPosition(), aux, "<");
-            metagraph.get(aux.getChain()).removeConnection(aux.getPosition(), p2, ">");
-        }
+            // merge p2 in p1
+            TimePoint p2next = metagraph.get(p2.getChain()).getNextTimePoint(p2);
+            TimePoint p2prev = metagraph.get(p2.getChain()).getPreviousTimePoint(p2);
 
 
+            // copy everything to p1
+            p1.associateEntities(p2.getAssociatedEntities());
+            String[] associated_entities = p2.getAssociatedEntities().split(",");
+            for (int aen = 0; aen < associated_entities.length; aen++) {
+                entity_tp_map.put(associated_entities[aen], p1);
+            }
 
-        // update connkeys
-        Set<Integer> connkeys = null;
-        if (metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()) != null) {
-            connkeys = new HashSet<Integer>();
-            connkeys.addAll(metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()).keySet());
-        }
-        if (connkeys != null) {
-            for (Integer key : connkeys) {
-                TimePoint dest_point = metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()).get(key); // connection to move to p1
+            // remove connections between the unified point and the chain and vice-versa
+            if (metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()) != null && metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()).containsKey(p1.getChain())) {
+                TimePoint aux = metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()).get(p1.getChain());
+                metagraph.get(p2.getChain()).removeConnection(p2.getPosition(), aux, ">");
+                metagraph.get(aux.getChain()).removeConnection(aux.getPosition(), p2, "<");
+            }
+            if (metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()) != null && metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()).containsKey(p1.getChain())) {
+                TimePoint aux = metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()).get(p1.getChain());
+                metagraph.get(p2.getChain()).removeConnection(p2.getPosition(), aux, "<");
+                metagraph.get(aux.getChain()).removeConnection(aux.getPosition(), p2, ">");
+            }
 
-                // remove from p2
-                metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), p2, "<");
-                metagraph.get(p2.getChain()).removeConnection(p2.getPosition(), dest_point, ">");
 
-                //add_after_crosschain(p1, dest_point);
-                TimePoint conflictpoint_dest_point = null;
+
+            // update connkeys
+            Set<Integer> connkeys = null;
+            if (metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()) != null) {
+                connkeys = new HashSet<Integer>();
+                connkeys.addAll(metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()).keySet());
+            }
+            if (connkeys != null) {
+                for (Integer key : connkeys) {
+                    TimePoint dest_point = metagraph.get(p2.getChain()).getAfterConnections(p2.getPosition()).get(key); // connection to move to p1
+
+                    // remove from p2
+                    metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), p2, "<");
+                    metagraph.get(p2.getChain()).removeConnection(p2.getPosition(), dest_point, ">");
+
+                    //add_after_crosschain(p1, dest_point);
+                    TimePoint conflictpoint_dest_point = null;
+                    // dest_point already conected to p1 < conflict
+                    if (metagraph.get(dest_point.getChain()).getBeforeConnections(dest_point.getPosition()) != null) {
+                        conflictpoint_dest_point = metagraph.get(dest_point.getChain()).getBeforeConnections(dest_point.getPosition()).get(p1.getChain());
+                    }
+                    // p1 already connected to destpoint chain > conflict
+                    TimePoint conflictpoint_p1 = null;
+                    if (metagraph.get(p1.getChain()).getAfterConnections(p1.getPosition()) != null) {
+                        conflictpoint_p1 = metagraph.get(p1.getChain()).getAfterConnections(p1.getPosition()).get(dest_point.getChain());
+                    }
+                    if (conflictpoint_dest_point != null || conflictpoint_p1 != null) {
+                        // normal conflict
+                        if (conflictpoint_p1 == null && metagraph.get(dest_point.getChain()).isMoreInformative(dest_point.getPosition(), p1, "<")) {
+                            metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), conflictpoint_dest_point, "<");
+                            metagraph.get(conflictpoint_dest_point.getChain()).removeConnection(conflictpoint_dest_point.getPosition(), dest_point, ">");
+                            metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, "<");
+                            metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, ">");
+                        }
+                        // inverse conflict
+                        if (conflictpoint_dest_point == null && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), dest_point, ">")) {
+                            metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, ">");
+                            metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, "<");
+                            metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, "<");
+                            metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, ">");
+                        }
+                        // double conflict
+                        if (conflictpoint_dest_point != null && conflictpoint_p1 != null
+                                && metagraph.get(dest_point.getChain()).isMoreInformative(dest_point.getPosition(), p1, "<")
+                                && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), dest_point, ">")) {
+                            metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), conflictpoint_dest_point, "<");
+                            metagraph.get(conflictpoint_dest_point.getChain()).removeConnection(conflictpoint_dest_point.getPosition(), dest_point, ">");
+                            metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, ">");
+                            metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, "<");
+                            metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, "<");
+                            metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, ">");
+                        }
+                    } else {
+                        metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, "<");
+                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, ">");
+                    }
+                }
+            }
+            connkeys = null;
+            if (metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()) != null) {
+                connkeys = new HashSet<Integer>();
+                connkeys.addAll(metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()).keySet());
+            }
+            if (connkeys != null) {
+                for (Integer key : connkeys) {
+                    TimePoint dest_point = metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()).get(key); // connection to move to p1
+
+                    // remove from p2
+                    metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), p2, ">");
+                    metagraph.get(p2.getChain()).removeConnection(p2.getPosition(), dest_point, "<");
+
+                    //add_after_crosschain(dest_point, p1);
+                    TimePoint conflictpoint_dest_point = null;
+                    // dest_point already conected to p1 < conflict
+                    if (metagraph.get(dest_point.getChain()).getAfterConnections(dest_point.getPosition()) != null) {
+                        conflictpoint_dest_point = metagraph.get(dest_point.getChain()).getAfterConnections(dest_point.getPosition()).get(p1.getChain());
+                    }
+                    // p1 already connected to destpoint chain > conflict
+                    TimePoint conflictpoint_p1 = null;
+                    if (metagraph.get(p1.getChain()).getBeforeConnections(p1.getPosition()) != null) {
+                        conflictpoint_p1 = metagraph.get(p1.getChain()).getBeforeConnections(p1.getPosition()).get(dest_point.getChain());
+                    }
+                    if (conflictpoint_dest_point != null || conflictpoint_p1 != null) {
+                        // normal conflict
+                        if (conflictpoint_p1 == null && metagraph.get(dest_point.getChain()).isMoreInformative(dest_point.getPosition(), p1, ">")) {
+                            metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), conflictpoint_dest_point, ">");
+                            metagraph.get(conflictpoint_dest_point.getChain()).removeConnection(conflictpoint_dest_point.getPosition(), dest_point, "<");
+                            metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, ">");
+                            metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, "<");
+                        }
+                        // inverse conflict
+                        if (conflictpoint_dest_point == null && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), dest_point, "<")) {
+                            metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, "<");
+                            metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, ">");
+                            metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, ">");
+                            metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, "<");
+                        }
+                        // double conflict
+                        if (conflictpoint_dest_point != null && conflictpoint_p1 != null
+                                && metagraph.get(dest_point.getChain()).isMoreInformative(dest_point.getPosition(), p1, ">")
+                                && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), dest_point, "<")) {
+                            metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), conflictpoint_dest_point, ">");
+                            metagraph.get(conflictpoint_dest_point.getChain()).removeConnection(conflictpoint_dest_point.getPosition(), dest_point, "<");
+                            metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, "<");
+                            metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, ">");
+                            metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, ">");
+                            metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, "<");
+                        }
+                    } else {
+                        metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, ">");
+                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, "<");
+                    }
+                }
+            }
+
+            if (p2next == null && p2prev == null) {
+                metagraph.get(p2.getChain()).clear();
+                return;
+            }
+
+            if (p2next != null && p2prev != null) {
+                // new chain needed for next
+                int c = createOrSelectNewChain();
+                // replace with last one
+                for (TimePoint tp : metagraph.get(p2.getChain()).getTimePointsGreaterOrEqual(p2next).values()) {
+                    // add new point to metagraph
+                    TimePoint np = new TimePoint(c, tp.getPosition(), tp.getAssociatedEntities());
+                    metagraph.get(c).getTimePoints().put(np.getPosition(), np);
+
+                    Set<Integer> connkeys2 = null;
+                    if (metagraph.get(tp.getChain()).getAfterConnections(tp.getPosition()) != null) {
+                        connkeys2 = new HashSet<Integer>();
+                        connkeys2.addAll(metagraph.get(tp.getChain()).getAfterConnections(tp.getPosition()).keySet());
+                    }
+                    if (connkeys2 != null) {
+                        for (Integer key : connkeys2) {
+                            TimePoint dest_point = metagraph.get(tp.getChain()).getAfterConnections(tp.getPosition()).get(key);
+                            metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), tp, "<");
+                            metagraph.get(tp.getChain()).removeConnection(tp.getPosition(), dest_point, ">");
+                            metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), np, "<");
+                            metagraph.get(np.getChain()).addConnection(np.getPosition(), dest_point, ">");
+                        }
+                    }
+                    connkeys2 = null;
+                    if (metagraph.get(tp.getChain()).getBeforeConnections(tp.getPosition()) != null) {
+                        connkeys2 = new HashSet<Integer>();
+                        connkeys2.addAll(metagraph.get(tp.getChain()).getBeforeConnections(tp.getPosition()).keySet());
+                    }
+                    if (connkeys2 != null) {
+                        for (Integer key : connkeys2) {
+                            TimePoint dest_point = metagraph.get(tp.getChain()).getBeforeConnections(tp.getPosition()).get(key);
+                            metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), tp, ">");
+                            metagraph.get(tp.getChain()).removeConnection(tp.getPosition(), dest_point, "<");
+                            metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), np, ">");
+                            metagraph.get(np.getChain()).addConnection(np.getPosition(), dest_point, "<");
+                        }
+                    }
+                    // search and update entity-tp references (change to new point)
+                    String[] associated_entities2 = tp.getAssociatedEntities().split(",");
+                    for (int aen = 0; aen < associated_entities2.length; aen++) {
+                        entity_tp_map.put(associated_entities2[aen], np);
+                    }
+                }
+                // leave only prev in the original chain
+                metagraph.get(p2.getChain()).setTimePoints(metagraph.get(p2.getChain()).getTimePointsLowerOrEqual(p2prev));
+                // relate chains to the merged point
+                metagraph.get(c).addConnection(p2next.getPosition(), p1, ">");
+                metagraph.get(p1.getChain()).addConnection(p1.getPosition(), metagraph.get(c).getTimePoints().firstEntry().getValue(), "<");
+                checkChainFusion(metagraph.get(c).getTimePoints().firstEntry().getValue(), p1);
+                metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2prev, ">");
+                metagraph.get(p2prev.getChain()).addConnection(p2prev.getPosition(), p1, "<");
+                checkChainFusion(p1, p2prev);
+                return;
+            }
+
+            if (p2next != null) {
+                // leave only prev in the original chain
+                metagraph.get(p2.getChain()).setTimePoints(metagraph.get(p2.getChain()).getTimePointsGreaterOrEqual(p2next));
+                // relate chains to the merged point
+
+                TimePoint conflictpoint_p2next = null;
+                if (metagraph.get(p2next.getChain()).getAfterConnections(p2next.getPosition()) != null) {
+                    conflictpoint_p2next = metagraph.get(p2next.getChain()).getAfterConnections(p2next.getPosition()).get(p1.getChain());
+                }
+                TimePoint conflictpoint_p1 = null;
+                if (metagraph.get(p1.getChain()).getBeforeConnections(p1.getPosition()) != null) {
+                    conflictpoint_p1 = metagraph.get(p1.getChain()).getBeforeConnections(p1.getPosition()).get(p2next.getChain());
+                }
+
+                if (conflictpoint_p2next != null || conflictpoint_p1 != null) {
+                    // normal conflict
+                    if (conflictpoint_p1 == null && metagraph.get(p2next.getChain()).isMoreInformative(p2next.getPosition(), p1, ">")) {
+                        metagraph.get(p2next.getChain()).removeConnection(p2next.getPosition(), conflictpoint_p2next, ">");
+                        metagraph.get(conflictpoint_p2next.getChain()).removeConnection(conflictpoint_p2next.getPosition(), p2next, "<");
+                        metagraph.get(p2next.getChain()).addConnection(p2next.getPosition(), p1, ">");
+                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2next, "<");
+                    }
+                    // inverse conflict
+                    if (conflictpoint_p2next == null && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), p2next, "<")) {
+                        metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, "<");
+                        metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, ">");
+                        metagraph.get(p2next.getChain()).addConnection(p2next.getPosition(), p1, ">");
+                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2next, "<");
+                    }
+                    // double conflict
+                    if (conflictpoint_p2next != null && conflictpoint_p1 != null
+                            && metagraph.get(p2next.getChain()).isMoreInformative(p2next.getPosition(), p1, ">")
+                            && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), p2next, "<")) {
+                        metagraph.get(p2next.getChain()).removeConnection(p2next.getPosition(), conflictpoint_p2next, ">");
+                        metagraph.get(conflictpoint_p2next.getChain()).removeConnection(conflictpoint_p2next.getPosition(), p2next, "<");
+                        metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, "<");
+                        metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, ">");
+                        metagraph.get(p2next.getChain()).addConnection(p2next.getPosition(), p1, ">");
+                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2next, "<");
+                    }
+
+                } else {
+                    metagraph.get(p2next.getChain()).addConnection(p2next.getPosition(), p1, ">");
+                    metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2next, "<");
+                }
+
+                checkChainFusion(p2next, p1);
+                return;
+            }
+
+            if (p2prev != null) {
+                // leave only prev in the original chain
+                metagraph.get(p2.getChain()).setTimePoints(metagraph.get(p2.getChain()).getTimePointsLowerOrEqual(p2prev));
+                // relate chains to the merged point
+                TimePoint conflictpoint_p2prev = null;
                 // dest_point already conected to p1 < conflict
-                if (metagraph.get(dest_point.getChain()).getBeforeConnections(dest_point.getPosition()) != null) {
-                    conflictpoint_dest_point = metagraph.get(dest_point.getChain()).getBeforeConnections(dest_point.getPosition()).get(p1.getChain());
+                if (metagraph.get(p2prev.getChain()).getBeforeConnections(p2prev.getPosition()) != null) {
+                    conflictpoint_p2prev = metagraph.get(p2prev.getChain()).getBeforeConnections(p2prev.getPosition()).get(p1.getChain());
                 }
                 // p1 already connected to destpoint chain > conflict
                 TimePoint conflictpoint_p1 = null;
                 if (metagraph.get(p1.getChain()).getAfterConnections(p1.getPosition()) != null) {
-                    conflictpoint_p1 = metagraph.get(p1.getChain()).getAfterConnections(p1.getPosition()).get(dest_point.getChain());
+                    conflictpoint_p1 = metagraph.get(p1.getChain()).getAfterConnections(p1.getPosition()).get(p2prev.getChain());
                 }
-                if (conflictpoint_dest_point != null || conflictpoint_p1 != null) {
+                if (conflictpoint_p2prev != null || conflictpoint_p1 != null) {
                     // normal conflict
-                    if (conflictpoint_p1 == null && metagraph.get(dest_point.getChain()).isMoreInformative(dest_point.getPosition(), p1, "<")) {
-                        metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), conflictpoint_dest_point, "<");
-                        metagraph.get(conflictpoint_dest_point.getChain()).removeConnection(conflictpoint_dest_point.getPosition(), dest_point, ">");
-                        metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, "<");
-                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, ">");
+                    if (conflictpoint_p1 == null && metagraph.get(p2prev.getChain()).isMoreInformative(p2prev.getPosition(), p1, "<")) {
+                        metagraph.get(p2prev.getChain()).removeConnection(p2prev.getPosition(), conflictpoint_p2prev, "<");
+                        metagraph.get(conflictpoint_p2prev.getChain()).removeConnection(conflictpoint_p2prev.getPosition(), p2prev, ">");
+                        metagraph.get(p2prev.getChain()).addConnection(p2prev.getPosition(), p1, "<");
+                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2prev, ">");
                     }
                     // inverse conflict
-                    if (conflictpoint_dest_point == null && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), dest_point, ">")) {
+                    if (conflictpoint_p2prev == null && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), p2prev, ">")) {
                         metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, ">");
                         metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, "<");
-                        metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, "<");
-                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, ">");
+                        metagraph.get(p2prev.getChain()).addConnection(p2prev.getPosition(), p1, "<");
+                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2prev, ">");
                     }
                     // double conflict
-                    if (conflictpoint_dest_point != null && conflictpoint_p1 != null
-                            && metagraph.get(dest_point.getChain()).isMoreInformative(dest_point.getPosition(), p1, "<")
-                            && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), dest_point, ">")) {
-                        metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), conflictpoint_dest_point, "<");
-                        metagraph.get(conflictpoint_dest_point.getChain()).removeConnection(conflictpoint_dest_point.getPosition(), dest_point, ">");
+                    if (conflictpoint_p2prev != null && conflictpoint_p1 != null
+                            && metagraph.get(p2prev.getChain()).isMoreInformative(p2prev.getPosition(), p1, "<")
+                            && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), p2prev, ">")) {
+                        metagraph.get(p2prev.getChain()).removeConnection(p2prev.getPosition(), conflictpoint_p2prev, "<");
+                        metagraph.get(conflictpoint_p2prev.getChain()).removeConnection(conflictpoint_p2prev.getPosition(), p2prev, ">");
                         metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, ">");
                         metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, "<");
-                        metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, "<");
-                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, ">");
+                        metagraph.get(p2prev.getChain()).addConnection(p2prev.getPosition(), p1, "<");
+                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2prev, ">");
                     }
                 } else {
-                    metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, "<");
-                    metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, ">");
-                }
-            }
-        }
-        connkeys = null;
-        if (metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()) != null) {
-            connkeys = new HashSet<Integer>();
-            connkeys.addAll(metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()).keySet());
-        }
-        if (connkeys != null) {
-            for (Integer key : connkeys) {
-                TimePoint dest_point = metagraph.get(p2.getChain()).getBeforeConnections(p2.getPosition()).get(key); // connection to move to p1
-
-                // remove from p2
-                metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), p2, ">");
-                metagraph.get(p2.getChain()).removeConnection(p2.getPosition(), dest_point, "<");
-
-                //add_after_crosschain(dest_point, p1);
-                TimePoint conflictpoint_dest_point = null;
-                // dest_point already conected to p1 < conflict
-                if (metagraph.get(dest_point.getChain()).getAfterConnections(dest_point.getPosition()) != null) {
-                    conflictpoint_dest_point = metagraph.get(dest_point.getChain()).getAfterConnections(dest_point.getPosition()).get(p1.getChain());
-                }
-                // p1 already connected to destpoint chain > conflict
-                TimePoint conflictpoint_p1 = null;
-                if (metagraph.get(p1.getChain()).getBeforeConnections(p1.getPosition()) != null) {
-                    conflictpoint_p1 = metagraph.get(p1.getChain()).getBeforeConnections(p1.getPosition()).get(dest_point.getChain());
-                }
-                if (conflictpoint_dest_point != null || conflictpoint_p1 != null) {
-                    // normal conflict
-                    if (conflictpoint_p1 == null && metagraph.get(dest_point.getChain()).isMoreInformative(dest_point.getPosition(), p1, ">")) {
-                        metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), conflictpoint_dest_point, ">");
-                        metagraph.get(conflictpoint_dest_point.getChain()).removeConnection(conflictpoint_dest_point.getPosition(), dest_point, "<");
-                        metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, ">");
-                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, "<");
-                    }
-                    // inverse conflict
-                    if (conflictpoint_dest_point == null && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), dest_point, "<")) {
-                        metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, "<");
-                        metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, ">");
-                        metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, ">");
-                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, "<");
-                    }
-                    // double conflict
-                    if (conflictpoint_dest_point != null && conflictpoint_p1 != null
-                            && metagraph.get(dest_point.getChain()).isMoreInformative(dest_point.getPosition(), p1, ">")
-                            && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), dest_point, "<")) {
-                        metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), conflictpoint_dest_point, ">");
-                        metagraph.get(conflictpoint_dest_point.getChain()).removeConnection(conflictpoint_dest_point.getPosition(), dest_point, "<");
-                        metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, "<");
-                        metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, ">");
-                        metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, ">");
-                        metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, "<");
-                    }
-                } else {
-                    metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), p1, ">");
-                    metagraph.get(p1.getChain()).addConnection(p1.getPosition(), dest_point, "<");
-                }
-            }
-        }
-
-        if (p2next == null && p2prev == null) {
-            metagraph.get(p2.getChain()).clear();
-            return;
-        }
-
-        if (p2next != null && p2prev != null) {
-            // new chain needed for next
-            int c = createOrSelectNewChain();
-            // replace with last one
-            for (TimePoint tp : metagraph.get(p2.getChain()).getTimePointsGreaterOrEqual(p2next).values()) {
-                // add new point to metagraph
-                TimePoint np = new TimePoint(c, tp.getPosition(), tp.getAssociatedEntities());
-                metagraph.get(c).getTimePoints().put(np.getPosition(), np);
-
-                Set<Integer> connkeys2 = null;
-                if (metagraph.get(tp.getChain()).getAfterConnections(tp.getPosition()) != null) {
-                    connkeys2 = new HashSet<Integer>();
-                    connkeys2.addAll(metagraph.get(tp.getChain()).getAfterConnections(tp.getPosition()).keySet());
-                }
-                if (connkeys2 != null) {
-                    for (Integer key : connkeys2) {
-                        TimePoint dest_point = metagraph.get(tp.getChain()).getAfterConnections(tp.getPosition()).get(key);
-                        metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), tp, "<");
-                        metagraph.get(tp.getChain()).removeConnection(tp.getPosition(), dest_point, ">");
-                        metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), np, "<");
-                        metagraph.get(np.getChain()).addConnection(np.getPosition(), dest_point, ">");
-                    }
-                }
-                connkeys2 = null;
-                if (metagraph.get(tp.getChain()).getBeforeConnections(tp.getPosition()) != null) {
-                    connkeys2 = new HashSet<Integer>();
-                    connkeys2.addAll(metagraph.get(tp.getChain()).getBeforeConnections(tp.getPosition()).keySet());
-                }
-                if (connkeys2 != null) {
-                    for (Integer key : connkeys2) {
-                        TimePoint dest_point = metagraph.get(tp.getChain()).getBeforeConnections(tp.getPosition()).get(key);
-                        metagraph.get(dest_point.getChain()).removeConnection(dest_point.getPosition(), tp, ">");
-                        metagraph.get(tp.getChain()).removeConnection(tp.getPosition(), dest_point, "<");
-                        metagraph.get(dest_point.getChain()).addConnection(dest_point.getPosition(), np, ">");
-                        metagraph.get(np.getChain()).addConnection(np.getPosition(), dest_point, "<");
-                    }
-                }
-                // search and update entity-tp references (change to new point)
-                String[] associated_entities2 = tp.getAssociatedEntities().split(",");
-                for (int aen = 0; aen < associated_entities2.length; aen++) {
-                    entity_tp_map.put(associated_entities2[aen], np);
-                }
-            }
-            // leave only prev in the original chain
-            metagraph.get(p2.getChain()).setTimePoints(metagraph.get(p2.getChain()).getTimePointsLowerOrEqual(p2prev));
-            // relate chains to the merged point
-            metagraph.get(c).addConnection(p2next.getPosition(), p1, ">");
-            metagraph.get(p1.getChain()).addConnection(p1.getPosition(), metagraph.get(c).getTimePoints().firstEntry().getValue(), "<");
-            checkChainFusion(metagraph.get(c).getTimePoints().firstEntry().getValue(), p1);
-            metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2prev, ">");
-            metagraph.get(p2prev.getChain()).addConnection(p2prev.getPosition(), p1, "<");
-            checkChainFusion(p1, p2prev);
-            return;
-        }
-
-        if (p2next != null) {
-            // leave only prev in the original chain
-            metagraph.get(p2.getChain()).setTimePoints(metagraph.get(p2.getChain()).getTimePointsGreaterOrEqual(p2next));
-            // relate chains to the merged point
-
-            TimePoint conflictpoint_p2next = null;
-            if (metagraph.get(p2next.getChain()).getAfterConnections(p2next.getPosition()) != null) {
-                conflictpoint_p2next = metagraph.get(p2next.getChain()).getAfterConnections(p2next.getPosition()).get(p1.getChain());
-            }
-            TimePoint conflictpoint_p1 = null;
-            if (metagraph.get(p1.getChain()).getBeforeConnections(p1.getPosition()) != null) {
-                conflictpoint_p1 = metagraph.get(p1.getChain()).getBeforeConnections(p1.getPosition()).get(p2next.getChain());
-            }
-
-            if (conflictpoint_p2next != null || conflictpoint_p1 != null) {
-                // normal conflict
-                if (conflictpoint_p1 == null && metagraph.get(p2next.getChain()).isMoreInformative(p2next.getPosition(), p1, ">")) {
-                    metagraph.get(p2next.getChain()).removeConnection(p2next.getPosition(), conflictpoint_p2next, ">");
-                    metagraph.get(conflictpoint_p2next.getChain()).removeConnection(conflictpoint_p2next.getPosition(), p2next, "<");
-                    metagraph.get(p2next.getChain()).addConnection(p2next.getPosition(), p1, ">");
-                    metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2next, "<");
-                }
-                // inverse conflict
-                if (conflictpoint_p2next == null && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), p2next, "<")) {
-                    metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, "<");
-                    metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, ">");
-                    metagraph.get(p2next.getChain()).addConnection(p2next.getPosition(), p1, ">");
-                    metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2next, "<");
-                }
-                // double conflict
-                if (conflictpoint_p2next != null && conflictpoint_p1 != null
-                        && metagraph.get(p2next.getChain()).isMoreInformative(p2next.getPosition(), p1, ">")
-                        && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), p2next, "<")) {
-                    metagraph.get(p2next.getChain()).removeConnection(p2next.getPosition(), conflictpoint_p2next, ">");
-                    metagraph.get(conflictpoint_p2next.getChain()).removeConnection(conflictpoint_p2next.getPosition(), p2next, "<");
-                    metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, "<");
-                    metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, ">");
-                    metagraph.get(p2next.getChain()).addConnection(p2next.getPosition(), p1, ">");
-                    metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2next, "<");
-                }
-
-            } else {
-                metagraph.get(p2next.getChain()).addConnection(p2next.getPosition(), p1, ">");
-                metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2next, "<");
-            }
-
-            checkChainFusion(p2next, p1);
-            return;
-        }
-
-        if (p2prev != null) {
-            // leave only prev in the original chain
-            metagraph.get(p2.getChain()).setTimePoints(metagraph.get(p2.getChain()).getTimePointsLowerOrEqual(p2prev));
-            // relate chains to the merged point
-            TimePoint conflictpoint_p2prev = null;
-            // dest_point already conected to p1 < conflict
-            if (metagraph.get(p2prev.getChain()).getBeforeConnections(p2prev.getPosition()) != null) {
-                conflictpoint_p2prev = metagraph.get(p2prev.getChain()).getBeforeConnections(p2prev.getPosition()).get(p1.getChain());
-            }
-            // p1 already connected to destpoint chain > conflict
-            TimePoint conflictpoint_p1 = null;
-            if (metagraph.get(p1.getChain()).getAfterConnections(p1.getPosition()) != null) {
-                conflictpoint_p1 = metagraph.get(p1.getChain()).getAfterConnections(p1.getPosition()).get(p2prev.getChain());
-            }
-            if (conflictpoint_p2prev != null || conflictpoint_p1 != null) {
-                // normal conflict
-                if (conflictpoint_p1 == null && metagraph.get(p2prev.getChain()).isMoreInformative(p2prev.getPosition(), p1, "<")) {
-                    metagraph.get(p2prev.getChain()).removeConnection(p2prev.getPosition(), conflictpoint_p2prev, "<");
-                    metagraph.get(conflictpoint_p2prev.getChain()).removeConnection(conflictpoint_p2prev.getPosition(), p2prev, ">");
                     metagraph.get(p2prev.getChain()).addConnection(p2prev.getPosition(), p1, "<");
                     metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2prev, ">");
                 }
-                // inverse conflict
-                if (conflictpoint_p2prev == null && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), p2prev, ">")) {
-                    metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, ">");
-                    metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, "<");
-                    metagraph.get(p2prev.getChain()).addConnection(p2prev.getPosition(), p1, "<");
-                    metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2prev, ">");
-                }
-                // double conflict
-                if (conflictpoint_p2prev != null && conflictpoint_p1 != null
-                        && metagraph.get(p2prev.getChain()).isMoreInformative(p2prev.getPosition(), p1, "<")
-                        && metagraph.get(p1.getChain()).isMoreInformative(p1.getPosition(), p2prev, ">")) {
-                    metagraph.get(p2prev.getChain()).removeConnection(p2prev.getPosition(), conflictpoint_p2prev, "<");
-                    metagraph.get(conflictpoint_p2prev.getChain()).removeConnection(conflictpoint_p2prev.getPosition(), p2prev, ">");
-                    metagraph.get(p1.getChain()).removeConnection(p1.getPosition(), conflictpoint_p1, ">");
-                    metagraph.get(conflictpoint_p1.getChain()).removeConnection(conflictpoint_p1.getPosition(), p1, "<");
-                    metagraph.get(p2prev.getChain()).addConnection(p2prev.getPosition(), p1, "<");
-                    metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2prev, ">");
-                }
-            } else {
-                metagraph.get(p2prev.getChain()).addConnection(p2prev.getPosition(), p1, "<");
-                metagraph.get(p1.getChain()).addConnection(p1.getPosition(), p2prev, ">");
+                checkChainFusion(p1, p2prev);
+                return;
             }
-            checkChainFusion(p1, p2prev);
-            return;
-        }
-
+        /*} catch (Exception e) {
+            System.err.println("Errors found (TimeGraph):\n\t" + e.toString() + "\n");
+            if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
+                e.printStackTrace(System.err);
+            }
+            throw e;
+        }*/
 
     }
 
@@ -1461,9 +1575,9 @@ public class TimeGraph {
      * @param y
      * @return
      */
-    public void add_after_crosschain(TimePoint x, TimePoint y) {
+    public void add_after_crosschain(TimePoint x, TimePoint y) throws Exception {
         // check if previous connection exists and remove it if more informative
-
+        
         TimePoint conflictpoint_x = null;
         // x already conected to y < conflict
         if (metagraph.get(x.getChain()).getAfterConnections(x.getPosition()) != null) {
@@ -1602,7 +1716,7 @@ public class TimeGraph {
             }
             throw new Exception("Unknow relation: " + rel);
         } catch (Exception e) {
-            System.err.println("Errors found (TimeML_Merger):\n\t" + e.toString() + "\n");
+            System.err.println("Errors found (TimeGraph):\n\t" + e.toString() + "\n");
             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                 e.printStackTrace(System.err);
                 System.exit(1);
@@ -2148,9 +2262,9 @@ public class TimeGraph {
      * @return
      */
     public String checkRelation(String x, String y, String rel) {
-        
+
         // Note: entities casing is kept because TimeGraph is not limited to timeml
-        
+
         rel = rel.toUpperCase();
         // inverse relation if needed
         if (!rel.matches("(BEFORE|IBEFORE|BEGINS|ENDS|OVERLAPS|IS_INCLUDED|SIMULTANEOUS)")) {
@@ -2168,17 +2282,17 @@ public class TimeGraph {
         String x2 = x + "_e";
         String y1 = y + "_s";
         String y2 = y + "_e";
-        
+
         if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
-            System.err.println("Entities "+x+"-"+y+" relation "+rel+"\n");
+            System.err.println("Entities " + x + "-" + y + " relation " + rel + "\n");
         }
 
         TimePoint tpx1 = entity_tp_map.get(x1);
         TimePoint tpx2 = entity_tp_map.get(x2);
         TimePoint tpy1 = entity_tp_map.get(y1);
         TimePoint tpy2 = entity_tp_map.get(y2);
-        
-        
+
+
         try {
             // if the question is about an entity that is not in the graph check if it is an iso date
             if (tpx1 == null || tpx2 == null) {
@@ -3102,7 +3216,7 @@ public class TimeGraph {
      * @return
      */
     public String replace_e_by_ei_if_needed(String entity) {
-        if (entity_tp_map!=null && entity !=null && entity_tp_map.get(entity + "_s") == null && entity.matches("e[0-9]+")) {
+        if (entity_tp_map != null && entity != null && entity_tp_map.get(entity + "_s") == null && entity.matches("e[0-9]+")) {
             if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                 System.out.println("Replacing e by ei in " + entity);
             }

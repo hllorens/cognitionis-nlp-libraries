@@ -51,7 +51,7 @@ public class Chain {
         this.timepoints.putAll(tps);
     }
 
-    public boolean addConnection(Integer local_point, TimePoint dest_point, String relation) {
+    public void addConnection(Integer local_point, TimePoint dest_point, String relation) throws Exception {
         // this must detect other connections and add them and if detects
         //fully connected points of different chains it has to collapse chains (in fact that should be done by TimeGraph itself...)
 
@@ -87,9 +87,9 @@ public class Chain {
         } catch (Exception e) {
             System.err.println("Errors found (Chain):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            return false;
+            throw e;
         }
-        return true;
+        
     }
 
 
@@ -118,7 +118,7 @@ public class Chain {
         return false;
     }
 
-    public boolean removeConnection(Integer local_point, TimePoint dest_point, String relation) {
+    public void removeConnection(Integer local_point, TimePoint dest_point, String relation) throws Exception {
         try {
             HashMap<Integer, TimePoint> conn = null;
             if (relation.equals("<")) {
@@ -157,9 +157,8 @@ public class Chain {
         } catch (Exception e) {
             System.err.println("Errors found (Chain):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            return false;
+            throw e;
         }
-        return true;
     }
 
     public HashMap<Integer, TimePoint> getAfterConnections(int local_point) {

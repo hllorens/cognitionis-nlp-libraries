@@ -129,7 +129,7 @@ public final class TimePoint implements Comparable<TimePoint> {
      *
      * @param entities
      */
-    public void associateEntities(String entities) {
+    public boolean associateEntities(String entities) {
         try {
             // Minimum check
             entities = entities.replaceAll("[\\s+]", "").trim();
@@ -137,7 +137,7 @@ public final class TimePoint implements Comparable<TimePoint> {
                 if (System.getProperty("DEBUG") != null && System.getProperty("DEBUG").equalsIgnoreCase("true")) {
                     throw new Exception("Malformed entities string can not be associated to a time point: " + entities);
                 } else {
-                    return;
+                    return false;
                 }
             }
             if(entities.endsWith(",")){
@@ -160,8 +160,9 @@ public final class TimePoint implements Comparable<TimePoint> {
         } catch (Exception e) {
             System.err.println("Errors found (TimePoint):\n\t" + e.toString() + "\n");
             e.printStackTrace(System.err);
-            System.exit(1);
+            return false;
         }
+        return true;
     }
 
     @Override
