@@ -2185,12 +2185,15 @@ public class BaseTokenFeatures {
                         while (true) {
                             if (readmodel) {
                                 cmodel_prev = cmodel;
-                                if ((cmodel = (char) modelreader.read()) == -1) {
+                                if ((cmodel = (char) modelreader.read()) == -1) { // NOTE: does not work if no EOF char \0A
                                     if (cn == token.length()) {
                                         break; // save last token end of file
                                     } else {
                                         throw new Exception("Premature end of model file");
                                     }
+                                }
+                                if(cmodel=='\uffff'){
+                                        break; // save last token end of file                                    
                                 }
                                 offset++;
                             } else {
