@@ -30,7 +30,7 @@ public class Main {
 
         DETECT_LANG, TOKENIZE, TAG, XML2TOK, TOK2XML, EVAL_ANNOT, TIMEX_PATTERN,
         TIMEX_NORM, TIMEX_RESOLVE, CANONICALIZE_PHRASELIST, NUMBERIZE, GET_NGRAMS,
-        TRAIN_BASELINE_TAGGER, TEST_BASELINE_TAGGER
+        TRAIN_TAGGER, TEST_TAGGER
         
     };
 
@@ -227,7 +227,7 @@ public class Main {
                     }
                 }
                 break;
-                case TRAIN_BASELINE_TAGGER: {
+                case TRAIN_TAGGER: {
                     String n = getParameter(action_parameters, "n");
                     if (n == null) {
                         throw new Exception("size of the n-grams --> parameter n is required (e.g., n=3)");
@@ -236,18 +236,24 @@ public class Main {
                     if (classes == null) {
                         classes="default";
                     }
+                    String approach = getParameter(action_parameters, "approach");
+                    if (approach == null) {
+                        approach="baseline_most_frequent_tag";
+                    }
                     for (String file : input_files) {
+                        // TODO use approach to determine the type of tagger
                         Baseline_MostFrequentTag tagger = new Baseline_MostFrequentTag();
                         tagger.train_model(file,Integer.parseInt(n),classes);
                         tagger.write_model(null);
                     }
                 }
                 break;
-                case TEST_BASELINE_TAGGER: {
+                case TEST_TAGGER: {
                     String model = getParameter(action_parameters, "model");
                     if (model == null) {
                         throw new Exception("A 'model' to test must be specified as a paramter");
                     }
+                    // TODO the model should contain the type of tagger so that we create the adecuate class... or we can use an interface...
                     for (String file : input_files) {
                         Baseline_MostFrequentTag tagger = new Baseline_MostFrequentTag();
                         tagger.read_model(model);
