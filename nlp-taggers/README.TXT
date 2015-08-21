@@ -1,6 +1,6 @@
-It works on pure Linux or Pure Windows
-It fails in cygwin because of path issues: maybe there is a way to use absolute
-windows paths there since the JVM is using those...
+It works on pure Linux or Pure Windows.
+For cygwin use "cyqpath":
+java -jar cognitionis-nlp-libraries/nlp-taggers/target/nlp-taggers-1.0.jar -a TRAIN_BASELINE_TAGGER "$(cygpath -aw /home/Hector_Llorens/cognitionis-nlp-libraries/nlp-taggers/example-data/train-TE3-mini.txt)" -ap n=3 -d
 
 
 Command to be run in Windows (CMD, not bash):
