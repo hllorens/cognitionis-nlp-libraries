@@ -16,7 +16,6 @@
 package com.cognitionis.nlp_files;
 
 import java.util.Comparator;
-import java.util.Map.Entry;
 
 /**
  *
@@ -26,17 +25,17 @@ public class LengthAlphabeticalComparator implements Comparator {
 
     @Override
     public int compare(Object o1, Object o2) {
-      //String key1 = ((Entry<String,String[]>)o1).getKey();  
-      String key1 = (String) o1;  
-      String key2 = (String) o2;  
-   
-      if (key1.length() > key2.length())  
-         return(-1);  
-      else if (key1.length() < key2.length())  
-         return(1);  
-      else  //if (key1.equals(key2)) return 0;  //else 
-          return key1.compareTo(key2);
-    }
+        // String key1 = ((Entry<String,String[]>)o1).getKey();
+        final String key1 = (String) o1;
+        final String key2 = (String) o2;
 
+        if (key1.length() > key2.length())
+            return (-1);
+        else if (key1.length() < key2.length())
+            return (1);
+        else
+            // if (key1.equals(key2)) return 0; //else
+            return key1.compareTo(key2);
+    }
 
 }

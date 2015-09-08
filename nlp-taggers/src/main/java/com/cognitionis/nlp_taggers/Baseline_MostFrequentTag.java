@@ -85,56 +85,38 @@ public class Baseline_MostFrequentTag extends Tagger {
         // TODO: No classes replacement, is it necessary??
         word_counts = training_file.getTokenCount();
 
+        // Get ngrams of size n (e.g., n=3) for all columns (e.g., [[word1,
+        // tag1],[word2, tag2],[word3, tag3]])
         final NgramHandler ngram_iterator = new NgramHandler(training_file, n);
 
+        // Get only tag ngrams and count (e.g., [O B-TIMEX3 O] -> 5)
         for (final List<String[]> ngram : ngram_iterator) {
-            // Get tags ngram
             final ArrayList<String> tags_ngram = new ArrayList<>();
             for (final String[] item : ngram) {
+                // equivalent to item.length - 1
                 tags_ngram.add(item[training_file.getLastDescColumn()]);
             }
-            // System.err.println(ngram.toString());
-            // Count tags 2-gram to n-gram: A more intuitive way would be
-            // ArrayList<String> tagNgram=new ArrayList<>(); and start adding
-            // there. But you can still add the one-liner...
-            String tagNgram = tags_ngram.get(0);
-            for (int i = 1; i < n; i++) { // sublist exludes the last element
-                tagNgram += " " + tags_ngram.get(i); // if it is an object it is
-                                                     // equal by reference...
-                                                     // better use as tring
-                // tag_ngram_counts.get(i-1).put(new
-                // ArrayList<>(tags_ngram.subList(n-i, n)),
-                // tag_ngram_counts.get(i-1).get( new
-                // ArrayList<>(tags_ngram.subList(n-i, n)))==null ? 1 :
-                // tag_ngram_counts.get(i-1).get(new
-                // ArrayList<>(tags_ngram.subList(n-i, n)))+1);
-                tag_ngram_counts.get(i).put(
-                        tagNgram,
-                        tag_ngram_counts.get(i).get(tagNgram) == null ? 1
-                                : tag_ngram_counts.get(i).get(tagNgram) + 1);
+
+            String tagNgram = tags_ngram.get(n - 1); // last tag in the ngram
+            int tagNgramSize = 1;
+            // Count tags 2-gram to n-gram (excludes unigrams to exclude STOP)
+            // (Unigrams are not included because we don't want to include
+            // [None, STOP] case)
+            for (int i = n - 2; i >= 0; i--) {
+                tagNgram = tags_ngram.get(i) + " " + tagNgram;
+                tagNgramSize++;
+                tag_ngram_counts.get(tagNgramSize - 1)
+                        .put(tagNgram,
+                                tag_ngram_counts.get(tagNgramSize - 1).get(
+                                        tagNgram) == null ? 1
+                                        : tag_ngram_counts
+                                                .get(tagNgramSize - 1).get(
+                                                        tagNgram) + 1);
             }
 
-            // Count 1-grams and emission. This is separated to exclude STOP in
-            // tag 1-gramms and emission (tuples)
-            final String[] unigram = ngram.get(ngram.size() - 1);
-            tagNgram = unigram[unigram.length - 1];
-            if (!(unigram[0]).equals("_none_")) { // If this is not STOP the
-                                                  // last word in a sentence.
-                unigram[0] = replace_token_class(unigram[0]);
-                tag_ngram_counts.get(0).put(
-                        tagNgram,
-                        tag_ngram_counts.get(0).get(tagNgram) == null ? 1
-                                : tag_ngram_counts.get(0).get(tagNgram) + 1);
-                word_tag_emission_counts.put(
-                        unigram[0] + " " + unigram[1],
-                        word_tag_emission_counts.get(unigram[0] + " "
-                                + unigram[1]) == null ? 1
-                                : word_tag_emission_counts.get(unigram[0] + " "
-                                        + unigram[1]) + 1);
-            }
-
+            // Since the loop above will exclude the first min-size ngram
             // If we are at the begging of the sentence add an (n-1)-gram of
-            // sentence start symbols (e.g., for trigrams add [* *])
+            // * (sentence start symbols) e.g., for trigrams add [* *]
             if (ngram.size() > 1
                     && ngram.get(ngram_size - 2)[0].equals("_none_")) {
                 tagNgram = "*";
@@ -147,6 +129,34 @@ public class Baseline_MostFrequentTag extends Tagger {
                                         tagNgram) == null ? 1
                                         : tag_ngram_counts.get(ngram_size - 2)
                                                 .get(tagNgram) + 1);
+            }
+
+            // Count 1-grams and emission. This is separated to exclude STOP in
+            // tag 1-gramms and emission (tuples), and do class replacement
+            final String[] unigram = ngram.get(ngram.size() - 1); // first
+                                                                  // "real"
+                                                                  // [word,tag]
+                                                                  // excluding *
+                                                                  // *
+            tagNgram = unigram[training_file.getLastDescColumn()]; // first tag
+                                                                   // (unigram)
+            // Only * and STOP have _none_ as word, and
+            // since * is excluded if ==_none_ it must be STOP (last word in a
+            // sentence)
+            if (!(unigram[0]).equals("_none_")) {
+                // tag counts
+                tag_ngram_counts.get(0).put(
+                        tagNgram,
+                        tag_ngram_counts.get(0).get(tagNgram) == null ? 1
+                                : tag_ngram_counts.get(0).get(tagNgram) + 1);
+                // word-tag count (emission)
+                unigram[0] = replace_token_class(unigram[0]);
+                word_tag_emission_counts.put(
+                        unigram[0] + " " + unigram[1],
+                        word_tag_emission_counts.get(unigram[0] + " "
+                                + unigram[1]) == null ? 1
+                                : word_tag_emission_counts.get(unigram[0] + " "
+                                        + unigram[1]) + 1);
             }
         }
     }

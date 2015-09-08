@@ -184,7 +184,7 @@ public class Main {
     /**
      * Actions that require specific file/files to be performec (e.g., tokenized
      * file)
-     * 
+     *
      * @param action
      * @param input_files
      * @param action_parameters
@@ -274,10 +274,11 @@ public class Main {
             }
                 break;
             case TRAIN_BASELINE_TAGGER: {
-                final String n = getParameter(action_parameters, "n");
+                String n = getParameter(action_parameters, "n");
                 if (n == null) {
-                    throw new Exception(
-                            "size of the n-grams --> parameter n is required (e.g., n=3)");
+                    n = "3";
+                    System.err
+                            .println("size of the n-grams (parameter n) not defined. Defaulting to n=3 (trigrams)");
                 }
                 String classes = getParameter(action_parameters, "classes");
                 if (classes == null) {
@@ -288,6 +289,9 @@ public class Main {
                         "sort_model");
                 if (sort_model != null) {
                     sort_model_bool = true;
+                    System.err.println("DEBUG: sort_model=true");
+                } else {
+                    System.err.println("DEBUG: storing the model unsorted");
                 }
                 for (final String file : input_files) {
                     final Baseline_MostFrequentTag tagger = new Baseline_MostFrequentTag();
