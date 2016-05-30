@@ -1,0 +1,343 @@
+call <unk>
+john <contact>
+
+call <unk>
+mary <contact>
+
+please <unk>
+call <unk>
+mary <contact>
+
+call <unk>
+peter <contact>
+
+call <unk>
+marian <contact>
+
+please <unk>
+call <unk>
+felipe <contact>
+
+call <unk>
+paul <contact>
+
+call <unk>
+anna <contact>
+
+call <unk>
+mary <contact>
+
+please <unk>
+call <unk>
+mary <contact>
+
+call <unk>
+john <contact>
+
+call <unk>
+mary <contact>
+
+please <unk>
+call <unk>
+mary <contact>
+
+call <unk>
+peter <contact>
+
+call <unk>
+marian <contact>
+
+please <unk>
+call <unk>
+felipe <contact>
+
+call <unk>
+paul <contact>
+
+call <unk>
+anna <contact>
+
+call <unk>
+mary <contact>
+
+please <unk>
+call <unk>
+mary <contact>
+
+phone <unk>
+mary <contact>
+
+phone <unk>
+john <contact>
+smith <contact>
+
+phone <unk>
+john <contact>
+please <unk>
+
+send <unk>
+an <unk>
+sms <unk>
+to <unk>
+john <contact>
+
+make <unk>
+a <unk>
+call <unk>
+to <unk>
+john <contact>
+
+send <unk>
+an <unk>
+sms <unk>
+to <unk>
+john <unk>
+with <unk>
+text <unk>
+john <text>
+is <text>
+fine <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+john <text>
+is <text>
+fine <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+mary <text>
+is <text>
+fine <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+john <text>
+is <text>
+fine <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+mary <text>
+is <text>
+pretty <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+hector <text>
+is <text>
+strong <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+mary <text>
+is <text>
+beautiful <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+john <text>
+is <text>
+fine <text>
+
+send <unk>
+a <unk>
+message <unk>
+with <unk>
+text <unk>
+I <text>
+like <text>
+apples <text>
+
+send <unk>
+a <unk>
+text <unk>
+sms <unk>
+with <unk>
+text <unk>
+I <text>
+like <text>
+apples <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+I <text>
+like <text>
+football <text>
+
+send <unk>
+a <unk>
+text <unk>
+sms <unk>
+saying <unk>
+he <text>
+like <text>
+monkeys <text>
+
+call <unk>
+mark <contact>
+
+call <unk>
+mary <contact>
+
+please <unk>
+call <unk>
+mary <contact>
+
+phone <unk>
+mary <contact>
+
+phone <unk>
+mark <contact>
+smith <contact>
+
+phone <unk>
+mark <contact>
+please <unk>
+
+send <unk>
+an <unk>
+sms <unk>
+to <unk>
+mark <contact>
+
+make <unk>
+a <unk>
+call <unk>
+to <unk>
+mark <contact>
+
+send <unk>
+an <unk>
+sms <unk>
+to <unk>
+mark <unk>
+with <unk>
+text <unk>
+mark <text>
+is <text>
+fine <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+mark <text>
+is <text>
+fine <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+mary <text>
+is <text>
+fine <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+mark <text>
+is <text>
+fine <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+mary <text>
+is <text>
+pretty <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+hector <text>
+is <text>
+strong <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+mary <text>
+is <text>
+beautiful <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+mark <text>
+is <text>
+fine <text>
+
+send <unk>
+a <unk>
+message <unk>
+with <unk>
+text <unk>
+I <text>
+like <text>
+apples <text>
+
+send <unk>
+a <unk>
+text <unk>
+sms <unk>
+with <unk>
+text <unk>
+I <text>
+like <text>
+apples <text>
+
+send <unk>
+an <unk>
+sms <unk>
+with <unk>
+text <unk>
+I <text>
+like <text>
+football <text>
+
+send <unk>
+a <unk>
+text <unk>
+sms <unk>
+saying <unk>
+he <text>
+like <text>
+monkeys <text>

@@ -1,0 +1,67 @@
+2 WORDTAG <unk> make
+2 WORDTAG <text> hector
+10 WORDTAG <text> fine
+8 WORDTAG <text> like
+25 WORDTAG <unk> call
+5 WORDTAG <contact> mark
+2 WORDTAG <contact> felipe
+2 WORDTAG <contact> paul
+2 WORDTAG <contact> anna
+4 WORDTAG <text> john
+1 WORDTAG <unk> john
+2 WORDTAG <text> pretty
+2 WORDTAG <text> monkeys
+2 WORDTAG <text> he
+22 WORDTAG <unk> with
+26 WORDTAG <unk> send
+2 WORDTAG <text> football
+12 WORDTAG <contact> mary
+2 WORDTAG <contact> marian
+20 WORDTAG <unk> an
+6 WORDTAG <unk> phone
+2 WORDTAG <text> beautiful
+4 WORDTAG <text> mark
+8 WORDTAG <unk> a
+26 WORDTAG <unk> text
+6 WORDTAG <unk> to
+2 WORDTAG <contact> smith
+4 WORDTAG <text> apples
+24 WORDTAG <unk> sms
+6 WORDTAG <contact> john
+6 WORDTAG <text> mary
+1 WORDTAG <unk> mark
+2 WORDTAG <unk> message
+16 WORDTAG <text> is
+6 WORDTAG <text> I
+9 WORDTAG <unk> please
+2 WORDTAG <text> strong
+2 WORDTAG <contact> peter
+2 WORDTAG <unk> saying
+180 1-GRAM <unk>
+35 1-GRAM <contact>
+72 1-GRAM <text>
+48 2-GRAM <text> <text>
+2 2-GRAM <unk> STOP
+57 2-GRAM * *
+24 2-GRAM <unk> <text>
+57 2-GRAM * <unk>
+121 2-GRAM <unk> <unk>
+31 2-GRAM <contact> STOP
+2 2-GRAM <contact> <unk>
+24 2-GRAM <text> STOP
+2 2-GRAM <contact> <contact>
+33 2-GRAM <unk> <contact>
+57 3-GRAM * * <unk>
+29 3-GRAM <unk> <contact> STOP
+2 3-GRAM <unk> <contact> <unk>
+11 3-GRAM <unk> <unk> <contact>
+24 3-GRAM <text> <text> STOP
+2 3-GRAM <contact> <unk> STOP
+24 3-GRAM <unk> <unk> <text>
+35 3-GRAM * <unk> <unk>
+86 3-GRAM <unk> <unk> <unk>
+24 3-GRAM <unk> <text> <text>
+22 3-GRAM * <unk> <contact>
+24 3-GRAM <text> <text> <text>
+2 3-GRAM <unk> <contact> <contact>
+2 3-GRAM <contact> <contact> STOP

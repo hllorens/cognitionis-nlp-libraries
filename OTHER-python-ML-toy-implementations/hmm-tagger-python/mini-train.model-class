@@ -1,0 +1,73 @@
+NGRAM-LEVEL CONFIG 3
+HANDLE-LOW-FREQ CONFIG classes
+- ENDCONFIG -
+10 WORDTAG <text> fine
+8 WORDTAG <text> like
+25 WORDTAG <unk> call
+5 WORDTAG <contact> mark
+1 WORDTAG <unk> mark
+4 WORDTAG <text> john
+6 WORDTAG <contact> john
+22 WORDTAG <unk> with
+26 WORDTAG <unk> send
+12 WORDTAG <contact> mary
+20 WORDTAG <unk> an
+6 WORDTAG <unk> phone
+4 WORDTAG <text> mark
+12 WORDTAG <contact> _RARE_
+8 WORDTAG <unk> a
+26 WORDTAG <unk> text
+6 WORDTAG <text> mary
+9 WORDTAG <unk> please
+1 WORDTAG <unk> john
+6 WORDTAG <unk> to
+16 WORDTAG <text> is
+6 WORDTAG <text> I
+24 WORDTAG <unk> sms
+6 WORDTAG <unk> _RARE_
+18 WORDTAG <text> _RARE_
+180 1-GRAM <unk>
+35 1-GRAM <contact>
+72 1-GRAM <text>
+48 2-GRAM <text> <text>
+2 2-GRAM <unk> STOP
+57 2-GRAM * *
+24 2-GRAM <unk> <text>
+57 2-GRAM * <unk>
+121 2-GRAM <unk> <unk>
+31 2-GRAM <contact> STOP
+2 2-GRAM <contact> <unk>
+24 2-GRAM <text> STOP
+2 2-GRAM <contact> <contact>
+33 2-GRAM <unk> <contact>
+57 3-GRAM * * <unk>
+29 3-GRAM <unk> <contact> STOP
+2 3-GRAM <unk> <contact> <unk>
+11 3-GRAM <unk> <unk> <contact>
+24 3-GRAM <text> <text> STOP
+2 3-GRAM <contact> <unk> STOP
+24 3-GRAM <unk> <unk> <text>
+35 3-GRAM * <unk> <unk>
+86 3-GRAM <unk> <unk> <unk>
+24 3-GRAM <unk> <text> <text>
+22 3-GRAM * <unk> <contact>
+24 3-GRAM <text> <text> <text>
+2 3-GRAM <unk> <contact> <contact>
+2 3-GRAM <contact> <contact> STOP
+9 WORD please
+16 WORD is
+20 WORD an
+10 WORD fine
+26 WORD send
+10 WORD mark
+6 WORD to
+25 WORD call
+26 WORD text
+11 WORD john
+18 WORD mary
+24 WORD sms
+6 WORD I
+6 WORD phone
+22 WORD with
+8 WORD a
+8 WORD like
